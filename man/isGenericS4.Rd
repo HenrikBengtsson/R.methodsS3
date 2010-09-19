@@ -16,7 +16,7 @@
  Checks if a function is a S4 generic function.
 }
 
-\usage{\method{isGenericS4}{default}(fcn, ...)}
+\usage{\method{isGenericS4}{default}(fcn, envir=parent.frame(), ...)}
 
 \arguments{
   \item{fcn}{A \code{\link[base]{function}} or a \code{\link[base]{character}} string.}

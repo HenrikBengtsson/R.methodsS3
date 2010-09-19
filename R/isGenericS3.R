@@ -11,6 +11,8 @@
 #
 # \arguments{
 #   \item{fcn}{A @function or a @character string.}
+#   \item{envir}{If argument \code{fcn} is a @character, this is the
+#      @environment from which the search for the @function is done.}
 #   \item{...}{Not used.}
 # }
 #
@@ -30,7 +32,10 @@
 # @keyword "methods"
 # @keyword "internal"
 #*/###########################################################################
-isGenericS3.default <- function(fcn, ...) {
+isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
+  if (is.character(fcn)) {
+    fcn <- get(fcn, mode="function", envir=envir, inherits=TRUE);
+  }
   body <- body(fcn);
   if (is.call(body))
     body <- deparse(body);
@@ -74,7 +79,10 @@ setGenericS3("isGenericS3");
 # @keyword "methods"
 # @keyword "internal"
 #*/###########################################################################
-isGenericS4.default <- function(fcn, ...) {
+isGenericS4.default <- function(fcn, envir=parent.frame(), ...) {
+  if (is.character(fcn)) {
+    fcn <- get(fcn, mode="function", envir=envir, inherits=TRUE);
+  }
   body <- body(fcn);
   if (is.call(body))
     body <- deparse(body);
@@ -88,6 +96,10 @@ setGenericS3("isGenericS4");
 
 ############################################################################
 # HISTORY:
+# 2010-09-18
+# o BUG FIX: isGenericS3() and isGenericS4() did not support specifying
+#   the function by name as a character string, despite it was documented
+#   to do so.  Thanks John Oleynick for reporting on this.
 # 2004-10-18
 # o Added Rdoc comments for isGenericS3() and isGenericS4().
 # 2002-10-15

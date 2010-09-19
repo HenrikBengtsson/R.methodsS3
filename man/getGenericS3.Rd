@@ -16,10 +16,12 @@
  Get an S3 generic function.
 }
 
-\usage{\method{getGenericS3}{default}(name, ...)}
+\usage{\method{getGenericS3}{default}(name, envir=parent.frame(), ...)}
 
 \arguments{
   \item{name}{The name of the generic function.}
+  \item{envir}{The \code{\link[base]{environment}} from which the search for the
+    generic \code{\link[base]{function}} is done.}
   \item{...}{Not used.}
 }
 

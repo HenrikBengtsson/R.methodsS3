@@ -16,11 +16,13 @@
  Get an S3 method.
 }
 
-\usage{\method{getMethodS3}{default}(name, class="default", ...)}
+\usage{\method{getMethodS3}{default}(name, class="default", envir=parent.frame(), ...)}
 
 \arguments{
   \item{name}{The name of the method.}
   \item{class}{The class of the method.}
+  \item{envir}{The \code{\link[base]{environment}} from which the search for the
+    S3 method is done.}
   \item{...}{Not used.}
 }
 

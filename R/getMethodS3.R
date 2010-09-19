@@ -12,6 +12,8 @@
 # \arguments{
 #   \item{name}{The name of the method.}
 #   \item{class}{The class of the method.}
+#   \item{envir}{The @environment from which the search for the
+#     S3 method is done.}  
 #   \item{...}{Not used.}
 # }
 #
@@ -30,14 +32,18 @@
 # @keyword "programming"
 # @keyword "methods"
 #*/###########################################################################
-setMethodS3("getMethodS3", "default", function(name, class="default", ...) {
-  getS3method(name, class=class, optional=FALSE);
+setMethodS3("getMethodS3", "default", function(name, class="default", envir=parent.frame(), ...) {
+  args <- list(name, class=class, optional=FALSE);
+  do.call("getS3method", args, envir=envir);
 })
 
 
 
 ############################################################################
 # HISTORY:
+# 2010-09-18
+# o BUG FIX: getMethodS3() failed to locate S3 methods created in the
+#   global enviroment. 
 # 2008-05-08
 # o Added getMethodS3().
 ############################################################################
