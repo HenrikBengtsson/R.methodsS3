@@ -3,10 +3,11 @@ Package: R.methodsS3
 
 Version: 1.2.1 [2010-09-18]
 o BUG FIX: isGenericS3(), isGenericS4(), getGenericS3() and getMethodS3()
-  failed to locate functions created in the global environment which
-  at the same time existed in the 'base' package.  The problem did not
-  exist prior to R.methodsS3 v1.2.0 when the package did not yet have
-  a namespace.  Thanks John Oleynick for reporting on this problem.
+  failed to locate functions created in the global environment while
+  there exist a function with the same name in the 'base' package.  
+  The problem only affects the above functions and nothing else and it
+  did not exist prior to R.methodsS3 v1.2.0 when the package did not yet
+  have a namespace.  Thanks John Oleynick for reporting on this problem.
 o BUG FIX: isGenericS3() and isGenericS4() did not support specifying
   the function by name as a character string, despite it was documented
   to do so.  Thanks John Oleynick for reporting on this.
