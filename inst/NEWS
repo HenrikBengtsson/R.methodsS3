@@ -1,6 +1,10 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.2.2 [2011-11-17]
+o CLEANUP: Dropped example(getMethodS3), which was for setMethodS3().
+
+
 Version: 1.2.1 [2010-09-18]
 o BUG FIX: isGenericS3(), isGenericS4(), getGenericS3() and getMethodS3()
   failed to locate functions created in the global environment while

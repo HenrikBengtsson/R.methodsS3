@@ -1,6 +1,6 @@
 Package: R.methodsS3
-Version: 1.2.1
-Date: 2010-09-18
+Version: 1.2.2
+Date: 2010-11-17
 Title: Utility function for defining S3 methods
 Author: Henrik Bengtsson <henrikb@braju.com>
 Maintainer: Henrik Bengtsson <henrikb@braju.com>
