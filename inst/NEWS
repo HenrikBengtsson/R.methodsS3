@@ -1,6 +1,10 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.2.3 [2012-03-08]
+o Now arguments '...' of setMethodS3() are passed to setGenericS3().
+
+
 Version: 1.2.2 [2011-11-17]
 o CLEANUP: Dropped example(getMethodS3), which was for setMethodS3().
 

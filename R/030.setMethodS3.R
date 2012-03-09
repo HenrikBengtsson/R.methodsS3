@@ -49,7 +49,7 @@
 #      generic function with many arguments and/or argument \code{...}.}
 #   \item{validators}{An optional @list of @functions that can be used
 #      to assert that the generated method meets certain criteria.}
-#   \item{...}{Not used.}
+#   \item{...}{Passed to @see "setGenericS3", iff called.}
 # }
 #
 # \examples{
@@ -275,8 +275,9 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   # 8. Create a generic function?
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-  if (createGeneric == TRUE)
-    setGenericS3(name, envir=envir, validators=validators);
+  if (createGeneric == TRUE) {
+    setGenericS3(name, envir=envir, validators=validators, ...);
+  }
 }
 
 setGenericS3("setMethodS3");
@@ -284,6 +285,8 @@ setGenericS3("setMethodS3");
 
 ############################################################################
 # HISTORY:
+# 2012-03-08
+# o Now arguments '...' of setMethodS3() are passed to setGenericS3().
 # 2007-09-17
 # o Replaced 'enforceRCC' argument with more generic 'validators'.
 # 2007-06-09
