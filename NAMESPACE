@@ -5,6 +5,9 @@
 export("appendVarArgs")
 S3method("appendVarArgs", "function")
 
+export("getMethodS3")
+S3method("getMethodS3", "default")
+
 export("setMethodS3")
 S3method("setMethodS3", "default")
 
