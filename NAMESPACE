@@ -1,3 +1,29 @@
 # Export all public methods, that is, those without a preceeding dot
 # in their names.
-exportPattern("^[^\\.]")
+##exportPattern("^[^\\.]")
+
+export("appendVarArgs")
+S3method("appendVarArgs", "function")
+
+export("setMethodS3")
+S3method("setMethodS3", "default")
+
+export("setGenericS3")
+S3method("setGenericS3", "default")
+
+export("isGenericS3")
+S3method("isGenericS3", "default")
+
+export("isGenericS4")
+S3method("isGenericS4", "default")
+
+export("throw")
+S3method("throw", "default")
+
+export("findDispatchMethodsS3")
+S3method("findDispatchMethodsS3", "default")
+
+export("getDispatchMethodS3")
+S3method("getDispatchMethodS3", "default")
+
+

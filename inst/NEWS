@@ -1,6 +1,11 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.3.0 [2012-04-16]
+o Now only generic funcions are exported, and not all of them.
+o Now all S3 methods are properly declared in NAMESPACE.
+
+
 Version: 1.2.3 [2012-03-08]
 o Now arguments '...' of setMethodS3() are passed to setGenericS3().
 
