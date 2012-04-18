@@ -2,6 +2,8 @@
 # in their names.
 ##exportPattern("^[^\\.]")
 
+export("R.KEYWORDS")
+
 export("appendVarArgs")
 S3method("appendVarArgs", "function")
 

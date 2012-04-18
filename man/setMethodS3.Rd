@@ -19,7 +19,7 @@
  it will be created automatically.
 }
 
-\usage{\method{setMethodS3}{default}(name, class="default", definition, private=FALSE, protected=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...)}
+\usage{\method{setMethodS3}{default}(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...)}
 
 \arguments{
   \item{name}{The name of the method.}
@@ -30,6 +30,7 @@
   \item{private, protected}{If \code{private=TRUE}, the method is declared
      private. If \code{protected=TRUE}, the method is declared protected.
      In all other cases the method is declared public.}
+  \item{export}{A \code{\link[base]{logical}} setting attribute \code{"export"}.}
   \item{static}{If \code{\link[base:logical]{TRUE}} this method is defined to be static,
      otherwise not. Currently this has no effect expect as an indicator.}
   \item{abstract}{If \code{\link[base:logical]{TRUE}} this method is defined to be abstract,
@@ -58,7 +59,7 @@
      generic function with many arguments and/or argument \code{...}.}
   \item{validators}{An optional \code{\link[base]{list}} of \code{\link[base]{function}}s that can be used
      to assert that the generated method meets certain criteria.}
-  \item{...}{Not used.}
+  \item{...}{Passed to \code{\link{setGenericS3}}(), iff called.}
 }
 
 \examples{

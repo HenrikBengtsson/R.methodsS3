@@ -1,4 +1,5 @@
 ###########################################################################/**
+# @eval "Rdoc$package <- 'R.methodsS3';''"
 # @RdocObject "R.KEYWORDS"
 #
 # @title "Reserved words in R not to be used for object names"

@@ -1,6 +1,12 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.4.0 [2012-04-17]
+o Now setMethodS3() sets attribute "S3class" to the class.
+o Added argument 'export' to setMethodS3() and setGenericS3(), which
+  sets attribute "export" to the same value.
+
+
 Version: 1.3.0 [2012-04-16]
 o Now only generic funcions are exported, and not all of them.
 o Now all S3 methods are properly declared in NAMESPACE.

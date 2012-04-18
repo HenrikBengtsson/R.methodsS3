@@ -29,7 +29,7 @@
 \seealso{
   This is just a conveniency wrapper around \code{\link[utils]{getS3method}}
   that have arguments consistent with \code{\link{setMethodS3}}().
-  \code{\link{getGenericS3}}().
+  \code{\link{getGenericS3}}.
 }
 
 \author{Henrik Bengtsson (\url{http://www.braju.com/R/})}

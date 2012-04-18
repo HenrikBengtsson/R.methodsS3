@@ -21,6 +21,7 @@
 #   \item{private, protected}{If \code{private=TRUE}, the method is declared
 #      private. If \code{protected=TRUE}, the method is declared protected.
 #      In all other cases the method is declared public.}
+#   \item{export}{A @logical setting attribute \code{"export"}.}
 #   \item{static}{If @TRUE this method is defined to be static,
 #      otherwise not. Currently this has no effect expect as an indicator.}
 #   \item{abstract}{If @TRUE this method is defined to be abstract,
@@ -65,7 +66,7 @@
 # @keyword "programming"
 # @keyword "methods"
 #*/###########################################################################
-setMethodS3.default <- function(name, class="default", definition, private=FALSE, protected=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...) {
+setMethodS3.default <- function(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...) {
   conflict <- match.arg(conflict);
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -251,10 +252,17 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # 6. Assign/create the new method
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   if (is.null(fcnDef) || overwrite == TRUE) {
-    eval(substitute({fcn <- definition; attr(fcn, "modifiers") <- modifiers},
-  	 list(fcn=as.name(methodName), definition=definition,
-  		   modifiers=modifiers)),
-  	 envir=envir);
+    # Create
+    expr <- substitute({
+        fcn <- definition;
+        attr(fcn, "export") <- export;
+        attr(fcn, "S3class") <- class;
+        attr(fcn, "modifiers") <- modifiers;
+      }, list(fcn=as.name(methodName), class=class, definition=definition,
+              export=export, modifiers=modifiers)
+    );
+    # Assign
+    eval(expr, envir=envir);
   }
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -285,6 +293,13 @@ setGenericS3("setMethodS3");
 
 ############################################################################
 # HISTORY:
+# 2012-04-17
+# o Added argument 'export' to setMethodS3() and setGenericS3().
+# o Now setMethodS3() sets attribute "S3class" to the class.  This will
+#   make S3 methods such as a.b.c() non abigous, because it will be possible
+#   to infer whether the generic function is a() or a.b().  The reason for
+#   not using an attribute "S3method" = c("a.b", "c") is that the generic
+#   function should automaticly change if someone does d.e.c <- a.b.c.
 # 2012-03-08
 # o Now arguments '...' of setMethodS3() are passed to setGenericS3().
 # 2007-09-17
