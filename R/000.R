@@ -3,9 +3,43 @@
 # is named "000.R" (zeros).
 ##############################################################################
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# NAMESPACE: export()
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Sets attribute export to TRUE
+export <- function(x) {
+  attr(x, "export") <- TRUE;
+  x;
+}
+export <- export(export)
+
+# Sets attribute export to 'value'.
+"export<-" <- export(function(x, value) {
+  attr(x, "export") <- value;
+  x;
+})
+
+noexport <- export(function(x) {
+  attr(x, "export") <- FALSE;
+  x;
+})
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# NAMESPACE: S3method()
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Sets attribute 'S3class' to 'value'.
+"S3class<-" <- export(function(x, value) {
+  attr(x, "S3class") <- value;
+  x;
+})
+
 
 ############################################################################
 # HISTORY:
+# 2012-04-17
+# o Added S3class() function.
+# o Added export() and noexport() functions.
 # 2007-09-17
 # o Removed support for R v2.2.0 and before by removing patch for missing
 #   baseenv().

@@ -2,33 +2,27 @@
 # in their names.
 ##exportPattern("^[^\\.]")
 
-export("R.KEYWORDS")
-
 export("appendVarArgs")
-S3method("appendVarArgs", "function")
-
-export("getMethodS3")
-S3method("getMethodS3", "default")
-
-export("setMethodS3")
-S3method("setMethodS3", "default")
-
-export("setGenericS3")
-S3method("setGenericS3", "default")
-
-export("isGenericS3")
-S3method("isGenericS3", "default")
-
-export("isGenericS4")
-S3method("isGenericS4", "default")
-
-export("throw")
-S3method("throw", "default")
-
+##export("export")
+##export("export<-")
 export("findDispatchMethodsS3")
-S3method("findDispatchMethodsS3", "default")
-
 export("getDispatchMethodS3")
+export("getGenericS3")
+export("getMethodS3")
+export("hasVarArgs")
+export("isGenericS3")
+export("isGenericS4")
+##export("noexport")
+##export("S3class<-")
+export("setGenericS3")
+export("setMethodS3")
+export("throw")
+S3method("appendVarArgs", "function")
+S3method("findDispatchMethodsS3", "default")
 S3method("getDispatchMethodS3", "default")
-
-
+S3method("getGenericS3", "default")
+S3method("getMethodS3", "default")
+S3method("hasVarArgs", "function")
+S3method("setGenericS3", "default")
+S3method("setMethodS3", "default")
+S3method("throw", "default")

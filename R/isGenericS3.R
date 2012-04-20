@@ -42,6 +42,7 @@ isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
   body <- as.character(body);
   return(length(grep("UseMethod[(]", body)) > 0)
 }
+export(isGenericS3.default) <- FALSE;
 
 setGenericS3("isGenericS3");
 
@@ -89,6 +90,7 @@ isGenericS4.default <- function(fcn, envir=parent.frame(), ...) {
   body <- as.character(body);
   return(length(grep("standardGeneric", body)) > 0)
 }
+export(isGenericS4.default) <- FALSE;
 
 setGenericS3("isGenericS4");
 

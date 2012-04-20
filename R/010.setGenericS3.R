@@ -186,7 +186,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
     defaultExists <- FALSE;
     for (env in envirs) {
       if (exists(nameDefault, mode="function", envir=env, inherits=FALSE)) {
-        defaultExists <- TRUE
+        defaultExists <- TRUE;
         defaultPkg <- if (is.null(env)) "base" else attr(env, "name");
         break;
       }
@@ -211,14 +211,16 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
   }
 
   # Create a generic function
-  src <- paste("...tmpfcn <- function(...) UseMethod(\"", name, "\")", sep="");
-  src <- c(src, paste("attr(...tmpfcn, \"export\") <- TRUE", sep=""));
-  src <- c(src, paste("\"", name, "\" <- ...tmpfcn", sep=""));
-  src <- c(src, paste("rm(list=\"...tmpfcn\");", sep=""));
+  src <- sprintf("...tmpfcn <- function(...) UseMethod(\"%s\")", name);
+  src <- c(src, sprintf("R.methodsS3:::export(...tmpfcn) <- %s", export));
+  src <- c(src, sprintf("\"%s\" <- ...tmpfcn", name));
+  src <- c(src, "rm(list=\"...tmpfcn\")");
   src <- paste(src, collapse=";\n");
   expr <- parse(text=src);
   eval(expr, envir=envir);
-}
+} # setGenericS3.default()
+S3class(setGenericS3.default) <- "default";
+export(setGenericS3.default) <- FALSE;
 
 setGenericS3.default("setGenericS3");  # Creates itself ;)
 

@@ -1,3 +1,6 @@
+hasVarArgs <- function(...) UseMethod("hasVarArgs");
+export(hasVarArgs) <- TRUE;
+
 hasVarArgs.function <- function(fcn, ...) {
   if (!is.function(fcn))
     stop("Argument 'fcn' must be a function: ", mode(fcn));
@@ -7,8 +10,12 @@ hasVarArgs.function <- function(fcn, ...) {
 
   is.element("...", names(args));
 } # hasVarArgs()
+S3class(hasVarArgs.function) <- "function";
+export(hasVarArgs.function) <- FALSE;
 
-hasVarArgs <- function(...) UseMethod("hasVarArgs");
+
+appendVarArgs <- function(...) UseMethod("appendVarArgs");
+export(appendVarArgs) <- TRUE;
 
 appendVarArgs.function <- function(fcn, ...) {
   if (hasVarArgs(fcn))
@@ -23,8 +30,9 @@ appendVarArgs.function <- function(fcn, ...) {
 
   fcn;
 } # appendVarArgs()
+S3class(appendVarArgs.function) <- "function";
+export(appendVarArgs.function) <- FALSE;
 
-appendVarArgs <- function(...) UseMethod("appendVarArgs");
 
 ############################################################################
 # HISTORY:

@@ -19,7 +19,7 @@
  it will be created automatically.
 }
 
-\usage{\method{setMethodS3}{default}(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...)}
+\usage{\method{setMethodS3}{default}(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, exportGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...)}
 
 \arguments{
   \item{name}{The name of the method.}
@@ -50,8 +50,10 @@
      an exception will be thrown and the method will not be created.
      If \code{"warning"}, a \code{\link[base]{warning}} will be given and the method \emph{will}
      be created, otherwise the conflict will be passed unnotice.}
-  \item{createGeneric}{If \code{\link[base:logical]{TRUE}}, a generic S3/UseMethod function is
-     defined for this method.}
+  \item{createGeneric, exportGeneric}{If \code{createGeneric=TRUE},
+     a generic S3/UseMethod function is defined for this method,
+     iff missing, and \code{exportGeneric} species attribute
+     \code{"export"} of it.}
   \item{appendVarArgs}{If \code{\link[base:logical]{TRUE}}, argument \code{...} is added with a
      warning, if missing.  For special methods such as \code{$} and
      \code{[[}, this is never done.

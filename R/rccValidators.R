@@ -15,12 +15,14 @@ rccValidateFunctionName <- function(name, ...) {
       throw("Method names should start with a lower case letter: ", name);
   }
 }
+export(rccValidateFunctionName) <- FALSE;
 
 rccValidateSetMethodS3 <- function(name, ...) {
   rccValidateFunctionName(name=name)
 }
+export(rccValidateSetMethodS3) <- FALSE;
 
 rccValidateSetGenericS3 <- function(name, ...) {
   rccValidateFunctionName(name=name)
 }
-
+export(rccValidateSetGenericS3) <- FALSE;

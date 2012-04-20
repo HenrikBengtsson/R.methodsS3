@@ -41,8 +41,10 @@
 #      an exception will be thrown and the method will not be created.
 #      If \code{"warning"}, a @warning will be given and the method \emph{will}
 #      be created, otherwise the conflict will be passed unnotice.}
-#   \item{createGeneric}{If @TRUE, a generic S3/UseMethod function is
-#      defined for this method.}
+#   \item{createGeneric, exportGeneric}{If \code{createGeneric=TRUE}, 
+#      a generic S3/UseMethod function is defined for this method, 
+#      iff missing, and \code{exportGeneric} species attribute
+#      \code{"export"} of it.}
 #   \item{appendVarArgs}{If @TRUE, argument \code{...} is added with a
 #      warning, if missing.  For special methods such as \code{$} and 
 #      \code{[[}, this is never done.
@@ -66,7 +68,7 @@
 # @keyword "programming"
 # @keyword "methods"
 #*/###########################################################################
-setMethodS3.default <- function(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...) {
+setMethodS3.default <- function(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, exportGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...) {
   conflict <- match.arg(conflict);
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -255,11 +257,11 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
     # Create
     expr <- substitute({
         fcn <- definition;
-        attr(fcn, "export") <- export;
+        R.methodsS3:::export(fcn) <- doExport;
         attr(fcn, "S3class") <- class;
         attr(fcn, "modifiers") <- modifiers;
       }, list(fcn=as.name(methodName), class=class, definition=definition,
-              export=export, modifiers=modifiers)
+              doExport=export, modifiers=modifiers)
     );
     # Assign
     eval(expr, envir=envir);
@@ -284,9 +286,11 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # 8. Create a generic function?
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   if (createGeneric == TRUE) {
-    setGenericS3(name, envir=envir, validators=validators, ...);
+    setGenericS3(name, export=exportGeneric, envir=envir, validators=validators, ...);
   }
-}
+} # setMethodS3.default()
+S3class(setMethodS3.default) <- "default";
+export(setMethodS3.default) <- FALSE;
 
 setGenericS3("setMethodS3");
 
@@ -294,6 +298,7 @@ setGenericS3("setMethodS3");
 ############################################################################
 # HISTORY:
 # 2012-04-17
+# o Added argument 'exportGeneric' to setMethodS3().
 # o Added argument 'export' to setMethodS3() and setGenericS3().
 # o Now setMethodS3() sets attribute "S3class" to the class.  This will
 #   make S3 methods such as a.b.c() non abigous, because it will be possible

@@ -1,4 +1,3 @@
-## .First.lib <- function(libname, pkgname) {
 .onAttach <- function(libname, pkgname) {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Set up RCC validators for R.methodsS3.
@@ -16,4 +15,3 @@
   packageStartupMessage(pkgname, " v", pi$Version, " (", 
     pi$Date, ") successfully loaded. See ?", pkgname, " for help.");
 }
-
