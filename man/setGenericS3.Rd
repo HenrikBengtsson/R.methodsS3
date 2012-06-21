@@ -22,7 +22,7 @@
  that function is renamed to \code{name.default}.
 }
 
-\usage{\method{setGenericS3}{default}(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), ...)}
+\usage{\method{setGenericS3}{default}(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...)}
 
 \arguments{
   \item{name}{The name of the generic function.}
@@ -38,6 +38,8 @@
      to assert that the generated generic function meets certain
      criteria.}
   \item{...}{Not used.}
+  \item{overwrite}{If \code{\link[base:logical]{TRUE}} an already existing generic function with
+     the same name will be overwritten, otherwise not.}
 }
 
 \examples{

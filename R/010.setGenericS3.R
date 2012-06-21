@@ -29,6 +29,8 @@
 #      to assert that the generated generic function meets certain 
 #      criteria.}
 #   \item{...}{Not used.}
+#   \item{overwrite}{If @TRUE an already existing generic function with
+#      the same name will be overwritten, otherwise not.}
 # }
 #
 # \examples{
@@ -62,7 +64,7 @@
 # @keyword "methods"
 # @keyword "internal"
 #*/###########################################################################
-setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), ...) {
+setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...) {
 #  cat("setGenericS3(\"", name, "\", \"", get("class", envir=parent.frame()), "\", ...)\n", sep="");
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -154,7 +156,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
     }
   }
 
-  if (!is.null(fcnDef)) {
+  if (!overwrite && !is.null(fcnDef)) {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
     # 4a. Is it already a generic function?
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -208,7 +210,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
       warning("Renamed the preexisting function ", name, " to ", 
         nameDefault, ", which was defined in environment ", fcnPkg, ".");
     }
-  }
+  } # if (...)
 
   # Create a generic function
   src <- sprintf("...tmpfcn <- function(...) UseMethod(\"%s\")", name);
@@ -229,6 +231,8 @@ setGenericS3.default("setGenericS3");  # Creates itself ;)
 
 ############################################################################
 # HISTORY:
+# 2012-06-17
+# o Added argument 'overwrite' to setGenericS3().
 # 2012-04-17
 # o Added argument 'export' to setMethodS3() and setGenericS3().
 # 2007-09-17
