@@ -47,7 +47,7 @@
 #      \code{"export"} of it.}
 #   \item{appendVarArgs}{If @TRUE, argument \code{...} is added with a
 #      warning, if missing.  For special methods such as \code{$} and 
-#      \code{[[}, this is never done.
+#      \code{[[}, this is never done (argument is ignored).
 #      This will increase the chances that the method is consistent with a
 #      generic function with many arguments and/or argument \code{...}.}
 #   \item{validators}{An optional @list of @functions that can be used
@@ -96,8 +96,18 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # Ignore argument 'appendVarArgs' if a "special" method 
   # or a replacement method.
   if (appendVarArgs) {
-    appendVarArgs <- !is.element(name, c("$", "$<-", "[[", "[[<-", "[", "[<-"));
-    appendVarArgs <- appendVarArgs && !(regexpr("<-", name) != -1);
+    # (a) Do not append '...' for the following methods
+    ignores <- c("$", "$<-", "[[", "[[<-", "[", "[<-");
+    ignores <- c(ignores, "==");
+    ignores <- c(ignores, "+", "-", "*", "/", "^", "%%", "%/%");
+    appendVarArgs <- !is.element(name, ignores);
+
+    if (appendVarArgs) {
+      # (b) Neither functions with any of these name patterns
+      ignorePatterns <- c("<-$", "^%[^%]*%$");
+      ignores <- (sapply(ignorePatterns, FUN=regexpr, name) != -1);
+      appendVarArgs <- appendVarArgs && !any(ignores);
+    }
   }
 
   # Check for forbidden names.
@@ -297,6 +307,11 @@ setGenericS3("setMethodS3");
 
 ############################################################################
 # HISTORY:
+# 2012-06-22
+# o Now setMethodS3(..., appendVarArgs=TRUE) ignores 'appendVarArgs' if
+#   the method name is "==", "+", "-", "*", "/", "^", "%%", or "%/%", 
+#   (in addition to "$", "$<-", "[[", "[[<-", "[", "[<-").  It will also
+#   ignore it if the name matches regular expressions "<-$" or "^%[^%]*%$".
 # 2012-04-17
 # o Added argument 'exportGeneric' to setMethodS3().
 # o Added argument 'export' to setMethodS3() and setGenericS3().
