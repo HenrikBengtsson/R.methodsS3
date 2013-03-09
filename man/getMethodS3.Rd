@@ -16,7 +16,9 @@
  Get an S3 method.
 }
 
-\usage{\method{getMethodS3}{default}(name, class="default", envir=parent.frame(), ...)}
+\usage{
+\method{getMethodS3}{default}(name, class="default", envir=parent.frame(), ...)
+}
 
 \arguments{
   \item{name}{The name of the method.}
@@ -32,7 +34,7 @@
   \code{\link{getGenericS3}}().
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 
 

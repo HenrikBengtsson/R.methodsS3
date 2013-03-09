@@ -1,6 +1,10 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.4.3 [2013-03-08]
+o Added an Authors@R field to the DESCRIPTION.
+
+
 Version: 1.4.2 [2012-06-22]
 o Now setMethodS3(..., appendVarArgs=TRUE) ignores 'appendVarArgs' if
   the method name is "==", "+", "-", "*", "/", "^", "%%", or "%/%", 

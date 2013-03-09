@@ -16,7 +16,9 @@
  Checks if a function is a S3/UseMethod generic function.
 }
 
-\usage{\method{isGenericS3}{default}(fcn, envir=parent.frame(), ...)}
+\usage{
+\method{isGenericS3}{default}(fcn, envir=parent.frame(), ...)
+}
 
 \arguments{
   \item{fcn}{A \code{\link[base]{function}} or a \code{\link[base]{character}} string.}
@@ -35,7 +37,7 @@
  Returns \code{\link[base:logical]{TRUE}} if a generic S3/UseMethod function, otherwise \code{\link[base:logical]{FALSE}}.
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 
 

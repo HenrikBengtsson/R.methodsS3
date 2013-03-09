@@ -16,7 +16,9 @@
  Get an S3 generic function.
 }
 
-\usage{\method{getGenericS3}{default}(name, envir=parent.frame(), ...)}
+\usage{
+\method{getGenericS3}{default}(name, envir=parent.frame(), ...)
+}
 
 \arguments{
   \item{name}{The name of the generic function.}
@@ -31,7 +33,7 @@
   \code{\link{isGenericS3}}().
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 
 

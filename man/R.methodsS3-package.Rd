@@ -15,7 +15,15 @@
 
 
 \description{
- Methods that simplify the setup of S3 generic functions and S3 methods.  Major effort has been made in making definition of methods as simple as possible with a minimum of maintenance for package developers.  For example, generic functions are created automatically, if missing, and naming conflict are automatically solved, if possible.  The method setMethodS3() is a good start for those who in the future may want to migrate to S4.  This is a cross-platform package implemented in pure R that generates standard S3 methods.
+ Methods that simplify the setup of S3 generic functions
+        and S3 methods.  Major effort has been made in making
+        definition of methods as simple as possible with a minimum of
+        maintenance for package developers.  For example, generic
+        functions are created automatically, if missing, and naming
+        conflict are automatically solved, if possible.  The method
+        setMethodS3() is a good start for those who in the future may
+        want to migrate to S4.  This is a cross-platform package
+        implemented in pure R that generates standard S3 methods.
  This contents of this package was extracted from the
  \pkg{R.oo} package [1].
 }
@@ -64,7 +72,7 @@
 
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 \section{License}{
   The releases of this package is licensed under

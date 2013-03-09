@@ -22,7 +22,9 @@
  that function is renamed to \code{name.default}.
 }
 
-\usage{\method{setGenericS3}{default}(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...)}
+\usage{
+\method{setGenericS3}{default}(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...)
+}
 
 \arguments{
   \item{name}{The name of the generic function.}
@@ -67,7 +69,7 @@
   For more information about S3, see \code{\link[base]{UseMethod}}().
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 
 

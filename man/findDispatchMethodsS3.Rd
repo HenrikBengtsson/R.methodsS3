@@ -16,7 +16,9 @@
  Finds the S3 methods that a generic function would call, ordered according to an S3 \code{\link[base]{class}}() \code{\link[base]{vector}}.
 }
 
-\usage{\method{findDispatchMethodsS3}{default}(methodName, classNames, firstOnly=FALSE, ...)}
+\usage{
+\method{findDispatchMethodsS3}{default}(methodName, classNames, firstOnly=FALSE, ...)
+}
 
 \arguments{
   \item{methodName}{A \code{\link[base]{character}} string specifying the name of a
@@ -34,7 +36,7 @@
   \code{\link{getDispatchMethodS3}}().
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 
 

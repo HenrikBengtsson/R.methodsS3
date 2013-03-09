@@ -17,7 +17,7 @@
  words in \R according to [1].
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 \references{
  [1] Section "Reserved words", R Language Definition, version 2.6.0

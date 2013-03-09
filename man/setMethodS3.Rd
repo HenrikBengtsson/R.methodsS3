@@ -19,7 +19,9 @@
  it will be created automatically.
 }
 
-\usage{\method{setMethodS3}{default}(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, exportGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...)}
+\usage{
+\method{setMethodS3}{default}(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, exportGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...)
+}
 
 \arguments{
   \item{name}{The name of the method.}
@@ -56,7 +58,7 @@
      \code{"export"} of it.}
   \item{appendVarArgs}{If \code{\link[base:logical]{TRUE}}, argument \code{...} is added with a
      warning, if missing.  For special methods such as \code{$} and
-     \code{[[}, this is never done.
+     \code{[[}, this is never done (argument is ignored).
      This will increase the chances that the method is consistent with a
      generic function with many arguments and/or argument \code{...}.}
   \item{validators}{An optional \code{\link[base]{list}} of \code{\link[base]{function}}s that can be used
@@ -117,7 +119,7 @@ bar("123")
   For more information about S3, see \code{\link[base]{UseMethod}}().
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 
 

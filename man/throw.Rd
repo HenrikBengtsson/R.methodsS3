@@ -24,7 +24,9 @@
  is of class \code{\link[R.oo]{Exception}}.}
 }
 
-\usage{\method{throw}{default}(...)}
+\usage{
+\method{throw}{default}(...)
+}
 
 \arguments{
   \item{...}{One or several strings that are concatenated and collapsed
@@ -49,7 +51,7 @@
   )
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 \keyword{error}
 
