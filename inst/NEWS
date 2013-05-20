@@ -1,6 +1,10 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.4.4 [2013-05-19]
+o Now all Rd \usage{} lines are at most 90 characters long.
+
+
 Version: 1.4.3 [2013-03-08]
 o Added an Authors@R field to the DESCRIPTION.
 

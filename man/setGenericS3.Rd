@@ -23,7 +23,9 @@
 }
 
 \usage{
-\method{setGenericS3}{default}(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...)
+\method{setGenericS3}{default}(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE,
+  dontWarn=getOption("dontWarnPkgs"),
+  validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...)
 }
 
 \arguments{

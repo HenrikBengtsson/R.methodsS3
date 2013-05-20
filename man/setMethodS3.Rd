@@ -20,7 +20,11 @@
 }
 
 \usage{
-\method{setMethodS3}{default}(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, exportGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...)
+\method{setMethodS3}{default}(name, class="default", definition, private=FALSE, protected=FALSE,
+  export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE,
+  envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"),
+  createGeneric=TRUE, exportGeneric=TRUE, appendVarArgs=TRUE,
+  validators=getOption("R.methodsS3:validators:setMethodS3"), ...)
 }
 
 \arguments{
