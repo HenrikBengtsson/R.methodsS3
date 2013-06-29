@@ -1,3 +1,5 @@
+# Makefile for R packages
+
 # CORE MACROS
 ifeq ($(OS), Windows_NT)
 CD=cd
@@ -204,4 +206,8 @@ test: ../$(R_OUTDIR)/tests/%.R
 	$(CD) ../$(R_OUTDIR)/submit_to_cran;\
 	$(R_SCRIPT) -e "RCmdCheckTools::testPkgsToSubmit()"
 
-submit: ../$(R_OUTDIR)/submit_to_cran/$(PKG_NAME),EmailToCRAN.txt
+submit: ../$(R_OUTDIR)/$(PKG_NAME).Rcheck.CRAN/$(PKG_NAME),EmailToCRAN.txt
+
+
+Makefile: ../../Makefile
+	$(R_SCRIPT) -e "d <- 'Makefile'; s <- '../../Makefile'; if (file_test('-nt', s, d) && regexpr("Makefile for R packages", readLines(s, n=1L)) != -1L) file.copy(s, d, overwrite=TRUE)"
