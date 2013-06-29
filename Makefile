@@ -30,6 +30,7 @@ FILES_TESTS := $(wildcard tests/*.R)
 FILES_NEWS := $(wildcard NEWS inst/NEWS)
 FILES_ROOT := DESCRIPTION NAMESPACE .Rbuildignore
 PKG_FILES := $(FILES_ROOT) $(FILES_NEWS) $(FILES_R) $(FILES_DATA) $(FILES_MAN) $(FILES_INST) $(FILES_VIGNETTES) $(FILES_SRC) $(FILES_TESTS)
+FILES_MAKEFILE := $(wildcard ../../Makefile)
 
 # Has vignettes in 'vignettes/' or 'inst/doc/'?
 DIR_VIGNS := $(wildcard vignettes inst/doc)
@@ -209,5 +210,5 @@ test: ../$(R_OUTDIR)/tests/%.R
 submit: ../$(R_OUTDIR)/$(PKG_NAME).Rcheck.CRAN/$(PKG_NAME),EmailToCRAN.txt
 
 
-Makefile: ../../Makefile
-	$(R_SCRIPT) -e "d <- 'Makefile'; s <- '../../Makefile'; if (file_test('-nt', s, d) && regexpr("Makefile for R packages", readLines(s, n=1L)) != -1L) file.copy(s, d, overwrite=TRUE)"
+Makefile: $(FILES_MAKEFILE)
+	$(R_SCRIPT) -e "d <- 'Makefile'; s <- '../../Makefile'; if (file_test('-nt', s, d) && (regexpr('Makefile for R packages', readLines(s, n=1L)) != -1L)) file.copy(s, d, overwrite=TRUE)"
