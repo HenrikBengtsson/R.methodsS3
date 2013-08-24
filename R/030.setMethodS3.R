@@ -270,6 +270,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
         `R.methodsS3_export<-` <- get("export<-", mode="function",
                         envir=asNamespace("R.methodsS3"), inherits=FALSE);
         R.methodsS3_export(fcn) <- doExport;
+        rm(list="R.methodsS3_export<-");
         attr(fcn, "S3class") <- class;
         attr(fcn, "modifiers") <- modifiers;
       }, list(fcn=as.name(methodName), class=class, definition=definition,
