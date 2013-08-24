@@ -1,6 +1,11 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.4.5 [2013-08-23]
+o CLEANUP: Dropped deprecated inst/HOWTOSITE replaced by inst/CITATION.
+o CLEANUP: No longer utilizing ':::' for "self" (i.e. R.methods3) methods. 
+
+
 Version: 1.4.4 [2013-05-19]
 o CRAN POLICY: Now all Rd \usage{} lines are at most 90 characters long.
 
