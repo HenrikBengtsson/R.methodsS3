@@ -5,6 +5,9 @@
 #
 # \description{
 #   @get "title".
+#   Contrary to @see "base::packageStartupMessage", this method does
+#   \emph{not} output a message when \code{library()/require()} is
+#   called with argument \code{quietly=TRUE}.
 # }
 #
 # @synopsis

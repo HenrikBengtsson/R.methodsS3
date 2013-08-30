@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Do not modify this file since it was automatically generated from:
 % 
-%  startupMessage.R
+%  pkgStartupMessage.R
 % 
 % by the Rdoc compiler part of the R.oo package.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,6 +14,9 @@
 
 \description{
   Generates a (package) startup message.
+  Contrary to \code{\link[base]{packageStartupMessage}}(), this method does
+  \emph{not} output a message when \code{library()/require()} is
+  called with argument \code{quietly=TRUE}.
 }
 
 \usage{
