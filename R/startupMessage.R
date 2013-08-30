@@ -33,35 +33,40 @@ setMethodS3("startupMessage", "default", function(..., quietly=NA) {
   # Infer 'quietly' from argument 'argument' in library() call?
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (is.na(quietly)) {
-    # The default, if not found
-    quietly <- formals(base::library)$quietly;
+    quietly <- FALSE;
 
-    # Identify the environment/frame of interest by making sure
-    # it at least contains all the arguments of source().
-    argsToFind <- names(formals(base::library));
+    # Just in case the below won't work one day due to R updates...
+    tryCatch({
+      # The default, if not found
+      quietly <- formals(base::library)$quietly;
 
-    # Scan the call frames/environments backwards...
-    srcfileList <- list();
-    for (ff in sys.nframe():0) {
-      env <- sys.frame(ff);
+      # Identify the environment/frame of interest by making sure
+      # it at least contains all the arguments of source().
+      argsToFind <- names(formals(base::library));
 
-      # Does the environment look like a library() environment?
-      exist <- sapply(argsToFind, FUN=exists, envir=env, inherits=FALSE);
-      if (!all(exist)) {
-        # Nope, then skip to the next one
-        next;
-      }
+      # Scan the call frames/environments backwards...
+      srcfileList <- list();
+      for (ff in sys.nframe():0) {
+        env <- sys.frame(ff);
 
-      # Was argument 'quietly' specified?
-      missing <- eval(expression(missing(quietly)), envir=env);
-      if (!missing) {
-        quietly <- get("quietly", envir=env, inherits=FALSE);
-        # Done
-        break;
-      }
+        # Does the environment look like a library() environment?
+        exist <- sapply(argsToFind, FUN=exists, envir=env, inherits=FALSE);
+        if (!all(exist)) {
+          # Nope, then skip to the next one
+          next;
+        }
 
-      # ...otherwise keep search, because there are nested library() calls.
-    } # for (ff ...)
+        # Was argument 'quietly' specified?
+        missing <- eval(expression(missing(quietly)), envir=env);
+        if (!missing) {
+          quietly <- get("quietly", envir=env, inherits=FALSE);
+          # Done
+          break;
+        }
+
+        # ...otherwise keep search, because there are nested library() calls.
+      } # for (ff ...)
+    }, error = function() {});
   } # if (is.na(quietly)
 
 
