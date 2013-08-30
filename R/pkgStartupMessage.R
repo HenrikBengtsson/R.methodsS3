@@ -64,7 +64,7 @@ setMethodS3("pkgStartupMessage", "default", function(..., quietly=NA) {
           break;
         }
 
-        # ...otherwise keep search, because there are nested library() calls.
+        # ...otherwise keep searching due to nested library() calls.
       } # for (ff ...)
     }, error = function() {});
   } # if (is.na(quietly)
