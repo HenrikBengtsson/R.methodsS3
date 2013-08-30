@@ -2,7 +2,7 @@ Package: R.methodsS3
 ====================
 
 Version: 1.5.0 [2013-08-29]
-o Added startupMessage() which acknowledge argument 'quietly' of library().
+o Added pkgStartupMessage() which acknowledges library(..., quietly=TRUE).
 
 
 Version: 1.4.5 [2013-08-23]

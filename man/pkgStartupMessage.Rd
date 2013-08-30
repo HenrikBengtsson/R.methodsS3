@@ -6,9 +6,9 @@
 % by the Rdoc compiler part of the R.oo package.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\name{startupMessage}
-\alias{startupMessage.default}
-\alias{startupMessage}
+\name{pkgStartupMessage}
+\alias{pkgStartupMessage.default}
+\alias{pkgStartupMessage}
 
 \title{Generates a (package) startup message}
 
@@ -17,7 +17,7 @@
 }
 
 \usage{
-\method{startupMessage}{default}(..., quietly=NA)
+\method{pkgStartupMessage}{default}(..., quietly=NA)
 }
 
 \arguments{

@@ -1,5 +1,5 @@
 #########################################################################/**
-# @RdocDefault startupMessage
+# @RdocDefault pkgStartupMessage
 #
 # @title "Generates a (package) startup message"
 #
@@ -28,7 +28,7 @@
 #
 # @keyword internal
 #*/#########################################################################
-setMethodS3("startupMessage", "default", function(..., quietly=NA) {
+setMethodS3("pkgStartupMessage", "default", function(..., quietly=NA) {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Infer 'quietly' from argument 'argument' in library() call?
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -79,5 +79,5 @@ setMethodS3("startupMessage", "default", function(..., quietly=NA) {
 ############################################################################
 # HISTORY:
 # 2013-08-29
-# o Added startupMessage().
+# o Added pkgStartupMessage().
 ############################################################################
