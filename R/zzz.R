@@ -12,6 +12,6 @@
   validators <- c(validators, list(rccValidateSetMethodS3));
 
   pi <- utils::packageDescription(pkgname);
-  packageStartupMessage(pkgname, " v", pi$Version, " (", 
-    pi$Date, ") successfully loaded. See ?", pkgname, " for help.");
+  startupMessage(pkgname, " v", pi$Version, " (", pi$Date,
+           ") successfully loaded. See ?", pkgname, " for help.");
 }

@@ -1,8 +1,8 @@
 Package: R.methodsS3
-Version: 1.4.5
+Version: 1.5.0
 Depends: R (>= 2.2.0)
 Imports: utils
-Date: 2013-08-23
+Date: 2013-08-29
 Title: Utility function for defining S3 methods
 Authors@R: c(person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
                                           email = "henrikb@braju.com"))
