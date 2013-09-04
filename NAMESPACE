@@ -41,3 +41,7 @@ S3method("setGenericS3", "default")
 S3method("setMethodS3", "default")
 S3method("throw", "default")
 S3method("pkgStartupMessage", "default")
+
+
+##export("startupMessage")
+##S3method("startupMessage", "default")

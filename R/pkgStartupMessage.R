@@ -79,6 +79,9 @@ setMethodS3("pkgStartupMessage", "default", function(..., quietly=NA) {
   }
 }, protected=TRUE)
 
+## startupMessage <- pkgStartupMessage
+## startupMessage.default <- pkgStartupMessage.default
+
 ############################################################################
 # HISTORY:
 # 2013-08-29
