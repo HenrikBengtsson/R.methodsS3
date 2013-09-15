@@ -1,6 +1,9 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # IMPORTS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+importFrom("utils", "capture.output")
+importFrom("utils", "getAnywhere")
+importFrom("utils", "getS3method")
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
