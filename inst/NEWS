@@ -5,6 +5,8 @@ Version: 1.5.1 [2013-09-15]
 o BUG FIX: Forgot to explicitly import capture.output() from 'utils'
   which could give an error on function "capture.output" not available
   when setMethodS3() was used to define a "replacement" function.
+  This was only observed on the R v3.0.1 release version but not with
+  the more recent patched or devel versions.
   In addition, two other 'utils' functions are now explicitly imported.
 
 
