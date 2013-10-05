@@ -70,8 +70,8 @@ isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
 
   FALSE;
 }
+S3class(isGenericS3.default) <- "default";
 export(isGenericS3.default) <- FALSE;
-
 
 setGenericS3("isGenericS3");
 
@@ -119,6 +119,7 @@ isGenericS4.default <- function(fcn, envir=parent.frame(), ...) {
   body <- as.character(body);
   return(length(grep("standardGeneric", body)) > 0)
 }
+S3class(isGenericS4.default) <- "default";
 export(isGenericS4.default) <- FALSE;
 
 setGenericS3("isGenericS4");

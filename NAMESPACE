@@ -34,18 +34,22 @@ export("pkgStartupMessage")
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # DECLARATIONS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-S3method("appendVarArgs", "function")
-S3method("findDispatchMethodsS3", "default")
-S3method("getDispatchMethodS3", "default")
+# default
 S3method("getGenericS3", "default")
 S3method("getMethodS3", "default")
-S3method("hasVarArgs", "function")
-S3method("setGenericS3", "default")
 S3method("isGenericS3", "default")
 S3method("isGenericS4", "default")
+S3method("pkgStartupMessage", "default")
+S3method("setGenericS3", "default")
 S3method("setMethodS3", "default")
 S3method("throw", "default")
-S3method("pkgStartupMessage", "default")
 
 ##export("startupMessage")
 ##S3method("startupMessage", "default")
+
+S3method("findDispatchMethodsS3", "default") ## private; drop?
+S3method("getDispatchMethodS3", "default") ## private; drop?
+
+# function
+S3method("appendVarArgs", "function")
+S3method("hasVarArgs", "function")
