@@ -34,13 +34,29 @@
 #*/###########################################################################
 isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
   isGenericS3.character <- function(fcn, envir=parent.frame(), ...) {
-    # Among one of the known S3 generic functions?
+    # Get the name of all known S3 generic functions
+    knownGenerics <- NULL;
     for (name in c(".knownS3Generics", ".S3PrimitiveGenerics")) {
       # Backward compatibility
       if (!exists(name, envir=baseenv())) next;
-      knownGenerics <- names(get(name, envir=baseenv()));
-      if (is.element(fcn, knownGenerics)) return(TRUE);
+      names <- names(get(name, envir=baseenv()));
+      knownGenerics <- c(knownGenerics, names);
     } # for (name ...)
+
+    # tools:::.get_internal_S3_generics() if available
+    ns <- getNamespace("tools")
+    if (exists(".get_internal_S3_generics", envir=ns, inherits=FALSE)) {
+      names <- get(".get_internal_S3_generics", envir=ns, inherits=FALSE)();
+      knownGenerics <- c(knownGenerics, names);
+    }
+
+    # Manually added, cf. ?cbind
+    names <- c("cbind", "rbind");
+    knownGenerics <- c(knownGenerics, names);
+
+    # Is it one of the known S3 generic functions?
+    knownGenerics <- unique(knownGenerics);
+    if (is.element(fcn, knownGenerics)) return(TRUE);
 
     # Check the body of the function
     fcn <- get(fcn, mode="function", envir=envir, inherits=TRUE);
