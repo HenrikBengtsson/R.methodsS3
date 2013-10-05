@@ -8,8 +8,8 @@
 #   @see "setMethodS3" and there is no reason for calling it directly!}\cr
 #
 #  Creates a generic function in S3 style, i.e. setting a
-#  function with name \code{name} that dispatches the method \code{name} 
-#  via \code{UseMethod}. If there is already a function named \code{name} 
+#  function with name \code{name} that dispatches the method \code{name}
+#  via \code{UseMethod}. If there is already a function named \code{name}
 #  that function is renamed to \code{name.default}.
 # }
 #
@@ -21,12 +21,12 @@
 #   \item{envir}{The environment for where this method should be stored.}
 #   \item{ellipsesOnly}{If @TRUE, the only arguments in the generic function
 #      will be @....}
-#   \item{dontWarn}{If a non-generic method with the same name is found it 
+#   \item{dontWarn}{If a non-generic method with the same name is found it
 #      will be "renamed" to a default method. If that method is found in
 #      a package with a name that is \emph{not} found in \code{dontWarn}
 #      a warning will be produced, otherwise it will be renamed silently.}
 #   \item{validators}{An optional @list of @functions that can be used
-#      to assert that the generated generic function meets certain 
+#      to assert that the generated generic function meets certain
 #      criteria.}
 #   \item{...}{Not used.}
 #   \item{overwrite}{If @TRUE an already existing generic function with
@@ -67,9 +67,9 @@
 setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...) {
 #  cat("setGenericS3(\"", name, "\", \"", get("class", envir=parent.frame()), "\", ...)\n", sep="");
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Backward compatibility tests
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   args <- list(...);
   if (is.element("enforceRCC", names(args))) {
     warning("Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.");
@@ -80,9 +80,9 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
   }
 
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 0. Define local constants and local functions
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Known generic functions (that I know of)
   GENERIC.FUNCTIONS <- c("as.vector", "range");
 
@@ -90,32 +90,33 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
   # maybe load and set the new get, which is then a generic function, and the
   # next thing it will try to get() (it uses get internally) will not be
   # retrieved, since get.default() might not be loaded at this time, but later.
-  PROTECTED.NAMES <- c("get"); 
+  PROTECTED.NAMES <- c("get");
 
-  is.primitive <- function(fdef)
+  is.primitive <- function(fdef) {
     switch(typeof(fdef), special=, builtin=TRUE, FALSE)
+  }
 
-  
+
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 1. Test the definition using validators
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (!is.null(validators)) {
     for (validator in validators) {
-      validator(name=name, envir=envir, ellipsesOnly=ellipsesOnly, 
+      validator(name=name, envir=envir, ellipsesOnly=ellipsesOnly,
                                    dontWarn=dontWarn, type="setGenericS3");
     }
   }
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 2. Check for forbidden names
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (is.element(name, R.KEYWORDS))
     stop("Method names must not be same as a reserved keyword in R: ", name);
 
   if (is.element(name, PROTECTED.NAMES))
     stop("Trying to use an unsafe generic method name (trust us, it is for a *good* reason): ", name);
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 2. Find the environment where sys.source() loads the package, which is
   # the local variable (argument) of sys.source() named as "envir".
   # Unfortunately, the only way we can be sure which of the parent frames
@@ -124,42 +125,45 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
   # Comment: sys.source() is used by library() and require() for loading
   # packages. Also note that packages that are currently loaded are not in
   # the search path, cf. search(), and there and standard exists() will not
-  # find it. *Not* checking the currently loading environment would *not* 
+  # find it. *Not* checking the currently loading environment would *not*
   # be harmful, but it would produce too many warnings.
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   sys.source.def <- get("sys.source", mode="function", envir=baseenv());
   loadenv <- NULL;
-  for (framePos in sys.parents()[-1]) {
+  for (framePos in sys.parents()[-1L]) {
     if (identical(sys.source.def, sys.function(framePos))) {
       loadenv <- parent.frame(framePos);
       break;
     }
   }
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 3. Check for preexisting functions with the same name
-  #     i) in the environment that we are saving to ('envir'), 
+  #     i) in the environment that we are saving to ('envir'),
   #    ii) in the currently loading environment ('loadenv'), or
   #   iii) in the environments in the search path (search()).
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   envirs <- c(envir, loadenv, lapply(search(), FUN=as.environment));
   fcnDef <- NULL;
-  for (env in envirs) {
-    if (exists(name, mode="function", envir=env, inherits=FALSE)) {
-      fcnDef <- get(name, mode="function", envir=env, inherits=FALSE);
+  checkImports <- getOption("R.methodsS3:checkImports:setGenericS3", FALSE);
+  for (kk in seq_along(envirs)) {
+    env <- envirs[[kk]];
+    inherits <- (checkImports && kk <= 2L);
+    if (exists(name, mode="function", envir=env, inherits=inherits)) {
+      fcnDef <- get(name, mode="function", envir=env, inherits=inherits);
       fcnPkg <- attr(env, "name");
-      if (is.null(fcnPkg)) 
-        fcnPkg <- "base" 
-      else 
+      if (is.null(fcnPkg))
+        fcnPkg <- "base"
+      else
         fcnPkg <- gsub("^package:", "", fcnPkg);
       break;
     }
   }
 
   if (!overwrite && !is.null(fcnDef)) {
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # 4a. Is it already a generic function?
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     if (is.element(name, GENERIC.FUNCTIONS)) {
       isGeneric <- TRUE;
     } else {
@@ -169,8 +173,8 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
         isGeneric <- is.primitive(fcnDef);
       } else {
         src <- as.character(deparse(bdy));  # deparse is needed! / HB 2002-01-24
-      	isGeneric <- any(regexpr("UseMethod", src) != -1) | 
-      		     any(regexpr("standardGeneric", src) != -1);
+      	isGeneric <- any(regexpr("UseMethod", src) != -1L) |
+      		     any(regexpr("standardGeneric", src) != -1L);
       }
     }
 
@@ -180,9 +184,9 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
       return();
     }
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # 4b. ... or, is there already a default function with the same name?
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Search for preexisting default function in the same environments as above.
     nameDefault <- paste(name, ".default", sep="");
     defaultExists <- FALSE;
@@ -196,18 +200,18 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
 
     if (defaultExists) {
       warning("Could not create generic function. There is already a",
-              " non-generic function named ", name, "() in package ", fcnPkg, 
-              " with the same name as an existing default function ", 
+              " non-generic function named ", name, "() in package ", fcnPkg,
+              " with the same name as an existing default function ",
               nameDefault, "() in package", defaultPkg, ".");
       return();
     }
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # 4c. "Rename" the function to a default function
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     assign(nameDefault, substitute(fcn, list(fcn=fcnDef)), envir=envir);
     if (!is.element(fcnPkg, dontWarn)) {
-      warning("Renamed the preexisting function ", name, " to ", 
+      warning("Renamed the preexisting function ", name, " to ",
         nameDefault, ", which was defined in environment ", fcnPkg, ".");
     }
   } # if (...)
@@ -231,6 +235,9 @@ setGenericS3.default("setGenericS3");  # Creates itself ;)
 
 ############################################################################
 # HISTORY:
+# 2013-10-05
+# o Now setGenericS3() looks for existing generic functions also in
+#   imported namespaces.
 # 2012-06-17
 # o Added argument 'overwrite' to setGenericS3().
 # 2012-04-17
@@ -253,13 +260,13 @@ setGenericS3.default("setGenericS3");  # Creates itself ;)
 # o Removed obsolete argument 'force' in Rdoc.
 # 2002-11-29
 # o Updated some error messages.
-# o Now it is possible to create generic methods with one (or several) 
+# o Now it is possible to create generic methods with one (or several)
 #   . (period) as a prefix of the name. Such a method should be considered
 #   private in the same manner as fields with a period are private.
 # 2002-11-28
 # o SPELL CHECK: "...name name..." in one of setGenericS3()'s error messages.
 # 2002-11-10
-# o Updated setGenericS3() to assert that the environment variable 'envir' 
+# o Updated setGenericS3() to assert that the environment variable 'envir'
 #   is actually the one in the frame of the sys.source() function call. This
 #   is done by comparing function defintions.
 # o Changed setGenericS3() to *always* create generic functions with no
@@ -272,11 +279,11 @@ setGenericS3.default("setGenericS3");  # Creates itself ;)
 #   work.
 # 2002-10-16
 # o There are times when
-#     generic <- function(...) UseMethod() 
+#     generic <- function(...) UseMethod()
 #   is not working, for example
 #     fcn <- get("generic"); fcn(myObj, ...);
 #   For this reason, always do method dispatching using the name explicitly;
-#     generic <- function(...) UseMethod("generic") 
+#     generic <- function(...) UseMethod("generic")
 #
 # 2002-10-15
 # o Created from R.oo Object.R and ideas as described on

@@ -17,9 +17,9 @@
 # }
 #
 # \details{
-#   A function is considered to be a generic S3/UseMethod function if its
-#   body, that is the source code, contains the regular pattern 
-#   \code{"UseMethod[(]"}.
+#   A function is considered to be a generic S3/UseMethod function if
+#   its name matches one of the known S3 generic functions, or if it
+#   calls \code{UseMethod()}.
 # }
 #
 # \value{
@@ -33,16 +33,45 @@
 # @keyword "internal"
 #*/###########################################################################
 isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
-  if (is.character(fcn)) {
+  isGenericS3.character <- function(fcn, envir=parent.frame(), ...) {
+    # Among one of the known S3 generic functions?
+    for (name in c(".knownS3Generics", ".S3PrimitiveGenerics")) {
+      # Backward compatibility
+      if (!exists(name, envir=baseenv())) next;
+      knownGenerics <- names(get(name, envir=baseenv()));
+      if (is.element(fcn, knownGenerics)) return(TRUE);
+    } # for (name ...)
+
+    # Check the body of the function
     fcn <- get(fcn, mode="function", envir=envir, inherits=TRUE);
+    isGenericS3(fcn, ...);
   }
-  body <- body(fcn);
-  if (is.call(body))
-    body <- deparse(body);
-  body <- as.character(body);
-  return(length(grep("UseMethod[(]", body)) > 0)
+
+  if (is.character(fcn)) {
+    return(isGenericS3.character(fcn, envir=envir, ...))
+  }
+
+  # Check with codetools::findGlobals(), if available,
+  # otherwise scan the body
+  res <- tryCatch({
+    ns <- getNamespace("codetools");
+    findGlobals <- get("findGlobals", mode="function", envir=ns);
+    fcns <- findGlobals(fcn, merge=FALSE)$functions;
+    is.element("UseMethod", fcns);
+  }, error = function(ex) {
+    # Scan the body of the function
+    body <- body(fcn);
+    if (is.call(body))
+      body <- deparse(body);
+    body <- as.character(body);
+    (length(grep("UseMethod[(]", body)) > 0L);
+  });
+  if (isTRUE(res)) return(TRUE);
+
+  FALSE;
 }
 export(isGenericS3.default) <- FALSE;
+
 
 setGenericS3("isGenericS3");
 
@@ -66,7 +95,7 @@ setGenericS3("isGenericS3");
 #
 # \details{
 #   A function is considered to be a generic S4 function if its
-#   body, that is the source code, contains the regular pattern 
+#   body, that is the source code, contains the regular pattern
 #   \code{"standardGeneric"}.
 # }
 #
@@ -98,6 +127,10 @@ setGenericS3("isGenericS4");
 
 ############################################################################
 # HISTORY:
+# 2013-10-05
+# o ROBUSTNESS: Now isGenericS3() also compares to known generic functions
+#   in the 'base' package.  It also does a better job on checking whether
+#   the function calls UseMethod() or not.
 # 2010-09-18
 # o BUG FIX: isGenericS3() and isGenericS4() did not support specifying
 #   the function by name as a character string, despite it was documented
