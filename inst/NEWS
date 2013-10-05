@@ -8,6 +8,10 @@ o BETA: Added an in-official option to make setGenericS3() look for
 o ROBUSTNESS: Now isGenericS3() also compares to known generic functions
   in the 'base' package.  It also does a better job on checking whether
   the function calls UseMethod() or not.
+o The above improvement of isGenericS3() means that setGenericS3()
+  does a better job to decided whether a generic function should be
+  created or not, which in turn means 'createGeneric=FALSE' is needed
+  much less in setMethodS3().
 
 
 Version: 1.5.1 [2013-09-15]
