@@ -10,10 +10,10 @@
 \alias{getMethodS3.default}
 \alias{getMethodS3}
 
-\title{Get an S3 method}
+\title{Gets an S3 method}
 
 \description{
- Get an S3 method.
+ Gets an S3 method.
 }
 
 \usage{

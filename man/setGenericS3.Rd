@@ -10,7 +10,7 @@
 \alias{setGenericS3.default}
 \alias{setGenericS3}
 
-\title{Creates a generic function in S3/UseMethod style}
+\title{Creates an S3 generic function}
 
 \description{
  \emph{Note that this method is a internal method called by
@@ -75,7 +75,5 @@
 
 
 
-
 \keyword{programming}
 \keyword{methods}
-\keyword{internal}

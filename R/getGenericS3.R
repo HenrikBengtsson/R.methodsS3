@@ -1,7 +1,7 @@
 ###########################################################################/**
 # @RdocDefault getGenericS3
 #
-# @title "Get an S3 generic function"
+# @title "Gets an S3 generic function"
 #
 # \description{
 #  @get "title".
@@ -26,8 +26,8 @@
 #
 # @author
 #
-# @keyword "programming"
-# @keyword "methods"
+# @keyword programming
+# @keyword methods
 #*/###########################################################################
 setMethodS3("getGenericS3", "default", function(name, envir=parent.frame(), inherits=TRUE, ...) {
   fcn <- .findFunction(name, envir=envir, inherits=inherits)$fcn;

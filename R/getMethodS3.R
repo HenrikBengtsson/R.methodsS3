@@ -1,7 +1,7 @@
 ###########################################################################/**
 # @RdocDefault getMethodS3
 #
-# @title "Get an S3 method"
+# @title "Gets an S3 method"
 #
 # \description{
 #  @get "title".
@@ -13,7 +13,7 @@
 #   \item{name}{The name of the method.}
 #   \item{class}{The class of the method.}
 #   \item{envir}{The @environment from which the search for the
-#     S3 method is done.}  
+#     S3 method is done.}
 #   \item{...}{Not used.}
 # }
 #
@@ -25,8 +25,8 @@
 #
 # @author
 #
-# @keyword "programming"
-# @keyword "methods"
+# @keyword programming
+# @keyword methods
 #*/###########################################################################
 setMethodS3("getMethodS3", "default", function(name, class="default", envir=parent.frame(), ...) {
   args <- list(name, class=class, optional=FALSE);
@@ -41,7 +41,7 @@ setMethodS3("getMethodS3", "default", function(name, class="default", envir=pare
 # o CLEANUP: Dropped example(getMethodS3), which was for setMethodS3().
 # 2010-09-18
 # o BUG FIX: getMethodS3() failed to locate S3 methods created in the
-#   global enviroment. 
+#   global enviroment.
 # 2008-05-08
 # o Added getMethodS3().
 ############################################################################

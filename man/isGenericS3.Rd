@@ -10,10 +10,10 @@
 \alias{isGenericS3.default}
 \alias{isGenericS3}
 
-\title{Checks if a function is a S3/UseMethod generic function}
+\title{Checks if a function is a S3 generic function}
 
 \description{
- Checks if a function is a S3/UseMethod generic function.
+ Checks if a function is a S3 generic function.
 }
 
 \usage{

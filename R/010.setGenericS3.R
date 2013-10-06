@@ -1,7 +1,7 @@
 ###########################################################################/**
 # @RdocDefault setGenericS3
 #
-# @title "Creates a generic function in S3/UseMethod style"
+# @title "Creates an S3 generic function"
 #
 # \description{
 #  \emph{Note that this method is a internal method called by
@@ -60,9 +60,8 @@
 #
 # @author
 #
-# @keyword "programming"
-# @keyword "methods"
-# @keyword "internal"
+# @keyword programming
+# @keyword methods
 #*/###########################################################################
 setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...) {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

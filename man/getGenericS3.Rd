@@ -10,10 +10,10 @@
 \alias{getGenericS3.default}
 \alias{getGenericS3}
 
-\title{Get an S3 generic function}
+\title{Gets an S3 generic function}
 
 \description{
- Get an S3 generic function.
+ Gets an S3 generic function.
 }
 
 \usage{

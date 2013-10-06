@@ -27,9 +27,10 @@
 #
 # @author
 #
-# @keyword "programming"
-# @keyword "methods"
-#*/########################################################################### 
+# @keyword programming
+# @keyword methods
+# @keyword internal
+#*/###########################################################################
 setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames, firstOnly=FALSE, ...) {
   # Argument 'methodName':
   methodName <- as.character(methodName);
@@ -98,4 +99,4 @@ setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames,
 # o Made findDispatchMethodsS3() a default method.
 # 2009-11-20
 # o Added findDispatchMethodsS3().
-############################################################################ 
+############################################################################

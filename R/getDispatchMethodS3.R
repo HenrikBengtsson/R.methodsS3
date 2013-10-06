@@ -26,9 +26,10 @@
 #
 # @author
 #
-# @keyword "programming"
-# @keyword "methods"
-#*/########################################################################### 
+# @keyword programming
+# @keyword methods
+# @keyword internal
+#*/###########################################################################
 setMethodS3("getDispatchMethodS3", "default", function(methodName, classNames, ...) {
   res <- findDispatchMethodsS3(methodName, classNames, firstOnly=TRUE, ...);
   if (length(res) == 0) {
@@ -43,7 +44,7 @@ setMethodS3("getDispatchMethodS3", "default", function(methodName, classNames, .
 # HISTORY:
 # 2010-12-02
 # o Added Rdoc comments.
-# o Made getDispatchMethodS3() a default method. 
+# o Made getDispatchMethodS3() a default method.
 # 2009-11-20
 # o Added getDispatchMethodS3().
-############################################################################ 
+############################################################################

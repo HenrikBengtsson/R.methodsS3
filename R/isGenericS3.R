@@ -1,7 +1,7 @@
 ###########################################################################/**
 # @RdocDefault isGenericS3
 #
-# @title "Checks if a function is a S3/UseMethod generic function"
+# @title "Checks if a function is a S3 generic function"
 #
 # \description{
 #  @get "title".
@@ -28,9 +28,9 @@
 #
 # @author
 #
-# @keyword "programming"
-# @keyword "methods"
-# @keyword "internal"
+# @keyword programming
+# @keyword methods
+# @keyword internal
 #*/###########################################################################
 isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
