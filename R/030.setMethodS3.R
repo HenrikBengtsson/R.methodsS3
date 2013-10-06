@@ -78,7 +78,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   if (is.element("enforceRCC", names(args))) {
     warning("Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.");
     # Turn off validators?
-    if (args$enforceRCC == FALSE) {
+    if (!args$enforceRCC) {
       validators <- NULL;
     }
   }
@@ -105,7 +105,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
     if (appendVarArgs) {
       # (b) Neither functions with any of these name patterns
       ignorePatterns <- c("<-$", "^%[^%]*%$");
-      ignores <- (sapply(ignorePatterns, FUN=regexpr, name) != -1);
+      ignores <- (sapply(ignorePatterns, FUN=regexpr, name) != -1L);
       appendVarArgs <- appendVarArgs && !any(ignores);
     }
   }
@@ -164,7 +164,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   sys.source.def <- get("sys.source", mode="function", envir=baseenv());
   loadenv <- NULL;
-  for (framePos in sys.parents()[-1]) {
+  for (framePos in sys.parents()[-1L]) {
     if (identical(sys.source.def, sys.function(framePos))) {
       loadenv <- parent.frame(framePos);
       break;
@@ -179,18 +179,12 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   #   iii) in the environments in the search path (search()).
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   envirs <- c(envir, loadenv, lapply(search(), FUN=as.environment));
-  fcnDef <- NULL;
-  for (env in envirs) {
-    if (exists(methodName, mode="function", envir=env, inherits=FALSE)) {
-      fcnDef <- get(methodName, mode="function", envir=env, inherits=FALSE);
-      fcnPkg <- attr(env, "name");
-      if (is.null(fcnPkg))
-        fcnPkg <- "base"
-      else
-        fcnPkg <- gsub("^package:", "", fcnPkg);
-      break;
-    }
-  }
+  inherits <- rep(FALSE, times=length(envirs));
+  checkImports <- getOption("R.methodsS3:checkImports:setGenericS3", FALSE);
+  if (checkImports) inherits[1:2] <- TRUE;
+
+  fcn <- .findFunction(methodName, envir=envirs, inherits=inherits);
+  fcnDef <- fcn$fcn; fcnPkg <- fcn$pkg;
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -213,7 +207,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 5. Validate replacement functions (since R CMD check will complain)
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  if (regexpr("<-$", name) != -1) {
+  if (regexpr("<-$", name) != -1L) {
     f <- formals(definition);
 
     fStr <- capture.output(args(definition))[[1]];
@@ -238,7 +232,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   if (is.element(name, names(pickyMethods))) {
     f <- formals(definition);
 
-    fStr <- capture.output(args(definition))[[1]];
+    fStr <- capture.output(args(definition))[[1L]];
     fStr <- sub("^[\t\n\f\r ]*", "", fStr);    # trim() is not available
     fStr <- sub("[\t\n\f\r ]*$", "", fStr);    # when package loads!
 
@@ -263,7 +257,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 6. Assign/create the new method
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  if (is.null(fcnDef) || overwrite == TRUE) {
+  if (is.null(fcnDef) || overwrite) {
     # Create
     expr <- substitute({
         fcn <- definition;
@@ -298,7 +292,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 8. Create a generic function?
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  if (createGeneric == TRUE) {
+  if (createGeneric) {
     setGenericS3(name, export=exportGeneric, envir=envir, validators=validators, ...);
   }
 } # setMethodS3.default()
@@ -310,6 +304,8 @@ setGenericS3("setMethodS3");
 
 ############################################################################
 # HISTORY:
+# 2013-10-06
+# o CLEANUP: setGenericS3() utilizes new .findFunction().
 # 2012-08-23
 # o No longer utilizing ':::' for "self" (i.e. R.methods3) methods.
 # 2012-06-22

@@ -35,8 +35,39 @@ noexport <- export(function(x) {
 })
 
 
+
+# Use by setGenericS3() and setMethodS3()
+.findFunction <- function(name, envir, inherits=rep(FALSE, times=length(envir))) {
+  # Argument 'envir':
+  if (!is.list(envir)) {
+    envir <- list(envir);
+  }
+  n <- length(envir);
+
+  # Argument 'inherits':
+  inherits <- as.logical(inherits);
+  stopifnot(length(inherits) == n);
+
+  fcn <- pkg <- NULL;
+  for (kk in seq_along(envir)) {
+    env <- envir[[kk]];
+    inh <- inherits[kk];
+    if (exists(name, mode="function", envir=env, inherits=inh)) {
+      fcn <- get(name, mode="function", envir=env, inherits=inh);
+      pkg <- attr(env, "name");
+      pkg <- if (is.null(pkg)) "base" else gsub("^package:", "", pkg);
+      break;
+    }
+  } # for (kk ...)
+
+  list(fcn=fcn, pkg=pkg);
+} # .findFunction()
+
+
 ############################################################################
 # HISTORY:
+# 2013-10-06
+# o Added .findFunction().
 # 2012-04-17
 # o Added S3class() function.
 # o Added export() and noexport() functions.
@@ -62,11 +93,11 @@ noexport <- export(function(x) {
 #   work.
 # 2002-10-16
 # o There are times when
-#     generic <- function(...) UseMethod() 
+#     generic <- function(...) UseMethod()
 #   is not working, for example
 #     fcn <- get("generic"); fcn(myObj, ...);
 #   For this reason, always do method dispatching using the name explicitly;
-#     generic <- function(...) UseMethod("generic") 
+#     generic <- function(...) UseMethod("generic")
 #
 # 2002-10-15
 # o Created from R.oo Object.R and ideas as described on

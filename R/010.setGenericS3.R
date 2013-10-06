@@ -65,8 +65,6 @@
 # @keyword "internal"
 #*/###########################################################################
 setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...) {
-#  cat("setGenericS3(\"", name, "\", \"", get("class", envir=parent.frame()), "\", ...)\n", sep="");
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Backward compatibility tests
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -83,19 +81,11 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 0. Define local constants and local functions
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Known generic functions (that I know of)
-  GENERIC.FUNCTIONS <- c("as.vector", "range");
-
   # 'get' is illegal, because if it is redefined in a package, library() will
   # maybe load and set the new get, which is then a generic function, and the
   # next thing it will try to get() (it uses get internally) will not be
   # retrieved, since get.default() might not be loaded at this time, but later.
   PROTECTED.NAMES <- c("get");
-
-  is.primitive <- function(fdef) {
-    switch(typeof(fdef), special=, builtin=TRUE, FALSE)
-  }
-
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 1. Test the definition using validators
@@ -144,39 +134,18 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
   #   iii) in the environments in the search path (search()).
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   envirs <- c(envir, loadenv, lapply(search(), FUN=as.environment));
-  fcnDef <- NULL;
+  inherits <- rep(FALSE, times=length(envirs));
   checkImports <- getOption("R.methodsS3:checkImports:setGenericS3", FALSE);
-  for (kk in seq_along(envirs)) {
-    env <- envirs[[kk]];
-    inherits <- (checkImports && kk <= 2L);
-    if (exists(name, mode="function", envir=env, inherits=inherits)) {
-      fcnDef <- get(name, mode="function", envir=env, inherits=inherits);
-      fcnPkg <- attr(env, "name");
-      if (is.null(fcnPkg))
-        fcnPkg <- "base"
-      else
-        fcnPkg <- gsub("^package:", "", fcnPkg);
-      break;
-    }
-  }
+  if (checkImports) inherits[1:2] <- TRUE;
+
+  fcn <- .findFunction(name, envir=envirs, inherits=inherits);
+  fcnDef <- fcn$fcn; fcnPkg <- fcn$pkg;
 
   if (!overwrite && !is.null(fcnDef)) {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # 4a. Is it already a generic function?
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    if (is.element(name, GENERIC.FUNCTIONS)) {
-      isGeneric <- TRUE;
-    } else {
-      bdy <- body(fcnDef);
-      if (is.null(bdy)) {
-        # Assume that all primitive functions are generic, which is 99% correct.
-        isGeneric <- is.primitive(fcnDef);
-      } else {
-        src <- as.character(deparse(bdy));  # deparse is needed! / HB 2002-01-24
-      	isGeneric <- any(regexpr("UseMethod", src) != -1L) |
-      		     any(regexpr("standardGeneric", src) != -1L);
-      }
-    }
+    isGeneric <- isGenericS3(fcnDef) || isGenericS4(fcnDef);
 
     # If it is a generic function, we are done!
     if (isGeneric) {
@@ -189,14 +158,8 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Search for preexisting default function in the same environments as above.
     nameDefault <- paste(name, ".default", sep="");
-    defaultExists <- FALSE;
-    for (env in envirs) {
-      if (exists(nameDefault, mode="function", envir=env, inherits=FALSE)) {
-        defaultExists <- TRUE;
-        defaultPkg <- if (is.null(env)) "base" else attr(env, "name");
-        break;
-      }
-    }
+    fcn <- .findFunction(nameDefault, envir=envirs, inherits=inherits);
+    defaultExists <- !is.null(fcn$fcn); defaultPkg <- fcn$pkg;
 
     if (defaultExists) {
       warning("Could not create generic function. There is already a",
@@ -235,7 +198,10 @@ setGenericS3.default("setGenericS3");  # Creates itself ;)
 
 ############################################################################
 # HISTORY:
+# 2013-10-06
+# o CLEANUP: setGenericS3() utilizes new .findFunction().
 # 2013-10-05
+# o Now setGenericS3() fully utilizes isGenericS3().
 # o Now setGenericS3() looks for existing generic functions also in
 #   imported namespaces.
 # 2012-06-17

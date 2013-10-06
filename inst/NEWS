@@ -1,13 +1,14 @@
 Package: R.methodsS3
 ====================
 
-Version: 1.5.2 [2013-10-05]
-o BETA: Added an in-official option to make setGenericS3() look for
-  existing generic functions also in imported namespaces.  When
-  fully validated/tested, this will become the default behavior.
-o ROBUSTNESS: Now isGenericS3() also compares to known generic functions
-  in the 'base' package.  It also does a better job on checking whether
-  the function calls UseMethod() or not.
+Version: 1.5.2 [2013-10-06]
+o BETA: Added an in-official option to make setGenericS3() and 
+  setMethodsS3() look for existing (generic) functions also in 
+  imported namespaces.  This will eventually become the default.
+o ROBUSTNESS: Now isGenericS3() also compares to known generic 
+  functions in the 'base' package.  It also does a better job on
+  checking whether the function calls UseMethod() or not.
+o Added argument 'inherits' to getGenericS3().
 o The above improvement of isGenericS3() means that setGenericS3()
   does a better job to decided whether a generic function should be
   created or not, which in turn means 'createGeneric=FALSE' is needed

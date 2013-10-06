@@ -5,6 +5,9 @@ importFrom("utils", "capture.output")
 importFrom("utils", "getAnywhere")
 importFrom("utils", "getS3method")
 
+## When package depends on R (>= 2.6.0)
+## importFrom("codetools", "findGlobals")
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # EXPORTS

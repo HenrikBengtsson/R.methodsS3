@@ -33,7 +33,7 @@
 # @keyword "internal"
 #*/###########################################################################
 isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
-  isGenericS3.character <- function(fcn, envir=parent.frame(), ...) {
+  isNameInternalGenericS3 <- function(fcn, envir=parent.frame(), ...) {
     # Get the name of all known S3 generic functions
     knownGenerics <- NULL;
     for (name in c(".knownS3Generics", ".S3PrimitiveGenerics")) {
@@ -57,14 +57,18 @@ isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
     # Is it one of the known S3 generic functions?
     knownGenerics <- unique(knownGenerics);
     if (is.element(fcn, knownGenerics)) return(TRUE);
-
-    # Check the body of the function
-    fcn <- get(fcn, mode="function", envir=envir, inherits=TRUE);
-    isGenericS3(fcn, ...);
-  }
+  } # isNameInternalGenericS3()
 
   if (is.character(fcn)) {
-    return(isGenericS3.character(fcn, envir=envir, ...))
+    if (isNameInternalGenericS3(fcn)) return(TRUE);
+
+    # Get the function
+    fcn <- .findFunction(fcn, envir=envir, inherits=TRUE)$fcn;
+
+    # Does it even exist?
+    if (is.null(fcn)) {
+      return(FALSE);
+    }
   }
 
   # Check with codetools::findGlobals(), if available,
