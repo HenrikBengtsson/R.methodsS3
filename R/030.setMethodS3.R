@@ -55,9 +55,7 @@
 #   \item{...}{Passed to @see "setGenericS3", iff called.}
 # }
 #
-# \examples{
-#  @include "../incl/setMethodS3.Rex"
-# }
+# @examples "../incl/setMethodS3.Rex"
 #
 # \seealso{
 #   For more information about S3, see @see "base::UseMethod".

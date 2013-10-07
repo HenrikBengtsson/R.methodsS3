@@ -30,7 +30,6 @@
 #
 # @keyword programming
 # @keyword methods
-# @keyword internal
 #*/###########################################################################
 isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

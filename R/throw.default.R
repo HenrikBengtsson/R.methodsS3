@@ -11,7 +11,7 @@
 #
 #  \emph{This default function will be overridden by ditto in the \pkg{R.oo}
 #  package, if that is loaded.  The latter @see "R.oo::throw" implementation
-#  is fully backward compatible with this one, but the error object thrown 
+#  is fully backward compatible with this one, but the error object thrown
 #  is of class @see "R.oo::Exception".}
 # }
 #
@@ -26,19 +26,7 @@
 #   Returns nothing.
 # }
 #
-# \examples{
-#   rbern <- function(n=1, prob=1/2) {
-#     if (prob < 0 || prob > 1)
-#       throw("Argument 'prob' is out of range: ", prob)
-#     rbinom(n=n, size=1, prob=prob)
-#   }
-#
-#   rbern(10, 0.4)
-#   # [1] 0 1 0 0 0 1 0 0 1 0
-#   tryCatch(rbern(10, 10*0.4),
-#     error=function(ex) {}
-#   )
-# }
+# @examples "../incl/throw.Rex"
 #
 # @author
 #
