@@ -47,6 +47,14 @@
 #*/###########################################################################
 setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...) {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Validate arguments
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Argument 'name':
+  if (nchar(name) == 0L) {
+    stop("Cannot set S3 generic method. Argument 'name' is empty.");
+  }
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Backward compatibility tests
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   args <- list(...);
@@ -179,6 +187,9 @@ setGenericS3.default("setGenericS3");  # Creates itself ;)
 
 ############################################################################
 # HISTORY:
+# 2013-11-05
+# o ROBUSTNESS: Now setGenericS3(name, ...) asserts that argument
+#   'name' is non-empty.
 # 2013-10-06
 # o CLEANUP: setGenericS3() utilizes new .findFunction().
 # 2013-10-05

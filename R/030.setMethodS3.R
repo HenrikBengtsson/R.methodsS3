@@ -67,7 +67,22 @@
 # @keyword "methods"
 #*/###########################################################################
 setMethodS3.default <- function(name, class="default", definition, private=FALSE, protected=FALSE, export=FALSE, static=FALSE, abstract=FALSE, trial=FALSE, deprecated=FALSE, envir=parent.frame(), overwrite=TRUE, conflict=c("warning", "error", "quiet"), createGeneric=TRUE, exportGeneric=TRUE, appendVarArgs=TRUE, validators=getOption("R.methodsS3:validators:setMethodS3"), ...) {
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Validate arguments
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Argument 'name':
+  if (nchar(name) == 0L) {
+    stop("Cannot set S3 method. Argument 'name' is empty.");
+  }
+
+  # Argument 'class':
+  if (nchar(class) == 0L) {
+    stop("Cannot set S3 method. Argument 'class' is empty.");
+  }
+
+  # Argument 'conflict':
   conflict <- match.arg(conflict);
+
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Backward compatibility tests
@@ -302,6 +317,9 @@ setGenericS3("setMethodS3");
 
 ############################################################################
 # HISTORY:
+# 2013-11-05
+# o ROBUSTNESS: Now setMethodS3(name, class, ...) asserts that arguments
+#   'name' and 'class' are non-empty.
 # 2013-10-06
 # o CLEANUP: setGenericS3() utilizes new .findFunction().
 # 2012-08-23
