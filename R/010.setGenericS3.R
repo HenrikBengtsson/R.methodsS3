@@ -168,8 +168,17 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
     }
   } # if (...)
 
+  # By default all generic functions have '...' arguments
+  argsStr <- "...";
+
+  # Should argument 'value' be added?
+  isReplacementFunction <- (regexpr("<-$", name) != -1L);
+  if (isReplacementFunction) {
+    argsStr <- paste(c(argsStr, "value"), collapse=", ");
+  }
+
   # Create a generic function
-  src <- sprintf("...tmpfcn <- function(...) UseMethod(\"%s\")", name);
+  src <- sprintf("...tmpfcn <- function(%s) UseMethod(\"%s\")", argsStr, name);
   src <- c(src, sprintf("R.methodsS3:::export(...tmpfcn) <- %s", export));
   src <- c(src, sprintf("\"%s\" <- ...tmpfcn", name));
   src <- c(src, "rm(list=\"...tmpfcn\")");
@@ -187,6 +196,9 @@ setGenericS3.default("setGenericS3");  # Creates itself ;)
 
 ############################################################################
 # HISTORY:
+# 2013-11-12
+# o BUG FIX: Generic function created by setGenericS3("foo<-") would not
+#   have a last argument name 'value', which 'R CMD check' complains about.
 # 2013-11-05
 # o ROBUSTNESS: Now setGenericS3(name, ...) asserts that argument
 #   'name' is non-empty.

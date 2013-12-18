@@ -1,6 +1,11 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.6.0 [2013-11-12]
+o BUG FIX: Generic function created by setGenericS3("foo<-") would not
+  have a last argument name 'value', which 'R CMD check' complains about.
+
+
 Version: 1.5.3 [2013-11-05]
 o ROBUSTNESS: Now setMethodS3(name, class, ...) and
   setGenericS3(name, ...) assert that arguments 'name' and 'class'
