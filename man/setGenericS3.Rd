@@ -23,8 +23,7 @@
 }
 
 \usage{
-\method{setGenericS3}{default}(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE,
-  dontWarn=getOption("dontWarnPkgs"),
+\method{setGenericS3}{default}(name, export=TRUE, envir=parent.frame(), dontWarn=getOption("dontWarnPkgs"),
   validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...)
 }
 
@@ -32,8 +31,6 @@
   \item{name}{The name of the generic function.}
   \item{export}{A \code{\link[base]{logical}} setting attribute \code{"export"}.}
   \item{envir}{The environment for where this method should be stored.}
-  \item{ellipsesOnly}{If \code{\link[base:logical]{TRUE}}, the only arguments in the generic function
-     will be \code{...}.}
   \item{dontWarn}{If a non-generic method with the same name is found it
      will be "renamed" to a default method. If that method is found in
      a package with a name that is \emph{not} found in \code{dontWarn}

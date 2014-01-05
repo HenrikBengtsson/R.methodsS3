@@ -19,8 +19,6 @@
 #   \item{name}{The name of the generic function.}
 #   \item{export}{A @logical setting attribute \code{"export"}.}
 #   \item{envir}{The environment for where this method should be stored.}
-#   \item{ellipsesOnly}{If @TRUE, the only arguments in the generic function
-#      will be @....}
 #   \item{dontWarn}{If a non-generic method with the same name is found it
 #      will be "renamed" to a default method. If that method is found in
 #      a package with a name that is \emph{not} found in \code{dontWarn}
@@ -45,7 +43,7 @@
 # @keyword programming
 # @keyword methods
 #*/###########################################################################
-setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellipsesOnly=TRUE, dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...) {
+setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWarn=getOption("dontWarnPkgs"), validators=getOption("R.methodsS3:validators:setGenericS3"), overwrite=FALSE, ...) {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Validate arguments
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -81,8 +79,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), ellips
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (!is.null(validators)) {
     for (validator in validators) {
-      validator(name=name, envir=envir, ellipsesOnly=ellipsesOnly,
-                                   dontWarn=dontWarn, type="setGenericS3");
+      validator(name=name, envir=envir, dontWarn=dontWarn, type="setGenericS3");
     }
   }
 
@@ -196,6 +193,10 @@ setGenericS3.default("setGenericS3");  # Creates itself ;)
 
 ############################################################################
 # HISTORY:
+# 2014-01-04
+# o CLEANUP: Dropped obsolete argument 'ellipsesOnly' from setGenericS3().
+#   It was not used internally anyway.  Thanks Antonio Piccolboni for
+#   reporting on this.
 # 2013-11-12
 # o BUG FIX: Generic function created by setGenericS3("foo<-") would not
 #   have a last argument name 'value', which 'R CMD check' complains about.

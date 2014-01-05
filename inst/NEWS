@@ -1,6 +1,12 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.6.1 [2014-01-04]
+o CLEANUP: Dropped obsolete argument 'ellipsesOnly' from setGenericS3().
+  It was not used internally anyway.  Thanks Antonio Piccolboni for
+  reporting on this.
+
+
 Version: 1.6.0 [2013-11-12]
 o BUG FIX: Generic function created by setGenericS3("foo<-") would not
   have a last argument name 'value', which 'R CMD check' complains about.
