@@ -46,8 +46,7 @@ R_VERSION_STATUS := $(shell $(R_SCRIPT) -e "status <- tolower(R.version[['status
 R_VERSION := $(shell $(R_SCRIPT) -e "cat(as.character(getRversion()))")
 R_VERSION_FULL := $(R_VERSION)$(R_VERSION_STATUS)
 R_LIBS_USER_X := $(shell $(R_SCRIPT) -e "cat(.libPaths()[1])")
-##R_TMPDIR := $(shell $(R_SCRIPT) -e "cat(Sys.getenv('R_TMPDIR', '..'))")
-R_OUTDIR := ../_R-$(R_VERSION_FULL)
+R_OUTDIR := _R-$(R_VERSION_FULL)
 ## R_BUILD_OPTS := 
 ## R_BUILD_OPTS := $(R_BUILD_OPTS) --no-build-vignettes
 R_CHECK_OUTDIR := $(R_OUTDIR)/$(PKG_NAME).Rcheck
@@ -83,7 +82,6 @@ debug:
 	@echo R_VERSION_STATUS=\'$(R_VERSION_STATUS)\'
 	@echo R_VERSION_FULL=\'$(R_VERSION_FULL)\'
 	@echo R_LIBS_USER_X=\'$(R_LIBS_USER_X)\'
-##	@echo R_TMPDIR=\'$(R_TMPDIR)\'
 	@echo R_OUTDIR=\'$(R_OUTDIR)\'
 	@echo
 	@echo "Default packages:" $(shell $(R) --slave -e "cat(paste(getOption('defaultPackages'), collapse=', '))")
@@ -134,23 +132,21 @@ ns:
 	$(R_SCRIPT) -e "library('$(PKG_NAME)'); source('X:/devtools/NAMESPACE.R'); writeNamespaceSection('$(PKG_NAME)'); writeNamespaceImports('$(PKG_NAME)');"
 
 # Build source tarball
-$(R_OUTDIR):
-	$(MKDIR) $(R_OUTDIR)
-
-$(R_OUTDIR)/$(PKG_TARBALL): $(R_OUTDIR) $(PKG_FILES)
-	$(CD) $(R_OUTDIR);\
+../$(R_OUTDIR)/$(PKG_TARBALL): $(PKG_FILES)
+	$(MKDIR) ../$(R_OUTDIR)
+	$(CD) ../$(R_OUTDIR);\
 	$(R) $(R_NO_INIT) CMD build $(R_BUILD_OPTS) ../$(PKG_DIR)
 
-build: $(R_OUTDIR)/$(PKG_TARBALL)
+build: ../$(R_OUTDIR)/$(PKG_TARBALL)
 
 build_force:
-	$(RM) $(R_OUTDIR)/$(PKG_TARBALL)
+	$(RM) ../$(R_OUTDIR)/$(PKG_TARBALL)
 	$(MAKE) install
 
 
 # Install on current system
-$(R_LIBS_USER_X)/$(PKG_NAME)/DESCRIPTION: $(R_OUTDIR)/$(PKG_TARBALL)
-	$(CD) $(R_OUTDIR);\
+$(R_LIBS_USER_X)/$(PKG_NAME)/DESCRIPTION: ../$(R_OUTDIR)/$(PKG_TARBALL)
+	$(CD) ../$(R_OUTDIR);\
 	$(R) --no-init-file CMD INSTALL $(PKG_TARBALL)
 
 install: $(R_LIBS_USER_X)/$(PKG_NAME)/DESCRIPTION
@@ -161,8 +157,8 @@ install_force:
 
 
 # Check source tarball
-$(R_CHECK_OUTDIR)/.check.complete: $(R_OUTDIR)/$(PKG_TARBALL)
-	$(CD) $(R_OUTDIR);\
+../$(R_CHECK_OUTDIR)/.check.complete: ../$(R_OUTDIR)/$(PKG_TARBALL)
+	$(CD) ../$(R_OUTDIR);\
 	$(RM) -r $(PKG_NAME).Rcheck;\
 	export _R_CHECK_CRAN_INCOMING_=$(_R_CHECK_CRAN_INCOMING_);\
 	export _R_CHECK_CRAN_INCOMING_USE_ASPELL_=$(HAS_ASPELL);\
@@ -175,17 +171,17 @@ $(R_CHECK_OUTDIR)/.check.complete: $(R_OUTDIR)/$(PKG_TARBALL)
 	$(R) --no-init-file CMD check $(R_CHECK_OPTS) $(PKG_TARBALL);\
 	echo done > $(PKG_NAME).Rcheck/.check.complete
 
-check: $(R_CHECK_OUTDIR)/.check.complete
+check: ../$(R_CHECK_OUTDIR)/.check.complete
 
 
 check_force:
-	$(RM) -r $(R_CHECK_OUTDIR)
+	$(RM) -r ../$(R_CHECK_OUTDIR)
 	$(MAKE) check
 
 
 # Install and build binaries
-binary: $(R_OUTDIR)/$(PKG_TARBALL)
-	$(CD) $(R_OUTDIR);\
+binary: ../$(R_OUTDIR)/$(PKG_TARBALL)
+	$(CD) ../$(R_OUTDIR);\
 	$(R) --no-init-file CMD INSTALL --build --merge-multiarch $(PKG_TARBALL)
 
 
@@ -202,7 +198,7 @@ Rd: check_Rex
 	$(R_SCRIPT) -e "setwd('..'); Sys.setlocale(locale='C'); R.oo::compileRdoc('$(PKG_NAME)', path='$(PKG_DIR)', '$*.R')"
 
 missing_Rd:
-	$(R_SCRIPT) -e "x <- readLines('$(R_CHECK_OUTDIR)/00check.log'); from <- grep('Undocumented code objects:', x)+1; if (length(from) > 0L) { to <- grep('All user-level objects', x)-1; x <- x[from:to]; x <- gsub('^[ ]*', '', x); x <- gsub('[\']', '', x); cat(x, sep='\n', file='999.missingdocs.txt'); }"
+	$(R_SCRIPT) -e "x <- readLines('../$(R_CHECK_OUTDIR)/00check.log'); from <- grep('Undocumented code objects:', x)+1; if (length(from) > 0L) { to <- grep('All user-level objects', x)-1; x <- x[from:to]; x <- gsub('^[ ]*', '', x); x <- gsub('[\']', '', x); cat(x, sep='\n', file='999.missingdocs.txt'); }"
 
 spell_Rd:
 	$(R_SCRIPT) -e "f <- list.files('man', pattern='[.]Rd$$', full.names=TRUE); utils::aspell(f, filter='Rd')"
@@ -216,48 +212,48 @@ spell:
 
 
 # Build package vignettes
-$(R_OUTDIR)/vigns: install
-	$(MKDIR) $(R_OUTDIR)/vigns/$(shell dirname $(DIR_VIGNS))
-	$(CP) DESCRIPTION $(R_OUTDIR)/vigns/
-	$(CP) -r $(DIR_VIGNS) $(R_OUTDIR)/vigns/$(shell dirname $(DIR_VIGNS))
-	$(CD) $(R_OUTDIR)/vigns;\
+../$(R_OUTDIR)/vigns: install
+	$(MKDIR) ../$(R_OUTDIR)/vigns/$(shell dirname $(DIR_VIGNS))
+	$(CP) DESCRIPTION ../$(R_OUTDIR)/vigns/
+	$(CP) -r $(DIR_VIGNS) ../$(R_OUTDIR)/vigns/$(shell dirname $(DIR_VIGNS))
+	$(CD) ../$(R_OUTDIR)/vigns;\
 	$(R_SCRIPT) -e "v <- tools::buildVignettes(dir='.'); file.path(getwd(), v[['outputs']])"
 
-vignettes: $(R_OUTDIR)/vigns
+vignettes: ../$(R_OUTDIR)/vigns
 
 
 # Run package tests
-$(R_OUTDIR)/tests/%.R: $(FILES_TESTS)
-	$(RMDIR) $(R_OUTDIR)/tests
-	$(MKDIR) $(R_OUTDIR)/tests
-	$(CP) $? $(R_OUTDIR)/tests
+../$(R_OUTDIR)/tests/%.R: $(FILES_TESTS)
+	$(RMDIR) ../$(R_OUTDIR)/tests
+	$(MKDIR) ../$(R_OUTDIR)/tests
+	$(CP) $? ../$(R_OUTDIR)/tests
 
-test_files: $(R_OUTDIR)/tests/*.R
+test_files: ../$(R_OUTDIR)/tests/*.R
 
-test: $(R_OUTDIR)/tests/%.R
-	$(CD) $(R_OUTDIR)/tests;\
+test: ../$(R_OUTDIR)/tests/%.R
+	$(CD) ../$(R_OUTDIR)/tests;\
 	$(R_SCRIPT) -e "for (f in list.files(pattern='[.]R$$')) { source(f, echo=TRUE) }"
 
-test_full: $(R_OUTDIR)/tests/%.R
-	$(CD) $(R_OUTDIR)/tests;\
+test_full: ../$(R_OUTDIR)/tests/%.R
+	$(CD) ../$(R_OUTDIR)/tests;\
 	export _R_CHECK_FULL_=TRUE;\
 	$(R_SCRIPT) -e "for (f in list.files(pattern='[.]R$$')) { source(f, echo=TRUE) }"
 
 
 
 # Run extensive CRAN submission checks
-$(R_CRAN_OUTDIR)/$(PKG_TARBALL): $(R_OUTDIR)/$(PKG_TARBALL)
-	$(MKDIR) $(R_CRAN_OUTDIR)
-	$(CP) $(R_OUTDIR)/$(PKG_TARBALL) $(R_CRAN_OUTDIR)
+../$(R_CRAN_OUTDIR)/$(PKG_TARBALL): ../$(R_OUTDIR)/$(PKG_TARBALL)
+	$(MKDIR) ../$(R_CRAN_OUTDIR)
+	$(CP) ../$(R_OUTDIR)/$(PKG_TARBALL) ../$(R_CRAN_OUTDIR)
 
-$(R_CRAN_OUTDIR)/$(PKG_NAME),EmailToCRAN.txt: $(R_CRAN_OUTDIR)/$(PKG_TARBALL)
-	$(CD) $(R_CRAN_OUTDIR);\
+../$(R_CRAN_OUTDIR)/$(PKG_NAME),EmailToCRAN.txt: ../$(R_CRAN_OUTDIR)/$(PKG_TARBALL)
+	$(CD) ../$(R_CRAN_OUTDIR);\
 	$(R_SCRIPT) -e "RCmdCheckTools::testPkgsToSubmit(delta=2/3)"
 
-cran_setup: $(R_CRAN_OUTDIR)/$(PKG_TARBALL)
+cran_setup: ../$(R_CRAN_OUTDIR)/$(PKG_TARBALL)
 	$(R_SCRIPT) -e "if (!nzchar(system.file(package='RCmdCheckTools'))) { source('http://aroma-project.org/hbLite.R'); hbLite('RCmdCheckTools', devel=TRUE); }"
 
-cran: cran_setup $(R_CRAN_OUTDIR)/$(PKG_NAME),EmailToCRAN.txt
+cran: cran_setup ../$(R_CRAN_OUTDIR)/$(PKG_NAME),EmailToCRAN.txt
 
 # Backward compatibilities
 submit: cran
