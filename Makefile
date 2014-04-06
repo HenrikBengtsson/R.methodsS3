@@ -46,6 +46,7 @@ R_VERSION_STATUS := $(shell $(R_SCRIPT) -e "status <- tolower(R.version[['status
 R_VERSION := $(shell $(R_SCRIPT) -e "cat(as.character(getRversion()))")
 R_VERSION_FULL := $(R_VERSION)$(R_VERSION_STATUS)
 R_LIBS_USER_X := $(shell $(R_SCRIPT) -e "cat(.libPaths()[1])")
+##R_TMPDIR := $(shell $(R_SCRIPT) -e "cat(Sys.getenv('R_TMPDIR', '..'))")
 R_OUTDIR := ../_R-$(R_VERSION_FULL)
 ## R_BUILD_OPTS := 
 ## R_BUILD_OPTS := $(R_BUILD_OPTS) --no-build-vignettes
@@ -82,6 +83,7 @@ debug:
 	@echo R_VERSION_STATUS=\'$(R_VERSION_STATUS)\'
 	@echo R_VERSION_FULL=\'$(R_VERSION_FULL)\'
 	@echo R_LIBS_USER_X=\'$(R_LIBS_USER_X)\'
+##	@echo R_TMPDIR=\'$(R_TMPDIR)\'
 	@echo R_OUTDIR=\'$(R_OUTDIR)\'
 	@echo
 	@echo "Default packages:" $(shell $(R) --slave -e "cat(paste(getOption('defaultPackages'), collapse=', '))")
@@ -132,8 +134,10 @@ ns:
 	$(R_SCRIPT) -e "library('$(PKG_NAME)'); source('X:/devtools/NAMESPACE.R'); writeNamespaceSection('$(PKG_NAME)'); writeNamespaceImports('$(PKG_NAME)');"
 
 # Build source tarball
-$(R_OUTDIR)/$(PKG_TARBALL): $(PKG_FILES)
+$(R_OUTDIR):
 	$(MKDIR) $(R_OUTDIR)
+
+$(R_OUTDIR)/$(PKG_TARBALL): $(R_OUTDIR) $(PKG_FILES)
 	$(CD) $(R_OUTDIR);\
 	$(R) $(R_NO_INIT) CMD build $(R_BUILD_OPTS) ../$(PKG_DIR)
 
