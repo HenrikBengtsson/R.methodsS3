@@ -7,11 +7,15 @@ install.packages('R.methodsS3')
 ```
 
 
-* R CMD check status: <a
-  href="https://travis-ci.org/HenrikBengtsson/R.methodsS3"><img
+* R CMD check status:
+  <a href="https://travis-ci.org/HenrikBengtsson/R.methodsS3"><img
   src="https://travis-ci.org/HenrikBengtsson/R.methodsS3.svg?branch=master"
   alt="Build status"></a>
-* Test coverage status: <a
-  href='https://coveralls.io/r/HenrikBengtsson/R.methodsS3?branch=develop'><img
+  <a href="https://ci.appveyor.com/api/projects/status/3jjkfvbxt7823965"><img
+  src="https://ci.appveyor.com/project/HenrikBengtsson/r-methodss3/"
+  alt="Build status"></a>
+
+* Test coverage status:
+  <a href='https://coveralls.io/r/HenrikBengtsson/R.methodsS3?branch=develop'><img
   src='https://coveralls.io/repos/HenrikBengtsson/R.methodsS3/badge.png?branch=develop'
   alt='Coverage Status' /></a> 
