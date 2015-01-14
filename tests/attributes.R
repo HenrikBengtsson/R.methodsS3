@@ -1,19 +1,25 @@
 library("R.methodsS3")
 
+export <- R.methodsS3:::export
+`export<-` <- R.methodsS3:::`export<-`
+noexport <- R.methodsS3:::noexport
+`S3class<-` <- R.methodsS3:::`S3class<-`
+
+
 foo <- function() NULL
 str(foo)
 
 foo <- export(foo)
 str(foo)
 
-foo <- export(foo, TRUE)
+export(foo) <- TRUE
 str(foo)
 
 foo <- noexport(foo)
 str(foo)
 
 foo.Bar <- function(...) NULL
-foo.Bar <- S3class(foo.Bar, "Bar")
+S3class(foo.Bar) <- "Bar"
 str(foo)
 
 
