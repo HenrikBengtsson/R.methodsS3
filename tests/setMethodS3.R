@@ -9,7 +9,7 @@ setMethodS3("foo", "default", function(x, ...) {
 })
 
 
-setMethodS3("foo", "character", function(s, ...) {
+setMethodS3("foo", "character", function(s) {
   cat("In foo() for class 'character':\n");
   print(s, ...);
 })
@@ -52,6 +52,17 @@ setMethodS3("bar<-", "character", function(x, value) {
 x <- "a"
 bar(x) <- "hello"
 str(x)
+
+
+setMethodS3("$", "SomeClass", function(x, name) {
+  attr(x, name)
+})
+
+setMethodS3("$<-", "SomeClass", function(x, name, value) {
+  attr(x, name) <- value
+  x
+})
+
 
 
 setMethodS3("yaa", "character", abstract=TRUE, validators=list(R.methodsS3:::rccValidateSetMethodS3))
