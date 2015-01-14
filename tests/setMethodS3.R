@@ -43,3 +43,16 @@ setMethodS3("bar", "character", function(object, ...) {
 
 bar(123)
 bar("123")
+
+setMethodS3("bar<-", "character", function(x, value) {
+  attr(x, "bar") <- value
+  x
+})
+
+x <- "a"
+bar(x) <- "hello"
+str(x)
+
+
+setMethodS3("yaa", "character", abstract=TRUE)
+

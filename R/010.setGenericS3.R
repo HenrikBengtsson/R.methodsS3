@@ -125,7 +125,8 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
   if (checkImports) inherits[1:2] <- TRUE;
 
   fcn <- .findFunction(name, envir=envirs, inherits=inherits);
-  fcnDef <- fcn$fcn; fcnPkg <- fcn$pkg;
+  fcnDef <- fcn$fcn;
+  fcnPkg <- fcn$pkg;
 
   if (!overwrite && !is.null(fcnDef)) {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -145,7 +146,8 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
     # Search for preexisting default function in the same environments as above.
     nameDefault <- paste(name, ".default", sep="");
     fcn <- .findFunction(nameDefault, envir=envirs, inherits=inherits);
-    defaultExists <- !is.null(fcn$fcn); defaultPkg <- fcn$pkg;
+    defaultExists <- !is.null(fcn$fcn);
+    defaultPkg <- fcn$pkg;
 
     if (defaultExists) {
       warning("Could not create generic function. There is already a",
