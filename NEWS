@@ -1,6 +1,14 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.6.3 [2015-01-13]
+o CONSISTENCY: Now isGenericS4() returns FALSE for non-existing
+  functions, just as isGenericS3() does.
+o BUG FIX: isGenericS3() on a function gave error "object 'Math' of
+  mode 'function' was not found" when the 'methods' package was not
+  loaded, e.g. Rscript -e "R.methodsS3::isGenericS3(function(...) NULL)".
+
+
 Version: 1.6.2 [2014-05-04]
 o CLEANUP: Internal directory restructuring.
 

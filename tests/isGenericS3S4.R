@@ -1,0 +1,16 @@
+library("R.methodsS3")
+
+FUNs <- list(
+  isGenericS3=isGenericS3,
+  isGenericS4=isGenericS4
+)
+
+for (name in names(FUNs)) {
+  cat(sprintf("%s():\n", name))
+  FUN <- FUNs[[name]]
+  print(FUN("print"))
+  print(FUN("show"))
+  print(FUN("unknown"))
+  print(FUN(print))
+  print(FUN(function() NULL))
+}
