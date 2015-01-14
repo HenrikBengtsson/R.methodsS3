@@ -1,17 +1,11 @@
 .onAttach <- function(libname, pkgname) {
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Set up RCC validators for R.methodsS3.
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  validators <- getOption("R.methodsS3:validators:setGenericS3");
-  if (is.null(validators))
-    validators <- list();
-  validators <- c(validators, list(rccValidateSetGenericS3));
-  validators <- getOption("R.methodsS3:validators:setMethodS3");
-  if (is.null(validators))
-    validators <- list();
-  validators <- c(validators, list(rccValidateSetMethodS3));
+  # Set up RCC validators for R.methodsS3
+  validators <- getOption("R.methodsS3:validators:setGenericS3", list())
+  validators <- c(validators, list(rccValidateSetGenericS3))
+  validators <- getOption("R.methodsS3:validators:setMethodS3", list())
+  validators <- c(validators, list(rccValidateSetMethodS3))
 
-  pi <- utils::packageDescription(pkgname);
+  pi <- utils::packageDescription(pkgname)
   pkgStartupMessage(pkgname, " v", pi$Version, " (", pi$Date,
-           ") successfully loaded. See ?", pkgname, " for help.");
+           ") successfully loaded. See ?", pkgname, " for help.")
 }
