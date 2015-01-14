@@ -17,7 +17,7 @@ myCat(1:10)
 mat <- matrix(1:10, ncol=5)
 myCat(mat)
 
-setGenericS3("foo")
+setGenericS3("foo", validators=list(R.methodsS3:::rccValidateSetGenericS3))
 setGenericS3("foo<-")
 
 bar.default <- function(...) cat("bar.default\n")

@@ -54,5 +54,5 @@ bar(x) <- "hello"
 str(x)
 
 
-setMethodS3("yaa", "character", abstract=TRUE)
+setMethodS3("yaa", "character", abstract=TRUE, validators=list(R.methodsS3:::rccValidateSetMethodS3))
 
