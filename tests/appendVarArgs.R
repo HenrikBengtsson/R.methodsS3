@@ -8,3 +8,6 @@ print(foobar)
 
 foobar <- appendVarArgs(foobar)
 print(foobar)
+
+# Cleanup
+rm(list=ls())

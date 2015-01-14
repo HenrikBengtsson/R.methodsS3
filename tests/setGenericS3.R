@@ -25,3 +25,12 @@ bar <- function(...) cat("bar\n")
 setGenericS3("bar")
 
 print(getGenericS3("print"))
+
+
+# Your defintion will redefine bar() above to bar.default().
+foobar <- function() print("foobar()")
+setGenericS3("foobar")
+
+
+# Cleanup
+rm(list=ls())

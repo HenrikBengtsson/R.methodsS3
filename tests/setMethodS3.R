@@ -4,14 +4,14 @@ library("R.methodsS3")
 # Example 1
 ######################################################################
 setMethodS3("foo", "default", function(x, ...) {
-  cat("In default foo():\n");
-  print(x, ...);
+  cat("In default foo():\n")
+  print(x, ...)
 })
 
 
 setMethodS3("foo", "character", function(s) {
-  cat("In foo() for class 'character':\n");
-  print(s, ...);
+  cat("In foo() for class 'character':\n")
+  print(s, ...)
 })
 
 # The generic function is automatically created!
@@ -31,14 +31,14 @@ foo("123")
 ######################################################################
 # bar() in other package
 bar <- function(x, y, ...) {
-  cat("In bar() of 'other' package.\n");
+  cat("In bar() of 'other' package.\n")
 }
 
 
-# Your defintion; will redefine bar() above to bar.default().
+# Your defintion will redefine bar() above to bar.default().
 setMethodS3("bar", "character", function(object, ...) {
-  cat("In bar() for class 'character':\n");
-  print(object, ...);
+  cat("In bar() for class 'character':\n")
+  print(object, ...)
 })
 
 bar(123)
@@ -69,4 +69,10 @@ setMethodS3("yaa", "character", abstract=TRUE, validators=list(R.methodsS3:::rcc
 
 print(getMethodS3("yaa", "character"))
 
+# Redefine
+setMethodS3("yaa", "character", abstract=TRUE, validators=list(R.methodsS3:::rccValidateSetMethodS3))
 
+
+
+# Cleanup
+rm(list=ls())
