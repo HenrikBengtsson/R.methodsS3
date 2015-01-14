@@ -11,8 +11,8 @@ install.packages('R.methodsS3')
   <a href="https://travis-ci.org/HenrikBengtsson/R.methodsS3"><img
   src="https://travis-ci.org/HenrikBengtsson/R.methodsS3.svg?branch=master"
   alt="Build status"></a>
-  <a href="https://ci.appveyor.com/api/projects/status/3jjkfvbxt7823965"><img
-  src="https://ci.appveyor.com/project/HenrikBengtsson/r-methodss3/"
+  <a href="https://ci.appveyor.com/project/HenrikBengtsson/r-methodss3/"><img
+  src="https://ci.appveyor.com/api/projects/status/3jjkfvbxt7823965"
   alt="Build status"></a>
 
 * Test coverage status:
