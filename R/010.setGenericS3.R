@@ -151,7 +151,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
       warning("Could not create generic function. There is already a",
               " non-generic function named ", name, "() in package ", fcnPkg,
               " with the same name as an existing default function ",
-              nameDefault, "() in package", defaultPkg, ".");
+              nameDefault, "() in package ", defaultPkg, ".");
       return();
     }
 

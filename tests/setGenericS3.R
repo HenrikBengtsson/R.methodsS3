@@ -16,3 +16,11 @@ setGenericS3("myCat")
 myCat(1:10)
 mat <- matrix(1:10, ncol=5)
 myCat(mat)
+
+setGenericS3("foo")
+setGenericS3("foo<-")
+
+bar.default <- function(...) cat("bar.default\n")
+bar <- function(...) cat("bar\n")
+setGenericS3("bar")
+

@@ -12,5 +12,6 @@ for (name in names(FUNs)) {
   print(FUN("show"))
   print(FUN("unknown"))
   print(FUN(print))
+  print(FUN(sum))
   print(FUN(function() NULL))
 }
