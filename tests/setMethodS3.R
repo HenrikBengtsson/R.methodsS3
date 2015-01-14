@@ -56,3 +56,6 @@ str(x)
 
 setMethodS3("yaa", "character", abstract=TRUE, validators=list(R.methodsS3:::rccValidateSetMethodS3))
 
+print(getMethodS3("yaa", "character"))
+
+

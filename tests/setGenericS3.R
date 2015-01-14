@@ -24,3 +24,4 @@ bar.default <- function(...) cat("bar.default\n")
 bar <- function(...) cat("bar\n")
 setGenericS3("bar")
 
+print(getGenericS3("print"))
