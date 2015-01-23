@@ -59,9 +59,9 @@ after_success:
 #  - $RENV github_package jimhester/covr
   - $RENV github_package HenrikBengtsson/covr
   - if [ "$RENV" == "./travis-tool.sh" ]; then
-      Rscript -e 'covr::coveralls()';
+      Rscript -e 'covr::coveralls(exclusions=list("R/zzz.R"=1:1e6))';
     elif [ "$RENV" == "./pkg-build.sh" ]; then
-      $RENV run_script -e 'covr::coveralls()';
+      $RENV run_script -e 'covr::coveralls(exclusions=list("R/zzz.R"=1:1e6))';
     fi
 
 after_failure:
