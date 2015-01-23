@@ -1,5 +1,7 @@
 library("R.methodsS3")
 
+message("TESTING: setMethodS3()...")
+
 ######################################################################
 # Example 1
 ######################################################################
@@ -76,3 +78,5 @@ setMethodS3("yaa", "character", abstract=TRUE, validators=list(R.methodsS3:::rcc
 
 # Cleanup
 rm(list=ls())
+
+message("TESTING: setMethodS3()...DONE")

@@ -1,5 +1,7 @@
 library("R.methodsS3")
 
+message("TESTING: setGenericS3()...")
+
 myCat.matrix <- function(..., sep=", ") {
   cat("A matrix:\n")
   cat(..., sep=sep)
@@ -34,3 +36,5 @@ setGenericS3("foobar")
 
 # Cleanup
 rm(list=ls())
+
+message("TESTING: setGenericS3()...DONE")

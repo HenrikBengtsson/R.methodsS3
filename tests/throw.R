@@ -1,5 +1,7 @@
 library("R.methodsS3")
 
+message("TESTING: throw()...")
+
 rbern <- function(n=1, prob=1/2) {
   if (prob < 0 || prob > 1)
     throw("Argument 'prob' is out of range: ", prob)
@@ -13,3 +15,5 @@ tryCatch({
 }, error=function(ex) {
   print(ex)
 })
+
+message("TESTING: throw()...DONE")

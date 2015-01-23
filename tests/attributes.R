@@ -1,5 +1,7 @@
 library("R.methodsS3")
 
+message("TESTING: attributes()...")
+
 export <- R.methodsS3:::export
 `export<-` <- R.methodsS3:::`export<-`
 noexport <- R.methodsS3:::noexport
@@ -22,6 +24,4 @@ foo.Bar <- function(...) NULL
 S3class(foo.Bar) <- "Bar"
 str(foo)
 
-
-
-
+message("TESTING: attributes()...DONE")
