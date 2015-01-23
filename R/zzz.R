@@ -1,3 +1,5 @@
+## covr: skip=all
+
 .onAttach <- function(libname, pkgname) {
   # Set up RCC validators for R.methodsS3
   validators <- getOption("R.methodsS3:validators:setGenericS3", list())

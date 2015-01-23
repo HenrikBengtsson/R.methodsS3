@@ -25,6 +25,7 @@ r_files <- function() {
 
 covr_lines <- function(file) {
   lines <- readLines(file)
+  nlines <- length(lines)
   pattern <- ".*#[ ]*covr:[ ]*([^#]*).*"
   idxs <- grep(pattern, lines)
   excludes <- lapply(idxs, FUN=function(idx) {
@@ -39,7 +40,13 @@ covr_lines <- function(file) {
     excl <- integer(0L)
     skip <- values[actions == "skip"]
     if (length(skip) > 0) {
-      excl <- c(excl, seq(from=idx+1L, length.out=as.integer(skip)))
+      if (skip == "all") {
+        idxs <- seq_len(nlines)
+      } else {
+        idxs <- seq(from=idx+1L, to=min(nlines, idxs + as.integer(skip)))
+      }
+      idxs <- idxs[idxs <= nlines]
+      excl <- c(excl, idxs)
     }
     excl
   })
@@ -65,10 +72,7 @@ stop_lines <- function(file) {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 excl <- list()
 
-## Don't report on certain files
-excl <- add_excl(excl, excl_files("R/zzz.R"))
-
-## Don't report on lines according to # covr: rules
+## Don't report on lines according to '# covr:' rules
 excl <- add_excl(excl, sapply(r_files(), FUN=covr_lines))
 
 ## Don't report on stop() lines
