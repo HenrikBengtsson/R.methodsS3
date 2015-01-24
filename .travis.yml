@@ -38,10 +38,9 @@ before_install:
   - chmod 755 $RENV
   - $RENV bootstrap
   - if [ "BOOTSTRAP_LATEX" == "true" ]; then
-      (cd /tmp && curl -OL http://mirrors.ctan.org/macros/latex/contrib/xcolor.zip && cd /usr/share/texmf/tex/latex && sudo unzip /tmp/xcolor.zip && cd xcolor && sudo latex xcolor.ins && sudo texhash);
+      (cd /tmp && curl -OL http://mirrors.ctan.org/macros/latex/contrib/xcolor.zip && cd /usr/share/texmf/tex/latex && sudo unzip /tmp/xcolor.zip && cd xcolor && sudo latex xcolor.ins && sudo texhash)
     else
-      ## In case R.rsp vignette engines are used, fake LaTeX
-      export R_RSP_COMPILELATEX_FALLBACK="copy-force";
+      export R_RSP_COMPILELATEX_FALLBACK="copy-force"
     fi
 
 install:
