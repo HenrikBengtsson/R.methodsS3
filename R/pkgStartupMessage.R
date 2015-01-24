@@ -63,7 +63,6 @@ setMethodS3("pkgStartupMessage", "default", function(..., quietly=NA) {
         missing <- eval(expression(missing(quietly)), envir=env);
         if (!missing) {
           quietly <- get("quietly", envir=env, inherits=FALSE);
-          # Done
           break;
         }
 

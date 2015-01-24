@@ -91,9 +91,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   if (is.element("enforceRCC", names(args))) {
     warning("Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.");
     # Turn off validators?
-    if (!args$enforceRCC) {
-      validators <- NULL;
-    }
+    if (!args$enforceRCC) validators <- NULL;
   }
 
 
