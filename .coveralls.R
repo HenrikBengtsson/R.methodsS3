@@ -10,19 +10,9 @@ requireNamespace("covr") || stop("Package not loaded: covr")
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Local functions
+# Filters
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-add_excl <- function(excl=list(), new) {
-  for (name in names(new)) {
-    excl[[name]] <- unique(sort(c(excl[[name]], new[[name]])))
-  }
-  excl
-}
-
-r_files <- function() {
-  dir(path="R", pattern="[.]R$", full.names=TRUE)
-}
-
+## Don't report on lines according to '# covr:' rules in file
 covr_lines <- function(file) {
   lines <- readLines(file)
   nlines <- length(lines)
@@ -43,7 +33,7 @@ covr_lines <- function(file) {
       if (skip == "all") {
         idxs <- seq_len(nlines)
       } else {
-        idxs <- seq(from=idx+1L, to=min(nlines, idxs + as.integer(skip)))
+        idxs <- seq(from=idx+1L, to=min(nlines, idx + as.integer(skip)))
       }
       idxs <- idxs[idxs <= nlines]
       excl <- c(excl, idxs)
@@ -56,28 +46,83 @@ covr_lines <- function(file) {
   excludes
 }
 
-excl_files <- function(files, ..., max_lines=10e3) {
-  excl <- lapply(c(files, ...), FUN=function(...) seq_len(max_lines))
-  names(excl) <- files
-  excl
+## Don't report on any line
+all_lines <- function(file) {
+  lines <- readLines(file)
+  seq_along(lines)
 }
 
+## Don't report on stop() lines
 stop_lines <- function(file) {
   grep("(^|[ \t])(abort|stop|throw)[(]", readLines(file))
 }
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Local functions
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+exclusions <- function(excl=list(), ...) {
+  excl <- c(excl, list(...))
+  structure(excl, class="exclusions")
+}
+
+as.exclusions <- function(excl) {
+  if (!inherits(excl, "exclusions")) excl <- exclusions(excl)
+  excl
+}
+
+c.exclusions <- function(excl=list(), new) {
+  excl <- as.exclusions(excl)
+  for (name in names(new)) {
+    excl[[name]] <- unique(sort(c(excl[[name]], new[[name]])))
+  }
+  as.exclusions(excl)
+}
+
+read.exclusion <- function(excl) {
+  mapply(names(excl), excl, FUN=function(file, idxs) {
+    readLines(file)[idxs]
+  })
+}
+
+excl_files <- function(files, ..., max_lines=10e3) {
+  excl <- lapply(c(files, ...), FUN=function(...) seq_len(max_lines))
+  names(excl) <- files
+  as.exclusions(excl)
+}
+
+filter <- function(files, FUN, ...) {
+  as.exclusions(sapply(files, FUN=FUN, ...))
+}
+
+files <- function(path, pattern, ...) {
+  dir(path=path, pattern=pattern, full.names=TRUE, ignore.case=TRUE)
+}
+
+r_files <- function(...) {
+  files(path="R", pattern="[.]R$", ...)
+}
+
+src_files <- function(...) {
+  files(path="src", pattern="[.](h|c|cpp|hpp|f)$", ...)
+}
+
+all_files <- function(...) {
+  c(r_files(), src_files())
+}
+
+
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Exclusion rules
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-excl <- list()
+excl <- exclusions(
+  ## Don't report on lines according to '# covr:' rules
+  filter(r_files(), covr_lines),
 
-## Don't report on lines according to '# covr:' rules
-excl <- add_excl(excl, sapply(r_files(), FUN=covr_lines))
-
-## Don't report on stop() lines
-excl <- add_excl(excl, sapply(r_files(), FUN=stop_lines))
-
+  ## Don't report on stop() lines in R code
+  filter(r_files(), stop_lines)
+)
 
 ## Debugging
 str(excl)
