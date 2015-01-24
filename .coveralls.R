@@ -13,6 +13,9 @@ requireNamespace("covr") || stop("Package not loaded: covr")
 # Filters
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ## Don't report on lines according to '# covr:' rules in file
+## Exclusions applied if 'covr: <rule>' is detected in file:
+##  skip=all : Skip all the lines in file
+##  skip=2   : Skip the following two lines
 covr_lines <- function(file) {
   lines <- readLines(file)
   nlines <- length(lines)
@@ -60,9 +63,8 @@ stop_lines <- function(file) {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Local functions
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-exclusions <- function(excl=list(), ...) {
-  excl <- c(excl, list(...))
-  structure(excl, class="exclusions")
+exclusions <- function(...) {
+  structure(c(...), class="exclusions")
 }
 
 as.exclusions <- function(excl) {
