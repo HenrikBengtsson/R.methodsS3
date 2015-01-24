@@ -50,8 +50,7 @@ script:
 
 after_success:
   - $RENV dump_logs_by_extension out
-#  - $RENV github_package jimhester/covr
-  - $RENV github_package HenrikBengtsson/covr
+  - curl -OL https://raw.githubusercontent.com/HenrikBengtsson/covr-utils/master/covr-utils.R;
   - $RENV run_script .coveralls.R
 
 after_failure:
