@@ -9,11 +9,12 @@ o BUG FIX: isGenericS3() on a function gave error "object 'Math' of
   mode 'function' was not found" when the 'methods' package was not
   loaded, e.g. Rscript -e "R.methodsS3::isGenericS3(function(...) NULL)".
 o BUG FIX/WORKAROUND: findDispatchMethodsS3() could in rare cases return
-  an extra set of false functions in R (< 3.1.?).  This was due to a
-  bug in R (< 3.1.?) where the output of getAnywhere() contained
-  garbage results.  Now findDispatchMethodsS3() detects this case
-  and works around it.  This bug was only detected after adding an
-  explicit package test for findDispatchMethodsS3().
+  an extra set of false functions in R (< 3.1.2).  This was due to a
+  bug in R (< 3.1.2) where the output of getAnywhere() contained
+  garbage results, e.g. getAnywhere(".Options")$objs.  For backward
+  compatibility, findDispatchMethodsS3() now detects this case and works
+  around it.  This bug was only detected after adding an explicit package
+  test for findDispatchMethodsS3().
 
 
 Version: 1.6.2 [2014-05-04]
