@@ -61,6 +61,28 @@ setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames,
       next;
     }
 
+    # WORKAROUND: In R (< 3.1.?) there is a bug in getAnywhere()
+    # causing it to return garbage in parts of the 'objs' list.
+    hasBug <- (length(obj$objs) > length(obj$where))
+    if (hasBug) {
+      ## Rebuild 'objs' manually
+      n <- length(obj$where)
+      obj$objs <- vector("list", length=n)
+      for (ii in seq_len(n)) {
+        where <- obj$where[[ii]]
+        tryCatch({
+          if (grepl("^namespace:", where)) {
+            env <- asNamespace(gsub("^namespace:", "", where))
+          } else {
+            env <- as.environment(where)
+          }
+          if (exists(fcnName, envir=env)) {
+            obj$objs[[ii]] <- get(fcnName, envir=env)
+          }
+        }, error = function(ex) {})
+      } # for (ii ...)
+    }
+
     # Keep only functions
     keep <- which(sapply(obj$objs, FUN=is.function));
     if (length(keep) == 0) {
@@ -94,6 +116,11 @@ setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames,
 
 ############################################################################
 # HISTORY:
+# 2015-02-02
+# o WORKAROUND: In R (< 3.1.?) there is a bug in getAnywhere() causing it
+#   to return garbage in parts of the 'objs' list.  This bug has been
+#   there all the time, but was only detected now when a package test
+#   for findDispatchMethodsS3() was added.
 # 2010-12-02
 # o Added Rdoc comments.
 # o Made findDispatchMethodsS3() a default method.
