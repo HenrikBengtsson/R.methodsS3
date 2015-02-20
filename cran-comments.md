@@ -8,8 +8,7 @@ Changes related to R/CRAN updates:
 
 
 ## Notes not sent to CRAN
-R.methodsS3 1.6.2-1 and its 32 reverse-dependent packages(*) have been
-verified using `R CMD build` and `R CMD check --as-cran` on
+R.methodsS3 1.7.0 and its 32 reverse-dependent packages(*) have been verified using `R CMD build` and `R CMD check --as-cran` on
 
 * R version 3.0.3 (2014-03-06) [Platform: x86_64-unknown-linux-gnu(64-bit)].
 * R version 3.1.2 Patched (2015-02-16 r67835) [Platform: x86_64-unknown-linux-gnu (64-bit)]
