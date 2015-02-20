@@ -118,8 +118,10 @@ isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
 
   # Finally, compare to all known internal generics
   for (name in knownInternalGenericS3()) {
-    generic <- get(name, mode="function", inherits=TRUE);
-    if (identical(fcn, generic)) return(TRUE);
+    if (exists(name, mode="function", inherits=TRUE)) {
+      generic <- get(name, mode="function", inherits=TRUE);
+      if (identical(fcn, generic)) return(TRUE);
+    }
   }
 
   FALSE;
@@ -165,6 +167,9 @@ setGenericS3("isGenericS3");
 #*/###########################################################################
 isGenericS4.default <- function(fcn, envir=parent.frame(), ...) {
   if (is.character(fcn)) {
+    if (!exists(fcn, mode="function", envir=envir, inherits=TRUE)) {
+      return(FALSE);
+    }
     fcn <- get(fcn, mode="function", envir=envir, inherits=TRUE);
   }
   body <- body(fcn);
@@ -182,6 +187,12 @@ setGenericS3("isGenericS4");
 
 ############################################################################
 # HISTORY:
+# 2015-01-13
+# o CONSISTENCY: Now isGenericS4() returns FALSE for non-existing
+#   functions, just as isGenericS3() does.
+# o BUG FIX: isGenericS3() on a function gave error "object 'Math' of
+#   mode 'function' was not found" when the 'methods' package was not
+#   loaded, e.g. Rscript -e "R.methodsS3::isGenericS3(function(...) NULL)".
 # 2013-10-05
 # o ROBUSTNESS: Now isGenericS3() also compares to known generic functions
 #   in the 'base' package.  It also does a better job on checking whether

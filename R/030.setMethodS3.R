@@ -91,9 +91,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   if (is.element("enforceRCC", names(args))) {
     warning("Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.");
     # Turn off validators?
-    if (!args$enforceRCC) {
-      validators <- NULL;
-    }
+    if (!args$enforceRCC) validators <- NULL;
   }
 
 
@@ -228,6 +226,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
     fStr <- sub("[\t\n\f\r ]*$", "", fStr);    # when package loads!
 
     if (names(f)[length(f)] != "value") {
+      ## covr: skip=2
       stop("Last argument of a ", name,
                               "() method should be named 'value': ", fStr);
     }
@@ -254,12 +253,14 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
 
     # Check for correct number of arguments
     if (length(f) != nbrOfReqArgs) {
+      ## covr: skip=2
       stop("There should be exactly ", nbrOfReqArgs, " arguments of a ",
                                               name, "() method: ", fStr);
     }
 
     for (kk in 1:nbrOfReqArgs) {
       if (!is.na(reqArgs[kk]) && (names(f)[kk] != reqArgs[kk])) {
+        ## covr: skip=2
         stop("Argument #", kk, " in a ", name,
              "() method, should be named '", reqArgs[kk], "': ", fStr);
       }
