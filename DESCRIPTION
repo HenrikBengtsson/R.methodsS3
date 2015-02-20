@@ -1,8 +1,8 @@
 Package: R.methodsS3
-Version: 1.6.2-1
+Version: 1.7.0
 Depends: R (>= 2.2.0)
 Imports: utils
-Date: 2015-02-02
+Date: 2015-02-19
 Title: S3 Methods Simplified
 Authors@R: c(person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
                                           email = "henrikb@braju.com"))
