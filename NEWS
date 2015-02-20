@@ -1,7 +1,7 @@
 Package: R.methodsS3
 ====================
 
-Version: 1.6.3 [2015-02-02]
+Version: 1.7.0 [2015-02-19]
 o ROBUSTNESS: Added several package tests.
 o CONSISTENCY: Now isGenericS4() returns FALSE for non-existing
   functions, just as isGenericS3() does.
