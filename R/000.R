@@ -55,7 +55,15 @@ noexport <- export(function(x) {
     if (exists(name, mode="function", envir=env, inherits=inh)) {
       fcn <- get(name, mode="function", envir=env, inherits=inh);
       pkg <- attr(env, "name");
-      pkg <- if (is.null(pkg)) "base" else gsub("^package:", "", pkg);
+      if (is.null(pkg)) {
+        pkg <- "base"
+        if (identical(env, baseenv())) {
+        } else if (identical(env, globalenv())) {
+          pkg <- "<R_GlobalEnv>"
+        }
+      } else {
+        pkg <- gsub("^package:", "", pkg);
+      }
       break;
     }
   } # for (kk ...)
