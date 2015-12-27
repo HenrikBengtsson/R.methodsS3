@@ -55,7 +55,7 @@ setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames,
   for (kk in seq(along=classNames)) {
     className <- classNames[kk];
     fcnName <- paste(methodName, className, sep=".");
-    obj <- do.call("getAnywhere", list(fcnName));
+    obj <- do.call(getAnywhere, list(fcnName));
     if (length(obj$objs) == 0) {
       # No matching objects
       next;
