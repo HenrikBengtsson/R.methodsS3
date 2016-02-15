@@ -7,6 +7,15 @@ R package R.methodsS3 is available on [CRAN](http://cran.r-project.org/package=R
 install.packages('R.methodsS3')
 ```
 
+### Pre-release version
+
+To install the pre-release version that is available in branch `develop`, use:
+```r
+source('http://callr.org/install#HenrikBengtsson/R.methodsS3@develop')
+```
+This will install the package from source.  
+
+
 
 ## Software status
 
