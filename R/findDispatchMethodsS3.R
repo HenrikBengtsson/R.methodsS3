@@ -52,7 +52,7 @@ setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames,
 
 
   res <- list();
-  for (kk in seq(along=classNames)) {
+  for (kk in seq_along(classNames)) {
     className <- classNames[kk];
     fcnName <- paste(methodName, className, sep=".");
     obj <- do.call(getAnywhere, list(fcnName));
