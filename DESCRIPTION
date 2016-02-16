@@ -1,5 +1,5 @@
 Package: R.methodsS3
-Version: 1.7.1
+Version: 1.7.1-9000
 Depends: R (>= 2.13.0)
 Imports: utils
 Date: 2016-02-15
