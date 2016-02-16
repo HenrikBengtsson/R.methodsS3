@@ -1,19 +1,53 @@
-# CRAN submission R.methodsS3 1.7.0
-on 2015-02-19
+# CRAN submission R.methodsS3 1.7.1
+on 2016-02-15
 
-Changes related to R/CRAN updates:
+Updates related to R/CRAN:
 
-* Using Title Case.
+* Explicit import of 'utils' functions.
 
+Thanks in advance
 
 
 ## Notes not sent to CRAN
-R.methodsS3 1.7.0 and its 32 reverse-dependent packages(*) have been verified using `R CMD build` and `R CMD check --as-cran` on
+The package has been verified using `R CMD check --as-cran` on:
 
-* R version 3.0.3 (2014-03-06) [Platform: x86_64-unknown-linux-gnu(64-bit)].
-* R version 3.1.2 Patched (2015-02-16 r67835) [Platform: x86_64-unknown-linux-gnu (64-bit)]
-* R Under development (unstable) (2015-02-17 r67836) [Platform: x86_64-unknown-linux-gnu (64-bit)]
+* Platform x86_64-unknown-linux-gnu (64-bit) [Travis CI]:
+  - R version 3.1.3 (2015-03-09)
+  - R version 3.2.3 (2015-12-10)
+  - R Under development (unstable) (2016-02-15 r70177)
+  
+* Platform x86_64-pc-linux-gnu (64-bit):
+  - R version 3.0.3 (2014-03-06)
+  - R version 3.1.3 (2015-03-09)
+  - R version 3.2.3 (2015-12-10)
+  - R version 3.2.3 Patched (2016-02-12 r70155)
+  - R Under development (unstable) (2016-02-14 r70170)
 
-It has also been verified by the <http://win-builder.r-project.org/> service.
+* Platform: x86_64-apple-darwin10.8.0 (64-bit):
+  - R version 3.2.3 Patched (2016-01-12 r69945)
 
-(*) The submitted updates cause no issues for any of the following 32 reverse dependencies on CRAN and Bioconductor: ACNE 0.7.0, ACTCD 1.0-0, CellularAutomaton 1.1-1, DATforDCEMRI 0.55, DEGraph 1.14.0, GAD 1.1.1, GhcnDaily 1.5, IdMappingRetrieval 1.8.0, MPAgenomics 1.1.2, NCIgraph 1.10.0, NPCD 1.0-7, NSA 0.0.32,PSCBS 0.43.0, R.cache 0.10.0, R.devices 2.12.0, R.filesets 2.6.0, R.huge 0.8.0, R.matlab 3.1.1, R.oo 1.18.0, R.rsp 0.20.0, R.utils 1.34.0, aroma.affymetrix 2.13.0, aroma.apd 0.5.0, aroma.cn 1.5.0, aroma.core 2.13.0, aroma.light 1.32.0, calmate 0.11.0, cgdsr 1.1.33, curvetest 2.2, phylosim 2.1.1, rtf 0.4-11 and tmle.npvi 0.9.3.
+* Platform i386-w64-mingw32 (32-bit) [Appveyor CI]:
+  - R Under development (unstable) (2016-02-11 r70152)
+
+* Platform x86_64-w64-mingw32/x64 (64-bit) [win-builder]:
+  - R version 3.2.3 (2015-12-10)
+  - R Under development (unstable) (2016-02-14 r70170)
+
+* Platform x86_64-w64-mingw32/x64 (64-bit):
+  - R version 3.1.3 (2015-03-09)
+  - R version 3.2.3 (2015-12-10)
+  - R version 3.2.3 Patched (2016-02-13 r70160)
+  - R Under development (unstable) (2016-02-14 r70170)
+
+
+Moreover, the updates cause no issues for any of the following
+31 reverse dependencies on CRAN and Bioconductor:
+ACNE 0.8.1, ACTCD 1.0-0, aroma.affymetrix 3.0.0, aroma.apd 0.6.0,
+aroma.cn 1.6.1, aroma.core 3.0.0, aroma.light 3.1.1, calmate 0.12.1,
+CellularAutomaton 1.1-1, cgdsr 1.2.5, curvetest 2.2,
+DATforDCEMRI 0.55, DEGraph 1.23.0, GAD 1.1.1,
+IdMappingRetrieval 1.19.2, MPAgenomics 1.1.2, NCIgraph 1.19.0,
+NPCD 1.0-9, NSA 0.0.32, PSCBS 0.61.0, R.cache 0.12.0,
+R.devices 2.13.2, R.filesets 2.10.0, R.huge 0.9.0, R.matlab 3.4.0,
+R.oo 1.19.0, R.rsp 0.21.0, R.utils 2.2.0, rtf 0.4-11, sisal 0.46 and
+tmle.npvi 0.10.0.
