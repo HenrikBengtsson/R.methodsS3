@@ -1,6 +1,13 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.7.1 [2016-02-15]
+o Explicit namespace imports also from 'utils' package.
+o CLEANUP: Package now requires R (>= 2.13.0) (April 2011).  If really 
+  needed on earlier version of R, it only takes a minor tweak, but 
+  I won't do that unless really really needed.
+
+
 Version: 1.7.0 [2015-02-19]
 o ROBUSTNESS: Added several package tests.
 o CONSISTENCY: Now isGenericS4() returns FALSE for non-existing

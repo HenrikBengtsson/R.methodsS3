@@ -1,13 +1,9 @@
 ## covr: skip=all
 
 .onAttach <- function(libname, pkgname) {
-  # Set up RCC validators for R.methodsS3
-  validators <- getOption("R.methodsS3:validators:setGenericS3", list())
-  validators <- c(validators, list(rccValidateSetGenericS3))
-  validators <- getOption("R.methodsS3:validators:setMethodS3", list())
-  validators <- c(validators, list(rccValidateSetMethodS3))
-
-  pi <- utils::packageDescription(pkgname)
-  pkgStartupMessage(pkgname, " v", pi$Version, " (", pi$Date,
-           ") successfully loaded. See ?", pkgname, " for help.")
+  pd <- utils::packageDescription(pkgname)
+  msg <- sprintf("%s v%s", pkgname, pd$Version)
+  if (!is.null(pd$Date)) msg <- sprintf("%s (%s)", msg, pd$Date)
+  msg <- sprintf("%s successfully loaded. See ?%s for help.", msg, pkgname)
+  pkgStartupMessage(msg)
 }
