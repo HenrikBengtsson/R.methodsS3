@@ -1,7 +1,7 @@
 Package: R.methodsS3
 ====================
 
-Version: 1.7.0-9000 [2015-09-18]
+Version: 1.7.1 [2016-02-15]
 o Explicit namespace imports also from 'utils' package.
 o CLEANUP: Package now requires R (>= 2.13.0) (April 2011).  If really 
   needed on earlier version of R, it only takes a minor tweak, but 
