@@ -237,8 +237,8 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # 5b. Validate arguments for 'picky' methods.
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   pickyMethods <- list(
-    "$"    = c(NA, "name"),
-    "$<-"  = c(NA, "name", "value")
+    "$"    = c(NA_character_, "name"),
+    "$<-"  = c(NA_character_, "name", "value")
   )
 
   if (is.element(name, names(pickyMethods))) {
