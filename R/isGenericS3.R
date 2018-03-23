@@ -182,28 +182,3 @@ S3class(isGenericS4.default) <- "default";
 export(isGenericS4.default) <- FALSE;
 
 setGenericS3("isGenericS4");
-
-
-
-############################################################################
-# HISTORY:
-# 2015-01-13
-# o CONSISTENCY: Now isGenericS4() returns FALSE for non-existing
-#   functions, just as isGenericS3() does.
-# o BUG FIX: isGenericS3() on a function gave error "object 'Math' of
-#   mode 'function' was not found" when the 'methods' package was not
-#   loaded, e.g. Rscript -e "R.methodsS3::isGenericS3(function(...) NULL)".
-# 2013-10-05
-# o ROBUSTNESS: Now isGenericS3() also compares to known generic functions
-#   in the 'base' package.  It also does a better job on checking whether
-#   the function calls UseMethod() or not.
-# 2010-09-18
-# o BUG FIX: isGenericS3() and isGenericS4() did not support specifying
-#   the function by name as a character string, despite it was documented
-#   to do so.  Thanks John Oleynick for reporting on this.
-# 2004-10-18
-# o Added Rdoc comments for isGenericS3() and isGenericS4().
-# 2002-10-15
-# o Created from R.oo Object.R and ideas as described on
-#    http://www.maths.lth.se/help/R/
-############################################################################

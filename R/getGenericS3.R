@@ -38,18 +38,3 @@ setMethodS3("getGenericS3", "default", function(name, envir=parent.frame(), inhe
   }
   fcn;
 })
-
-
-
-############################################################################
-# HISTORY:
-# 2013-10-06
-# o Now getGenericS3() uses .findFunction().
-# 2013-10-05
-# o Added argument 'inherits' to getGenericS3().
-# 2010-09-18
-# o BUG FIX: getGenericS3() failed to locate generic functions created
-#   in the global enviroment.
-# 2008-05-08
-# o Added getGenericS3().
-############################################################################

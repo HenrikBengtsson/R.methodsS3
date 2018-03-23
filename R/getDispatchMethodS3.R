@@ -38,13 +38,3 @@ setMethodS3("getDispatchMethodS3", "default", function(methodName, classNames, .
 
   res[[1]]$fcn;
 }, private=TRUE)
-
-
-############################################################################
-# HISTORY:
-# 2010-12-02
-# o Added Rdoc comments.
-# o Made getDispatchMethodS3() a default method.
-# 2009-11-20
-# o Added getDispatchMethodS3().
-############################################################################

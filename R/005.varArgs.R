@@ -32,10 +32,3 @@ appendVarArgs.function <- function(fcn, ...) {
 } # appendVarArgs()
 S3class(appendVarArgs.function) <- "function";
 export(appendVarArgs.function) <- FALSE;
-
-
-############################################################################
-# HISTORY:
-# 2005-02-15
-# o Created.
-############################################################################

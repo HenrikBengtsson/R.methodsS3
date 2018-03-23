@@ -26,15 +26,3 @@ R.KEYWORDS <- c(
   "...", paste("..", 1:99, sep="")
 );
 export(R.KEYWORDS) <- FALSE;
-  
-     
-############################################################################
-# HISTORY:
-# 2007-09-17
-# o Updated. Added 'NA_<data type>_' keywords.
-# 2005-02-10
-# o Moved into its own source code file. Extracted from 000.GLOBALS.R.
-# 2002-11-21
-# o Added "..." to R.KEYWORDS.
-############################################################################
-

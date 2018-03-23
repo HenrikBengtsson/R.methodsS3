@@ -27,13 +27,3 @@ rccValidateSetGenericS3 <- function(name, ...) {
   rccValidateFunctionName(name=name)
 }
 export(rccValidateSetGenericS3) <- FALSE;
-
-
-############################################################################
-# HISTORY:
-# 2012-06-22
-# o Now rccValidateFunctionName() also accepts names starting with
-#   symbols "+", "-", "*", "^", and "%".
-# 200x-xx-xx
-# o Created.
-############################################################################

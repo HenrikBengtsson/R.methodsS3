@@ -112,18 +112,3 @@ setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames,
 
   res;
 }, private=TRUE) # findDispatchMethodsS3()
-
-
-############################################################################
-# HISTORY:
-# 2015-02-02
-# o WORKAROUND: In R (< 3.1.?) there is a bug in getAnywhere() causing it
-#   to return garbage in parts of the 'objs' list.  This bug has been
-#   there all the time, but was only detected now when a package test
-#   for findDispatchMethodsS3() was added.
-# 2010-12-02
-# o Added Rdoc comments.
-# o Made findDispatchMethodsS3() a default method.
-# 2009-11-20
-# o Added findDispatchMethodsS3().
-############################################################################
