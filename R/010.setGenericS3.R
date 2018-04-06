@@ -155,6 +155,9 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
       return();
     }
 
+    ## Assign 'S3class' attribute (an R.methodsS3 thing)
+    attr(fcnDef, "S3class") <- "default";
+    
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # 4c. "Rename" the function to a default function
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -1,6 +1,11 @@
 Package: R.methodsS3
 ====================
 
+Version: 1.8.0 [2018-04-06]
+o Now setGenericS3() sets the 'S3class' attribute on any "default" methods
+  it creates, if any.
+  
+
 Version: 1.7.1 [2016-02-15]
 o Explicit namespace imports also from 'utils' package.
 o CLEANUP: Package now requires R (>= 2.13.0) (April 2011).  If really 
