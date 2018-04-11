@@ -89,12 +89,9 @@ isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
     }
   }
 
-  # Check with codetools::findGlobals(), if available,
-  # otherwise scan the body
+  # Check with codetools::findGlobals(), otherwise scan the body
   res <- tryCatch({
-    ns <- getNamespace("codetools")
-    findGlobals <- get("findGlobals", mode="function", envir=ns)
-    fcns <- findGlobals(fcn, merge=FALSE)$functions
+    fcns <- codetools::findGlobals(fcn, merge=FALSE)$functions
     is.element("UseMethod", fcns)
   }, error = function(ex) {
     # Scan the body of the function
