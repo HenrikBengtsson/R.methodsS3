@@ -8,20 +8,20 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Sets attribute export to TRUE
 export <- function(x) {
-  attr(x, "export") <- TRUE;
-  x;
+  attr(x, "export") <- TRUE
+  x
 }
 export <- export(export)
 
 # Sets attribute export to 'value'.
 "export<-" <- export(function(x, value) {
-  attr(x, "export") <- value;
-  x;
+  attr(x, "export") <- value
+  x
 })
 
 noexport <- export(function(x) {
-  attr(x, "export") <- FALSE;
-  x;
+  attr(x, "export") <- FALSE
+  x
 })
 
 
@@ -30,8 +30,8 @@ noexport <- export(function(x) {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Sets attribute 'S3class' to 'value'.
 "S3class<-" <- export(function(x, value) {
-  attr(x, "S3class") <- value;
-  x;
+  attr(x, "S3class") <- value
+  x
 })
 
 
@@ -40,21 +40,21 @@ noexport <- export(function(x) {
 .findFunction <- function(name, envir, inherits=rep(FALSE, times=length(envir))) {
   # Argument 'envir':
   if (!is.list(envir)) {
-    envir <- list(envir);
+    envir <- list(envir)
   }
-  n <- length(envir);
+  n <- length(envir)
 
   # Argument 'inherits':
-  inherits <- as.logical(inherits);
-  stopifnot(length(inherits) == n);
+  inherits <- as.logical(inherits)
+  stopifnot(length(inherits) == n)
 
-  fcn <- pkg <- NULL;
+  fcn <- pkg <- NULL
   for (kk in seq_along(envir)) {
-    env <- envir[[kk]];
-    inh <- inherits[kk];
+    env <- envir[[kk]]
+    inh <- inherits[kk]
     if (exists(name, mode="function", envir=env, inherits=inh)) {
-      fcn <- get(name, mode="function", envir=env, inherits=inh);
-      pkg <- attr(env, "name");
+      fcn <- get(name, mode="function", envir=env, inherits=inh)
+      pkg <- attr(env, "name")
       if (is.null(pkg)) {
         pkg <- "base"
         if (identical(env, baseenv())) {
@@ -62,11 +62,11 @@ noexport <- export(function(x) {
           pkg <- "<R_GlobalEnv>"
         }
       } else {
-        pkg <- gsub("^package:", "", pkg);
+        pkg <- gsub("^package:", "", pkg)
       }
-      break;
+      break
     }
   } # for (kk ...)
 
-  list(fcn=fcn, pkg=pkg);
+  list(fcn=fcn, pkg=pkg)
 } # .findFunction()

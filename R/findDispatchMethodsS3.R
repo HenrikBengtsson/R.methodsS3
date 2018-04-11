@@ -33,32 +33,32 @@
 #*/###########################################################################
 setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames, firstOnly=FALSE, ...) {
   # Argument 'methodName':
-  methodName <- as.character(methodName);
+  methodName <- as.character(methodName)
   if (length(methodName) == 0) {
-    throw("Argument 'methodName' is empty.");
+    throw("Argument 'methodName' is empty.")
   }
   if (length(methodName) > 1) {
-    throw("Argument 'methodName' must only contain one element: ", paste(head(methodName), collapse=", "));
+    throw("Argument 'methodName' must only contain one element: ", paste(head(methodName), collapse=", "))
   }
 
   # Argument 'classNames':
-  classNames <- as.character(classNames);
+  classNames <- as.character(classNames)
   if (length(classNames) == 0) {
-    throw("Argument 'classNames' is empty.");
+    throw("Argument 'classNames' is empty.")
   }
 
   # Argument 'firstOnly':
-  firstOnly <- as.logical(firstOnly);
+  firstOnly <- as.logical(firstOnly)
 
 
-  res <- list();
+  res <- list()
   for (kk in seq_along(classNames)) {
-    className <- classNames[kk];
-    fcnName <- paste(methodName, className, sep=".");
-    obj <- do.call(getAnywhere, list(fcnName));
+    className <- classNames[kk]
+    fcnName <- paste(methodName, className, sep=".")
+    obj <- do.call(getAnywhere, list(fcnName))
     if (length(obj$objs) == 0) {
       # No matching objects
-      next;
+      next
     }
 
     # WORKAROUND: In R (< 3.1.?) there is a bug in getAnywhere()
@@ -84,31 +84,31 @@ setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames,
     }
 
     # Keep only functions
-    keep <- which(sapply(obj$objs, FUN=is.function));
+    keep <- which(sapply(obj$objs, FUN=is.function))
     if (length(keep) == 0) {
       # No functions
-      next;
+      next
     }
 
     # Keep the first function
-    first <- keep[1];
-    fcn <- obj$objs[[first]];
-    where <- obj$where[first];
+    first <- keep[1]
+    fcn <- obj$objs[[first]]
+    where <- obj$where[first]
 
-    resKK <- list();
-    resKK$class <- className;
-    resKK$name <- methodName;
-    resKK$fullname <- fcnName;
-    resKK$fcn <- fcn;
-    resKK$where <- obj$where;
+    resKK <- list()
+    resKK$class <- className
+    resKK$name <- methodName
+    resKK$fullname <- fcnName
+    resKK$fcn <- fcn
+    resKK$where <- obj$where
 
-    res[[className]] <- resKK;
+    res[[className]] <- resKK
 
     # Return only the first match?
     if (firstOnly) {
-      break;
+      break
     }
   } # for (kk ...)
 
-  res;
+  res
 }, private=TRUE) # findDispatchMethodsS3()

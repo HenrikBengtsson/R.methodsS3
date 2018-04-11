@@ -36,40 +36,40 @@ isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
   # Local functions
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   knownInternalGenericS3 <- function(fcn, which=1:4, ...) {
-    knownGenerics <- NULL;
+    knownGenerics <- NULL
 
     # Get the name of all known S3 generic functions
     if (any(which == 1L)) {
-      knownGenerics <- c(knownGenerics, names(.knownS3Generics));
+      knownGenerics <- c(knownGenerics, names(.knownS3Generics))
     }
 
     if (any(which == 2L)) {
-      knownGenerics <- c(knownGenerics, .S3PrimitiveGenerics);
+      knownGenerics <- c(knownGenerics, .S3PrimitiveGenerics)
     }
 
     # tools:::.get_internal_S3_generics() if available
     if (any(which == 3L)) {
       ns <- getNamespace("tools")
       if (exists(".get_internal_S3_generics", envir=ns, inherits=FALSE)) {
-        names <- get(".get_internal_S3_generics", envir=ns, inherits=FALSE)();
-        knownGenerics <- c(knownGenerics, names);
+        names <- get(".get_internal_S3_generics", envir=ns, inherits=FALSE)()
+        knownGenerics <- c(knownGenerics, names)
       }
     }
 
     # Manually added, cf. ?cbind
     if (any(which == 4L)) {
-      names <- c("cbind", "rbind");
-      knownGenerics <- c(knownGenerics, names);
+      names <- c("cbind", "rbind")
+      knownGenerics <- c(knownGenerics, names)
     }
 
     # Is it one of the known S3 generic functions?
-    knownGenerics <- unique(knownGenerics);
+    knownGenerics <- unique(knownGenerics)
 
-    knownGenerics;
+    knownGenerics
   } # knownInternalGenericS3()
 
   isNameInternalGenericS3 <- function(fcn, ...) {
-    is.element(fcn, knownInternalGenericS3());
+    is.element(fcn, knownInternalGenericS3())
   } # isNameInternalGenericS3()
 
   isPrimitive <- function(fcn, ...) {
@@ -78,58 +78,58 @@ isGenericS3.default <- function(fcn, envir=parent.frame(), ...) {
 
 
   if (is.character(fcn)) {
-    if (isNameInternalGenericS3(fcn)) return(TRUE);
+    if (isNameInternalGenericS3(fcn)) return(TRUE)
 
     # Get the function
-    fcn <- .findFunction(fcn, envir=envir, inherits=TRUE)$fcn;
+    fcn <- .findFunction(fcn, envir=envir, inherits=TRUE)$fcn
 
     # Does it even exist?
     if (is.null(fcn)) {
-      return(FALSE);
+      return(FALSE)
     }
   }
 
   # Check with codetools::findGlobals(), if available,
   # otherwise scan the body
   res <- tryCatch({
-    ns <- getNamespace("codetools");
-    findGlobals <- get("findGlobals", mode="function", envir=ns);
-    fcns <- findGlobals(fcn, merge=FALSE)$functions;
-    is.element("UseMethod", fcns);
+    ns <- getNamespace("codetools")
+    findGlobals <- get("findGlobals", mode="function", envir=ns)
+    fcns <- findGlobals(fcn, merge=FALSE)$functions
+    is.element("UseMethod", fcns)
   }, error = function(ex) {
     # Scan the body of the function
-    body <- body(fcn);
+    body <- body(fcn)
     if (is.call(body))
-      body <- deparse(body);
-    body <- as.character(body);
-    (length(grep("UseMethod[(]", body)) > 0L);
-  });
-  if (isTRUE(res)) return(TRUE);
+      body <- deparse(body)
+    body <- as.character(body)
+    (length(grep("UseMethod[(]", body)) > 0L)
+  })
+  if (isTRUE(res)) return(TRUE)
 
   # Check primitive functions
   if (isPrimitive(fcn)) {
     # Scan the body of the function
-    body <- deparse(fcn);
-    call <- grep(".Primitive[(]", body, value=TRUE);
-    call <- gsub(".Primitive[(]\"", "", call);
-    call <- gsub("\"[)].*", "", call);
-    if (is.element(call, knownInternalGenericS3(2L))) return(TRUE);
+    body <- deparse(fcn)
+    call <- grep(".Primitive[(]", body, value=TRUE)
+    call <- gsub(".Primitive[(]\"", "", call)
+    call <- gsub("\"[)].*", "", call)
+    if (is.element(call, knownInternalGenericS3(2L))) return(TRUE)
   }
 
   # Finally, compare to all known internal generics
   for (name in knownInternalGenericS3()) {
     if (exists(name, mode="function", inherits=TRUE)) {
-      generic <- get(name, mode="function", inherits=TRUE);
-      if (identical(fcn, generic)) return(TRUE);
+      generic <- get(name, mode="function", inherits=TRUE)
+      if (identical(fcn, generic)) return(TRUE)
     }
   }
 
-  FALSE;
+  FALSE
 }
-S3class(isGenericS3.default) <- "default";
-export(isGenericS3.default) <- FALSE;
+S3class(isGenericS3.default) <- "default"
+export(isGenericS3.default) <- FALSE
 
-setGenericS3("isGenericS3");
+setGenericS3("isGenericS3")
 
 
 
@@ -168,17 +168,17 @@ setGenericS3("isGenericS3");
 isGenericS4.default <- function(fcn, envir=parent.frame(), ...) {
   if (is.character(fcn)) {
     if (!exists(fcn, mode="function", envir=envir, inherits=TRUE)) {
-      return(FALSE);
+      return(FALSE)
     }
-    fcn <- get(fcn, mode="function", envir=envir, inherits=TRUE);
+    fcn <- get(fcn, mode="function", envir=envir, inherits=TRUE)
   }
-  body <- body(fcn);
+  body <- body(fcn)
   if (is.call(body))
-    body <- deparse(body);
-  body <- as.character(body);
+    body <- deparse(body)
+  body <- as.character(body)
   return(length(grep("standardGeneric", body)) > 0)
 }
-S3class(isGenericS4.default) <- "default";
-export(isGenericS4.default) <- FALSE;
+S3class(isGenericS4.default) <- "default"
+export(isGenericS4.default) <- FALSE
 
-setGenericS3("isGenericS4");
+setGenericS3("isGenericS4")

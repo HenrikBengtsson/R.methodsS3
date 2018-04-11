@@ -29,6 +29,6 @@
 # @keyword methods
 #*/###########################################################################
 setMethodS3("getMethodS3", "default", function(name, class="default", envir=parent.frame(), ...) {
-  args <- list(name, class=class, optional=FALSE);
-  do.call(getS3method, args, envir=envir);
+  args <- list(name, class=class, optional=FALSE)
+  do.call(getS3method, args, envir=envir)
 })

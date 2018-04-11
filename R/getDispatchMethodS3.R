@@ -31,10 +31,10 @@
 # @keyword internal
 #*/###########################################################################
 setMethodS3("getDispatchMethodS3", "default", function(methodName, classNames, ...) {
-  res <- findDispatchMethodsS3(methodName, classNames, firstOnly=TRUE, ...);
+  res <- findDispatchMethodsS3(methodName, classNames, firstOnly=TRUE, ...)
   if (length(res) == 0) {
-    throw(sprintf("No method %s() for this class structure: %s", methodName, paste(classNames, collapse=", ")));
+    throw(sprintf("No method %s() for this class structure: %s", methodName, paste(classNames, collapse=", ")))
   }
 
-  res[[1]]$fcn;
+  res[[1]]$fcn
 }, private=TRUE)

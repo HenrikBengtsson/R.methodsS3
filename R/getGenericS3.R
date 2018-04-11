@@ -30,11 +30,11 @@
 # @keyword methods
 #*/###########################################################################
 setMethodS3("getGenericS3", "default", function(name, envir=parent.frame(), inherits=TRUE, ...) {
-  fcn <- .findFunction(name, envir=envir, inherits=inherits)$fcn;
+  fcn <- .findFunction(name, envir=envir, inherits=inherits)$fcn
   if (is.null(fcn)) {
-    throw("No such function found: ", name);
+    throw("No such function found: ", name)
   } else if (!isGenericS3(fcn)) {
-    throw("The function found is not an S3 generic function: ", name);
+    throw("The function found is not an S3 generic function: ", name)
   }
-  fcn;
+  fcn
 })
