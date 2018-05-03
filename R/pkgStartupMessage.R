@@ -14,7 +14,7 @@
 #
 # \arguments{
 #   \item{...}{Arguments passed to @see "base::packageStartupMessage".}
-#   \item{quietly}{If @FALSE, the message is outputed, otherwise not.
+#   \item{quietly}{If @FALSE, the message is outputted, otherwise not.
 #     If @NA, the message is \emph{not} outputted if @see "base::library"
 #     (or \code{require()}) was called with argument \code{quietly=TRUE}.}
 # }

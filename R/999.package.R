@@ -15,7 +15,7 @@
 #   To get the "devel" version, see \url{http://www.braju.com/R/}.
 # }
 #
-# \section{Dependancies and other requirements}{
+# \section{Dependencies and other requirements}{
 #   This package only requires a standard \R installation.
 # }
 #

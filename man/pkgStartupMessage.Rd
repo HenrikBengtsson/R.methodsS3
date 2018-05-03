@@ -25,7 +25,7 @@
 
 \arguments{
   \item{...}{Arguments passed to \code{\link[base]{packageStartupMessage}}().}
-  \item{quietly}{If \code{\link[base:logical]{FALSE}}, the message is outputed, otherwise not.
+  \item{quietly}{If \code{\link[base:logical]{FALSE}}, the message is outputted, otherwise not.
     If \code{\link[base]{NA}}, the message is \emph{not} outputted if \code{\link[base]{library}}()
     (or \code{require()}) was called with argument \code{quietly=TRUE}.}
 }

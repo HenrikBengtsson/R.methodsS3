@@ -37,7 +37,7 @@ bar <- function(x, y, ...) {
 }
 
 
-# Your defintion will redefine bar() above to bar.default().
+# Your definition will redefine bar() above to bar.default().
 setMethodS3("bar", "character", function(object, ...) {
   cat("In bar() for class 'character':\n")
   print(object, ...)
