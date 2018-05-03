@@ -29,7 +29,7 @@ setGenericS3("bar")
 print(getGenericS3("print"))
 
 
-# Your defintion will redefine bar() above to bar.default().
+# Your definition will redefine bar() above to bar.default().
 foobar <- function() print("foobar()")
 setGenericS3("foobar")
 

@@ -32,3 +32,5 @@ README[.]md
 ^[.]test
 ^[.]check
 ^.*[.]tar[.]gz$
+^.*\.Rproj$
+^\.Rproj\.user$
