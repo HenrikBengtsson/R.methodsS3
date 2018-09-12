@@ -1,10 +1,13 @@
 Package: R.methodsS3
 ====================
 
-Version: 1.7.1-9000 [2018-04-10]
+Version: 1.7.1-9000 [2018-09-11]
 o Now setGenericS3() sets the 'S3class' attribute on any "default" methods
   it creates, if any.
 o Now formally suggesting 'codetools'.
+o BUG FIX: R.methodsS3::setMethodS3() could produce 'Error in appendVarArgs(
+  ...R.oo.definition) : could not find function "appendVarArgs"' if the
+  R.methodsS3 package is not attached.
 
 
 Version: 1.7.1 [2016-02-15]

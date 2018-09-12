@@ -209,7 +209,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
       # As above, to avoid "using .GlobalEnv instead of package:<pkg>"
       # warnings, we do the below trick. /HB 2005-02-25
       assign("...R.oo.definition", definition, envir=envir)
-      eval(substitute(fcn <- appendVarArgs(fcn), list(fcn=as.name("...R.oo.definition"))), envir=envir)
+      eval(substitute(fcn <- R.methodsS3::appendVarArgs(fcn), list(fcn=as.name("...R.oo.definition"))), envir=envir)
       definition <- get("...R.oo.definition", envir=envir)
       rm(list="...R.oo.definition", envir=envir)
     }
