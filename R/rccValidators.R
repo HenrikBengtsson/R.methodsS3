@@ -9,11 +9,11 @@ rccValidateFunctionName <- function(name, ...) {
   allowedFirst <- c(allowedFirst, "+", "-", "*", "^", "%")
   if (!is.element(firstLetter, allowedFirst)) {
     if (!is.element(tolower(firstLetter), letters))
-      throw("Except for a few operators, method/function names must begin with a letter: ", name)
+      stop("Except for a few operators, method/function names must begin with a letter: ", name)
 
     # Check first letter  
     if (firstLetter == toupper(firstLetter))
-      throw("Method/function names should start with a lower case letter: ", name)
+      stop("Method/function names should start with a lower case letter: ", name)
   }
 }
 export(rccValidateFunctionName) <- FALSE

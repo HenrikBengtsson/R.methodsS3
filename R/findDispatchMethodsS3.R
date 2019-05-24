@@ -35,16 +35,16 @@ setMethodS3("findDispatchMethodsS3", "default", function(methodName, classNames,
   # Argument 'methodName':
   methodName <- as.character(methodName)
   if (length(methodName) == 0) {
-    throw("Argument 'methodName' is empty.")
+    stop("Argument 'methodName' is empty.")
   }
   if (length(methodName) > 1) {
-    throw("Argument 'methodName' must only contain one element: ", paste(head(methodName), collapse=", "))
+    stop("Argument 'methodName' must only contain one element: ", paste(head(methodName), collapse=", "))
   }
 
   # Argument 'classNames':
   classNames <- as.character(classNames)
   if (length(classNames) == 0) {
-    throw("Argument 'classNames' is empty.")
+    stop("Argument 'classNames' is empty.")
   }
 
   # Argument 'firstOnly':
