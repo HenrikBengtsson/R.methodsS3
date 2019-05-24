@@ -33,5 +33,6 @@
 # \keyword{error}
 #*/###########################################################################
 setMethodS3("throw", "default", function(...) {
+  .Deprecated(msg = "R.methodsS3::throw() is deprecated. Use base::stop() instead, or R.oo::throw().")
   stop(...)
 })
