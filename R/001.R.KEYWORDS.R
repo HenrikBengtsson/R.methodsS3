@@ -22,7 +22,7 @@
 R.KEYWORDS <- c(
   "break", "else", "for", "function", "if", "in", "next", 
   "repeat", "while", "TRUE", "FALSE", "Inf", "NULL", "NA", "NaN",
-  paste("NA_", c("integer", "real", "complex", "character", "_", sep="")),
+  paste("NA_", c("integer", "real", "complex", "character"), "_", sep=""),
   "...", paste("..", 1:99, sep="")
 )
 export(R.KEYWORDS) <- FALSE

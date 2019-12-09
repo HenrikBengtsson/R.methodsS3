@@ -1,7 +1,7 @@
 Package: R.methodsS3
 ====================
 
-Version: 1.7.1-9000 [2019-05-23]
+Version: 1.7.1-9000 [2019-12-08]
 
 NEW FEATURES:
 
@@ -17,6 +17,9 @@ BUG FIXES:
  * R.methodsS3::setMethodS3() could produce 'Error in appendVarArgs(
    ...R.oo.definition) : could not find function "appendVarArgs"' if the
    R.methodsS3 package is not attached.
+
+ * setMethodS3() and setGenericS3() failed to detect names 'NA_real_' etc.
+   as R keywords due to an 11 year old bug.
 
 DEPRECATED & DEFUNCT:
 
