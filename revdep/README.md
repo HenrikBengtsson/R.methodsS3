@@ -2,15 +2,15 @@
 
 |field    |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.6.1 (2019-07-05) |
-|os       |Ubuntu 18.04.3 LTS           |
+|version  |R version 3.6.2 (2019-12-12) |
+|os       |Ubuntu 18.04.4 LTS           |
 |system   |x86_64, linux-gnu            |
 |ui       |X11                          |
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2019-12-08                   |
+|date     |2020-02-13                   |
 
 # Dependencies
 
@@ -20,7 +20,7 @@
 
 # Revdeps
 
-## All (33)
+## All (32)
 
 |package                                              |version |error |warning |note |
 |:----------------------------------------------------|:-------|:-----|:-------|:----|
@@ -29,11 +29,10 @@
 |[aroma.affymetrix](problems.md#aromaaffymetrix)      |3.2.0   |      |        |2    |
 |aroma.apd                                            |0.6.0   |      |        |     |
 |aroma.cn                                             |1.6.1   |      |        |     |
-|[aroma.core](problems.md#aromacore)                  |3.2.0   |      |        |1    |
+|[aroma.core](problems.md#aromacore)                  |3.2.1   |      |        |1    |
 |[aroma.light](problems.md#aromalight)                |3.16.0  |      |        |1    |
 |calmate                                              |0.12.1  |      |        |     |
 |cgdsr                                                |1.3.0   |      |        |     |
-|[DATforDCEMRI](problems.md#datfordcemri)             |0.55    |      |        |4    |
 |[DEGraph](problems.md#degraph)                       |1.38.0  |      |        |4    |
 |GAD                                                  |1.1.1   |      |        |     |
 |[IdMappingRetrieval](problems.md#idmappingretrieval) |1.34.0  |1     |        |4    |

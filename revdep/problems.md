@@ -7,7 +7,7 @@
 * URL: https://www.aroma-project.org/, https://github.com/HenrikBengtsson/aroma.affymetrix
 * BugReports: https://github.com/HenrikBengtsson/aroma.affymetrix/issues
 * Date/Publication: 2019-06-23 06:00:14 UTC
-* Number of recursive dependencies: 80
+* Number of recursive dependencies: 75
 
 Run `revdep_details(,"aroma.affymetrix")` for more info
 
@@ -34,12 +34,12 @@ Run `revdep_details(,"aroma.affymetrix")` for more info
 
 <details>
 
-* Version: 3.2.0
+* Version: 3.2.1
 * Source code: https://github.com/cran/aroma.core
 * URL: https://github.com/HenrikBengtsson/aroma.core, https://www.aroma-project.org/
 * BugReports: https://github.com/HenrikBengtsson/aroma.core/issues
-* Date/Publication: 2019-06-17 18:20:03 UTC
-* Number of recursive dependencies: 46
+* Date/Publication: 2020-02-04 15:20:21 UTC
+* Number of recursive dependencies: 47
 
 Run `revdep_details(,"aroma.core")` for more info
 
@@ -78,77 +78,6 @@ Run `revdep_details(,"aroma.light")` for more info
     structure’ in the ‘Writing R Extensions’ manual.
     ```
 
-# DATforDCEMRI
-
-<details>
-
-* Version: 0.55
-* Source code: https://github.com/cran/DATforDCEMRI
-* Date/Publication: 2013-03-20 07:49:01
-* Number of recursive dependencies: 10
-
-Run `revdep_details(,"DATforDCEMRI")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Depends: includes the non-default packages:
-      'xtable', 'akima', 'R.oo', 'R.methodsS3', 'matlab', 'lattice',
-      'locfit', 'grid'
-    Adding so many packages to the search path is excessive and importing
-    selectively is preferable.
-    ```
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-    Deprecated license: CC BY-NC-SA 3.0
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    'library' or 'require' calls to packages already attached by Depends:
-      ‘R.methodsS3’ ‘R.oo’ ‘akima’ ‘graphics’ ‘grid’ ‘lattice’ ‘locfit’
-      ‘matlab’ ‘xtable’
-      Please remove these calls from your code.
-    'library' or 'require' call to ‘R.matlab’ in package code.
-      Please use :: or requireNamespace() instead.
-      See section 'Suggested packages' in the 'Writing R Extensions' manual.
-    Packages in Depends field not imported from:
-      ‘R.methodsS3’ ‘R.oo’ ‘akima’ ‘grid’ ‘lattice’ ‘locfit’ ‘matlab’
-      ‘xtable’
-      These packages need to be imported from (in the NAMESPACE file)
-      for when this namespace is loaded but not attached.
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    ...
-    DAT : DATrun: no visible global function definition for ‘graphics.off’
-    DAT : DATrun: no visible global function definition for ‘pdf’
-    DAT : DATrun: no visible global function definition for ‘layout’
-    DAT : DATrun: no visible global function definition for ‘par’
-    DAT : DATrun: no visible global function definition for ‘plot’
-    DAT : DATrun: no visible global function definition for ‘frame’
-    DAT : DATrun: no visible global function definition for ‘lines’
-    DAT : DATrun: no visible global function definition for ‘dev.off’
-    DAT : DATrun: no visible global function definition for ‘writeMat’
-    DAT: no visible binding for global variable ‘DAT.simData’
-    Undefined global functions or variables:
-      DAT.simData colorRampPalette dev.new dev.off dev.set frame
-      graphics.off image layout lines locator locfit.robust median palette
-      par pdf plot preplot rot90 text writeMat
-    Consider adding
-      importFrom("grDevices", "colorRampPalette", "dev.new", "dev.off",
-                 "dev.set", "graphics.off", "palette", "pdf")
-      importFrom("graphics", "frame", "image", "layout", "lines", "locator",
-                 "par", "plot", "text")
-      importFrom("stats", "median", "preplot")
-    to your NAMESPACE file.
-    ```
-
 # DEGraph
 
 <details>
@@ -156,7 +85,7 @@ Run `revdep_details(,"DATforDCEMRI")` for more info
 * Version: 1.38.0
 * Source code: https://github.com/cran/DEGraph
 * Date/Publication: 2019-10-29
-* Number of recursive dependencies: 41
+* Number of recursive dependencies: 40
 
 Run `revdep_details(,"DEGraph")` for more info
 
@@ -221,7 +150,7 @@ Run `revdep_details(,"DEGraph")` for more info
 * Version: 1.34.0
 * Source code: https://github.com/cran/IdMappingRetrieval
 * Date/Publication: 2019-10-29
-* Number of recursive dependencies: 62
+* Number of recursive dependencies: 60
 
 Run `revdep_details(,"IdMappingRetrieval")` for more info
 
@@ -319,7 +248,7 @@ Run `revdep_details(,"NCIgraph")` for more info
 * Version: 0.46
 * Source code: https://github.com/cran/sisal
 * Date/Publication: 2015-10-10 15:45:32
-* Number of recursive dependencies: 34
+* Number of recursive dependencies: 36
 
 Run `revdep_details(,"sisal")` for more info
 
