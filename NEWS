@@ -14,6 +14,9 @@ NEW FEATURES:
  * Now setGenericS3() sets the 'S3class' attribute on any "default" methods
    it creates, if any.
 
+ * Add internal function R.methodsS3:::makeNamespace(pkg) for producing
+   S3method() statements to be put in a package's NAMESPACE file.
+
 CODE QUALITY:
 
  * Now formally suggesting 'codetools'.
