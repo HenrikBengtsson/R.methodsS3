@@ -25,10 +25,11 @@
 
   \code{install.packages("R.methodsS3")}
 
-  To get the "devel" version, see \url{http://www.braju.com/R/}.
+  To get the "devel" version, see
+  \url{https://github.com/HenrikBengtsson/R.methodsS3/}.
 }
 
-\section{Dependancies and other requirements}{
+\section{Dependencies and other requirements}{
   This package only requires a standard \R installation.
 }
 
@@ -65,7 +66,7 @@ A. (ed.), 2003
 }
 
 \references{
- [1] H. Bengtsson, \emph{The R.oo package - Object-Oriented Programming with References Using Standard R Code}, In Kurt Hornik, Friedrich Leisch and Achim Zeileis, editors, Proceedings of the 3rd International Workshop on Distributed Statistical Computing (DSC 2003), March 20-22, Vienna, Austria. \url{http://www.r-project.org/conferences/DSC-2003/Proceedings/}
+ [1] H. Bengtsson, \emph{The R.oo package - Object-Oriented Programming with References Using Standard R Code}, In Kurt Hornik, Friedrich Leisch and Achim Zeileis, editors, Proceedings of the 3rd International Workshop on Distributed Statistical Computing (DSC 2003), March 20-22, Vienna, Austria. \url{https://www.r-project.org/conferences/DSC-2003/Proceedings/}
  \cr
 }
 \keyword{package}

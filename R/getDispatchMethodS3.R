@@ -31,20 +31,10 @@
 # @keyword internal
 #*/###########################################################################
 setMethodS3("getDispatchMethodS3", "default", function(methodName, classNames, ...) {
-  res <- findDispatchMethodsS3(methodName, classNames, firstOnly=TRUE, ...);
+  res <- findDispatchMethodsS3(methodName, classNames, firstOnly=TRUE, ...)
   if (length(res) == 0) {
-    throw(sprintf("No method %s() for this class structure: %s", methodName, paste(classNames, collapse=", ")));
+    stop(sprintf("No method %s() for this class structure: %s", methodName, paste(classNames, collapse=", ")))
   }
 
-  res[[1]]$fcn;
+  res[[1]]$fcn
 }, private=TRUE)
-
-
-############################################################################
-# HISTORY:
-# 2010-12-02
-# o Added Rdoc comments.
-# o Made getDispatchMethodS3() a default method.
-# 2009-11-20
-# o Added getDispatchMethodS3().
-############################################################################

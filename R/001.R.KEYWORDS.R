@@ -22,19 +22,7 @@
 R.KEYWORDS <- c(
   "break", "else", "for", "function", "if", "in", "next", 
   "repeat", "while", "TRUE", "FALSE", "Inf", "NULL", "NA", "NaN",
-  paste("NA_", c("integer", "real", "complex", "character", "_", sep="")),
+  paste("NA_", c("integer", "real", "complex", "character"), "_", sep=""),
   "...", paste("..", 1:99, sep="")
-);
-export(R.KEYWORDS) <- FALSE;
-  
-     
-############################################################################
-# HISTORY:
-# 2007-09-17
-# o Updated. Added 'NA_<data type>_' keywords.
-# 2005-02-10
-# o Moved into its own source code file. Extracted from 000.GLOBALS.R.
-# 2002-11-21
-# o Added "..." to R.KEYWORDS.
-############################################################################
-
+)
+export(R.KEYWORDS) <- FALSE

@@ -17,7 +17,7 @@
 #   \item{class}{The class for which the method should be defined. If
 #      \code{class == "default"} a function with name \code{<name>.default}
 #      will be created.}
-#   \item{definition}{The method defintion.}
+#   \item{definition}{The method definition.}
 #   \item{private, protected}{If \code{private=TRUE}, the method is declared
 #      private. If \code{protected=TRUE}, the method is declared protected.
 #      In all other cases the method is declared public.}
@@ -40,7 +40,7 @@
 #      the same class), different actions can be taken. If \code{"error"},
 #      an exception will be thrown and the method will not be created.
 #      If \code{"warning"}, a @warning will be given and the method \emph{will}
-#      be created, otherwise the conflict will be passed unnotice.}
+#      be created, otherwise the conflict will be passed unnoticed.}
 #   \item{createGeneric, exportGeneric}{If \code{createGeneric=TRUE},
 #      a generic S3/UseMethod function is defined for this method,
 #      iff missing, and \code{exportGeneric} species attribute
@@ -72,26 +72,26 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Argument 'name':
   if (nchar(name) == 0L) {
-    stop("Cannot set S3 method. Argument 'name' is empty.");
+    stop("Cannot set S3 method. Argument 'name' is empty.")
   }
 
   # Argument 'class':
   if (nchar(class) == 0L) {
-    stop("Cannot set S3 method. Argument 'class' is empty.");
+    stop("Cannot set S3 method. Argument 'class' is empty.")
   }
 
   # Argument 'conflict':
-  conflict <- match.arg(conflict);
+  conflict <- match.arg(conflict)
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Backward compatibility tests
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  args <- list(...);
+  args <- list(...)
   if (is.element("enforceRCC", names(args))) {
-    warning("Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.");
+    warning("Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.")
     # Turn off validators?
-    if (!args$enforceRCC) validators <- NULL;
+    if (!args$enforceRCC) validators <- NULL
   }
 
 
@@ -100,7 +100,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (!is.null(validators)) {
     for (validator in validators) {
-      validator(name=name, class=class, definition=definition, private=private, protected=protected, static=static, abstract=abstract, trial=trial, deprecated=deprecated, envir=envir, overwrite=overwrite, conflict=conflict, createGeneric=createGeneric, appendVarArgs=appendVarArgs, type="setMethodS3");
+      validator(name=name, class=class, definition=definition, private=private, protected=protected, static=static, abstract=abstract, trial=trial, deprecated=deprecated, envir=envir, overwrite=overwrite, conflict=conflict, createGeneric=createGeneric, appendVarArgs=appendVarArgs, type="setMethodS3")
     }
   }
 
@@ -108,24 +108,24 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # or a replacement method.
   if (appendVarArgs) {
     # (a) Do not append '...' for the following methods
-    ignores <- c("$", "$<-", "[[", "[[<-", "[", "[<-");
-    ignores <- c(ignores, "==");
-    ignores <- c(ignores, "+", "-", "*", "/", "^", "%%", "%/%");
-    appendVarArgs <- !is.element(name, ignores);
+    ignores <- c("$", "$<-", "[[", "[[<-", "[", "[<-")
+    ignores <- c(ignores, "==")
+    ignores <- c(ignores, "+", "-", "*", "/", "^", "%%", "%/%")
+    appendVarArgs <- !is.element(name, ignores)
 
     if (appendVarArgs) {
       # (b) Neither functions with any of these name patterns
-      ignorePatterns <- c("<-$", "^%[^%]*%$");
-      ignores <- (sapply(ignorePatterns, FUN=regexpr, name) != -1L);
-      appendVarArgs <- appendVarArgs && !any(ignores);
+      ignorePatterns <- c("<-$", "^%[^%]*%$")
+      ignores <- (sapply(ignorePatterns, FUN=regexpr, name) != -1L)
+      appendVarArgs <- appendVarArgs && !any(ignores)
     }
   }
 
   # Check for forbidden names.
   if (is.element(name, R.KEYWORDS))
-    stop("Method names must not be same as a reserved keyword in R: ", name);
+    stop("Method names must not be same as a reserved keyword in R: ", name)
 
-  if (class == "ANY") class <- "default";
+  if (class == "ANY") class <- "default"
 
   # Create the modifiers
   if (private)
@@ -133,18 +133,18 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   else if (protected)
     protection <- "protected"
   else
-    protection <- "public";
+    protection <- "public"
 
-  modifiers <- protection;
-  if (static == TRUE) modifiers <- c(modifiers, "static");
-  if (abstract == TRUE) modifiers <- c(modifiers, "abstract");
-  if (deprecated == TRUE) modifiers <- c(modifiers, "deprecated");
-  if (trial == TRUE) modifiers <- c(modifiers, "trial");
+  modifiers <- protection
+  if (static == TRUE) modifiers <- c(modifiers, "static")
+  if (abstract == TRUE) modifiers <- c(modifiers, "abstract")
+  if (deprecated == TRUE) modifiers <- c(modifiers, "deprecated")
+  if (trial == TRUE) modifiers <- c(modifiers, "trial")
 
   if (missing(definition) && abstract == TRUE) {
     # Set default 'definition'.
-    src <- paste("...R.oo.definition <- function(...) stop(\"Method \\\"", name, "\\\" is defined abstract in class \\\"", class, "\\\" and has not been overridden by any of the subclasses: \", class(list(...)[[1]])[1])", sep="");
-    expr <- parse(text=src);
+    src <- paste("...R.oo.definition <- function(...) stop(\"Method \\\"", name, "\\\" is defined abstract in class \\\"", class, "\\\" and has not been overridden by any of the subclasses: \", class(list(...)[[1]])[1])", sep="")
+    expr <- parse(text=src)
 
     # If just defining a local 'definition' function, to be used below,
     # one will get warnings "using .GlobalEnv instead of package:<pkg>"
@@ -152,14 +152,14 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
     # the reasons for it, but here follows a trick in order to not get
     # such warnings. It kinda borrows the 'envir' frame to define a local
     # function. It works, but don't ask me why. /HB 2005-02-25
-    eval(expr, envir=envir);
-    definition <- get("...R.oo.definition", envir=envir);
-    rm(list="...R.oo.definition", envir=envir);
+    eval(expr, envir=envir)
+    definition <- get("...R.oo.definition", envir=envir)
+    rm(list="...R.oo.definition", envir=envir)
   }
 
 
   # Create the class method 'name':
-  methodName <- paste(name, class, sep=".");
+  methodName <- paste(name, class, sep=".")
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # 2. Find the environment where sys.source() loads the package, which is
@@ -173,12 +173,12 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # find it. *Not* checking the currently loading environment would *not*
   # be harmful, but it would produce too many warnings.
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  sys.source.def <- get("sys.source", mode="function", envir=baseenv());
-  loadenv <- NULL;
+  sys.source.def <- get("sys.source", mode="function", envir=baseenv())
+  loadenv <- NULL
   for (framePos in sys.parents()[-1L]) {
     if (identical(sys.source.def, sys.function(framePos))) {
-      loadenv <- parent.frame(framePos);
-      break;
+      loadenv <- parent.frame(framePos)
+      break
     }
   }
 
@@ -189,13 +189,13 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   #    ii) in the currently loading environment ('loadenv'), or
   #   iii) in the environments in the search path (search()).
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  envirs <- c(envir, loadenv, lapply(search(), FUN=as.environment));
-  inherits <- rep(FALSE, times=length(envirs));
-  checkImports <- getOption("R.methodsS3:checkImports:setGenericS3", FALSE);
-  if (checkImports) inherits[1:2] <- TRUE;
+  envirs <- c(envir, loadenv, lapply(search(), FUN=as.environment))
+  inherits <- rep(FALSE, times=length(envirs))
+  checkImports <- getOption("R.methodsS3:checkImports:setGenericS3", FALSE)
+  if (checkImports) inherits[1:2] <- TRUE
 
-  fcn <- .findFunction(methodName, envir=envirs, inherits=inherits);
-  fcnDef <- fcn$fcn; fcnPkg <- fcn$pkg;
+  fcn <- .findFunction(methodName, envir=envirs, inherits=inherits)
+  fcnDef <- fcn$fcn; fcnPkg <- fcn$pkg
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -203,15 +203,15 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (appendVarArgs) {
     if (!hasVarArgs(definition)) {
-      warning("Added missing argument '...' to make it more compatible with a generic function: ", methodName);
-#      definition <- appendVarArgs(definition);
+      warning("Added missing argument '...' to make it more compatible with a generic function: ", methodName)
+#      definition <- appendVarArgs(definition)
 
       # As above, to avoid "using .GlobalEnv instead of package:<pkg>"
       # warnings, we do the below trick. /HB 2005-02-25
-      assign("...R.oo.definition", definition, envir=envir);
-      eval(substitute(fcn <- appendVarArgs(fcn), list(fcn=as.name("...R.oo.definition"))), envir=envir);
-      definition <- get("...R.oo.definition", envir=envir);
-      rm(list="...R.oo.definition", envir=envir);
+      assign("...R.oo.definition", definition, envir=envir)
+      eval(substitute(fcn <- R.methodsS3::appendVarArgs(fcn), list(fcn=as.name("...R.oo.definition"))), envir=envir)
+      definition <- get("...R.oo.definition", envir=envir)
+      rm(list="...R.oo.definition", envir=envir)
     }
   }
 
@@ -219,16 +219,16 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # 5. Validate replacement functions (since R CMD check will complain)
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (regexpr("<-$", name) != -1L) {
-    f <- formals(definition);
+    f <- formals(definition)
 
-    fStr <- capture.output(args(definition))[[1]];
-    fStr <- sub("^[\t\n\f\r ]*", "", fStr);    # trim() is not available
-    fStr <- sub("[\t\n\f\r ]*$", "", fStr);    # when package loads!
+    fStr <- capture.output(args(definition))[[1]]
+    fStr <- sub("^[\t\n\f\r ]*", "", fStr) # trim() is not available
+    fStr <- sub("[\t\n\f\r ]*$", "", fStr) # when package loads!
 
     if (names(f)[length(f)] != "value") {
       ## covr: skip=2
       stop("Last argument of a ", name,
-                              "() method should be named 'value': ", fStr);
+                              "() method should be named 'value': ", fStr)
     }
   }
 
@@ -237,32 +237,32 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # 5b. Validate arguments for 'picky' methods.
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   pickyMethods <- list(
-    "$"    = c(NA, "name"),
-    "$<-"  = c(NA, "name", "value")
+    "$"    = c(NA_character_, "name"),
+    "$<-"  = c(NA_character_, "name", "value")
   )
 
   if (is.element(name, names(pickyMethods))) {
-    f <- formals(definition);
+    f <- formals(definition)
 
-    fStr <- capture.output(args(definition))[[1L]];
-    fStr <- sub("^[\t\n\f\r ]*", "", fStr);    # trim() is not available
-    fStr <- sub("[\t\n\f\r ]*$", "", fStr);    # when package loads!
+    fStr <- capture.output(args(definition))[[1L]]
+    fStr <- sub("^[\t\n\f\r ]*", "", fStr) # trim() is not available
+    fStr <- sub("[\t\n\f\r ]*$", "", fStr) # when package loads!
 
-    reqArgs <- pickyMethods[[name]];
-    nbrOfReqArgs <- length(reqArgs);
+    reqArgs <- pickyMethods[[name]]
+    nbrOfReqArgs <- length(reqArgs)
 
     # Check for correct number of arguments
     if (length(f) != nbrOfReqArgs) {
       ## covr: skip=2
       stop("There should be exactly ", nbrOfReqArgs, " arguments of a ",
-                                              name, "() method: ", fStr);
+                                              name, "() method: ", fStr)
     }
 
     for (kk in 1:nbrOfReqArgs) {
       if (!is.na(reqArgs[kk]) && (names(f)[kk] != reqArgs[kk])) {
         ## covr: skip=2
         stop("Argument #", kk, " in a ", name,
-             "() method, should be named '", reqArgs[kk], "': ", fStr);
+             "() method, should be named '", reqArgs[kk], "': ", fStr)
       }
     }
   }
@@ -274,18 +274,18 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   if (is.null(fcnDef) || overwrite) {
     # Create
     expr <- substitute({
-        fcn <- definition;
+        fcn <- definition
         `R.methodsS3_export<-` <- get("export<-", mode="function",
-                        envir=asNamespace("R.methodsS3"), inherits=FALSE);
-        R.methodsS3_export(fcn) <- doExport;
-        rm(list="R.methodsS3_export<-");
-        attr(fcn, "S3class") <- class;
-        attr(fcn, "modifiers") <- modifiers;
+                        envir=asNamespace("R.methodsS3"), inherits=FALSE)
+        R.methodsS3_export(fcn) <- doExport
+        rm(list="R.methodsS3_export<-")
+        attr(fcn, "S3class") <- class
+        attr(fcn, "modifiers") <- modifiers
       }, list(fcn=as.name(methodName), class=class, definition=definition,
               doExport=export, modifiers=modifiers)
-    );
+    )
     # Assign
-    eval(expr, envir=envir);
+    eval(expr, envir=envir)
   }
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -293,9 +293,9 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (!is.null(fcnDef)) {
     msg <- paste("Method already existed and was",
-                  if (overwrite != TRUE) " not", " overwritten: ", sep="");
+                  if (overwrite != TRUE) " not", " overwritten: ", sep="")
     if (is.null(conflict))
-      conflict <- "quiet";
+      conflict <- "quiet"
     if (conflict == "quiet") {
     } else if (conflict == "warning") {
       warning(msg, methodName)
@@ -307,95 +307,10 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # 8. Create a generic function?
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (createGeneric) {
-    setGenericS3(name, export=exportGeneric, envir=envir, validators=validators, ...);
+    setGenericS3(name, export=exportGeneric, envir=envir, validators=validators, ...)
   }
 } # setMethodS3.default()
-S3class(setMethodS3.default) <- "default";
-export(setMethodS3.default) <- FALSE;
+S3class(setMethodS3.default) <- "default"
+export(setMethodS3.default) <- FALSE
 
-setGenericS3("setMethodS3");
-
-
-############################################################################
-# HISTORY:
-# 2013-11-05
-# o ROBUSTNESS: Now setMethodS3(name, class, ...) asserts that arguments
-#   'name' and 'class' are non-empty.
-# 2013-10-06
-# o CLEANUP: setGenericS3() utilizes new .findFunction().
-# 2012-08-23
-# o No longer utilizing ':::' for "self" (i.e. R.methods3) methods.
-# 2012-06-22
-# o Now setMethodS3(..., appendVarArgs=TRUE) ignores 'appendVarArgs' if
-#   the method name is "==", "+", "-", "*", "/", "^", "%%", or "%/%",
-#   (in addition to "$", "$<-", "[[", "[[<-", "[", "[<-").  It will also
-#   ignore it if the name matches regular expressions "<-$" or "^%[^%]*%$".
-# 2012-04-17
-# o Added argument 'exportGeneric' to setMethodS3().
-# o Added argument 'export' to setMethodS3() and setGenericS3().
-# o Now setMethodS3() sets attribute "S3class" to the class.  This will
-#   make S3 methods such as a.b.c() non abigous, because it will be possible
-#   to infer whether the generic function is a() or a.b().  The reason for
-#   not using an attribute "S3method" = c("a.b", "c") is that the generic
-#   function should automaticly change if someone does d.e.c <- a.b.c.
-# 2012-03-08
-# o Now arguments '...' of setMethodS3() are passed to setGenericS3().
-# 2007-09-17
-# o Replaced 'enforceRCC' argument with more generic 'validators'.
-# 2007-06-09
-# o Removed (incorrect) argument name 'list' from all substitute() calls.
-# 2006-02-09
-# o Removed all usage of NULL environments.  get(envir=NULL) is replaced
-#   with get(envir=baseenv()).
-# 2005-11-23
-# o Added validation of arguments in replacement functions.
-# o Added RCC validation of arguments in 'picky' methods, e.g. $()".
-# 2005-06-14
-# o BUG FIX: Argument 'enforceRCC' was not passed to setGenericS3().
-# 2005-02-28
-# o Now appendVarArgs is ignore if replacement function, i.e. named "nnn<-".
-# 2005-02-25
-# o Tracked down the source of "using .GlobalEnv instead of package:<pkg>"
-#   warnings. They occured when defining abstract methods. They also occured
-#   when automatically adding missing '...' arguments. Made an ad hoc fix
-#   for this, which I do not really understand why it works, or rather why
-#   it did not work before.
-# 2005-02-20
-# o Abstract methods are now defined with '...' as the only argument(s).
-#   This will please R CMD check for some methods, e.g. open().
-# 2005-02-15
-# o Added argument 'addVarArgs' if missing.
-# o Added arguments '...' in order to match any generic functions.
-# 2003-04-24
-# o From R v1.7.0, 'if (vector == scalar)' gives a warning. Had to do
-#   conflict <- match.arg(conflict), which is more correct.
-# 2003-01-18
-# o Replaced all occurences of getClass() with data.class(). Will change
-#   the use of getClass() in the future to return a Class object.
-# 2002-12-05
-# o Spell correction in error message.
-# 2002-12-02
-# o Change to argument 'overwrite=TRUE'.
-# 2002-12-01
-# o Added argument 'overwrite=FALSE' and 'conflict=c("error", "warning",
-#   "quiet")' to setMethodS3().
-# 2002-11-29
-# o Updated some error messages.
-# o Now it is possible to create methods (also generic) with one (or several)
-#   . (period) as a prefix of the name. Such a method should be considered
-#   private in the same manner as fields with a period are private.
-# 2002-10-17
-# o Removed obsolete "modifiers<-"().
-# o Added also "Object" to the class attribute to make static methods to
-#   work.
-# 2002-10-16
-# o There are times when
-#     generic <- function(...) UseMethod()
-#   is not working, for example
-#     fcn <- get("generic"); fcn(myObj, ...);
-#   For this reason, always do method dispatching using the name explicitly;
-#     generic <- function(...) UseMethod("generic")
-# 2002-10-15
-# o Created from R.oo Object.R and ideas as described on
-#    http://www.maths.lth.se/help/R/
-############################################################################
+setGenericS3("setMethodS3")

@@ -30,26 +30,11 @@
 # @keyword methods
 #*/###########################################################################
 setMethodS3("getGenericS3", "default", function(name, envir=parent.frame(), inherits=TRUE, ...) {
-  fcn <- .findFunction(name, envir=envir, inherits=inherits)$fcn;
+  fcn <- .findFunction(name, envir=envir, inherits=inherits)$fcn
   if (is.null(fcn)) {
-    throw("No such function found: ", name);
+    stop("No such function found: ", name)
   } else if (!isGenericS3(fcn)) {
-    throw("The function found is not an S3 generic function: ", name);
+    stop("The function found is not an S3 generic function: ", name)
   }
-  fcn;
+  fcn
 })
-
-
-
-############################################################################
-# HISTORY:
-# 2013-10-06
-# o Now getGenericS3() uses .findFunction().
-# 2013-10-05
-# o Added argument 'inherits' to getGenericS3().
-# 2010-09-18
-# o BUG FIX: getGenericS3() failed to locate generic functions created
-#   in the global enviroment.
-# 2008-05-08
-# o Added getGenericS3().
-############################################################################

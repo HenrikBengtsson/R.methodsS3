@@ -32,7 +32,7 @@
   \item{class}{The class for which the method should be defined. If
      \code{class == "default"} a function with name \code{<name>.default}
      will be created.}
-  \item{definition}{The method defintion.}
+  \item{definition}{The method definition.}
   \item{private, protected}{If \code{private=TRUE}, the method is declared
      private. If \code{protected=TRUE}, the method is declared protected.
      In all other cases the method is declared public.}
@@ -55,7 +55,7 @@
      the same class), different actions can be taken. If \code{"error"},
      an exception will be thrown and the method will not be created.
      If \code{"warning"}, a \code{\link[base]{warning}} will be given and the method \emph{will}
-     be created, otherwise the conflict will be passed unnotice.}
+     be created, otherwise the conflict will be passed unnoticed.}
   \item{createGeneric, exportGeneric}{If \code{createGeneric=TRUE},
      a generic S3/UseMethod function is defined for this method,
      iff missing, and \code{exportGeneric} species attribute
@@ -106,7 +106,7 @@ bar <- function(x, y, ...) {
 }
 
 
-# Your defintion; will redefine bar() above to bar.default().
+# Your definition; will redefine bar() above to bar.default().
 setMethodS3("bar", "character", function(object, ...) {
   cat("In bar() for class 'character':\n");
   print(object, ...);

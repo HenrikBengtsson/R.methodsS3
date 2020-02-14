@@ -24,12 +24,13 @@ setGenericS3("foo<-")
 
 bar.default <- function(...) cat("bar.default\n")
 bar <- function(...) cat("bar\n")
-setGenericS3("bar")
+res <- tryCatch(setGenericS3("bar"), error = identity)
+stopifnot(inherits(res, "error"))
 
 print(getGenericS3("print"))
 
 
-# Your defintion will redefine bar() above to bar.default().
+# Your definition will redefine bar() above to bar.default().
 foobar <- function() print("foobar()")
 setGenericS3("foobar")
 
