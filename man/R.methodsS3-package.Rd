@@ -25,7 +25,8 @@
 
   \code{install.packages("R.methodsS3")}
 
-  To get the "devel" version, see \url{http://www.braju.com/R/}.
+  To get the "devel" version, see
+  \url{https://github.com/HenrikBengtsson/R.methodsS3/}.
 }
 
 \section{Dependencies and other requirements}{
