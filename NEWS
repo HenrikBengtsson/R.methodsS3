@@ -1,8 +1,14 @@
 Package: R.methodsS3
 ====================
 
-Version: 1.7.1-9000 [2019-12-08]
+Version: 1.7.1-9000 [2020-02-13]
 
+SIGNIFICANT CHANGES:
+
+ * Now setGenericS3() produce an error if it can not turn an existing function
+   into a "default" function and create a new generic function.  Previously,
+   it produced a warning.
+   
 NEW FEATURES:
 
  * Now setGenericS3() sets the 'S3class' attribute on any "default" methods
