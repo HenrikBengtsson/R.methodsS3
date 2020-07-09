@@ -4,7 +4,7 @@ Package: R.methodsS3
 Version: 1.8.0-9000 [2020-07-09]
 
  * BUG FIXES: R.methodsS3 would produce "Warning: partial match of 'Date' to
-   'Date/Publication'" when attached.
+   'Date/Publication'" when attached if options(warnPartialMatchDollar=TRUE).
 
 
 Version: 1.8.0 [2020-02-13]
