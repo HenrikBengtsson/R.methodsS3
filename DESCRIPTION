@@ -1,5 +1,5 @@
 Package: R.methodsS3
-Version: 1.8.0
+Version: 1.8.1
 Depends: R (>= 2.13.0)
 Imports: utils
 Suggests: codetools
