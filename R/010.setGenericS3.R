@@ -151,7 +151,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
     defaultPkg <- fcn$pkg
 
     if (defaultExists) {
-      msg <- paste("Could not create generic function. There is already a non-generic function named ", name, "() in package ", fcnPkg, " with the same name as an existing default function ", nameDefault, "() in ", defaultPkg, ".", sep = "")
+      msg <- paste("Could not create generic function. There is already a non-generic function named ", name, "() in ", sQuote(fcnPkg), " with the same name as an existing default function ", nameDefault, "() in ", sQuote(defaultPkg), ".", sep = "")
       action <- Sys.getenv("R_R_METHODSS3_SETGENERICS3_ONDEFAULTEXISTS", "error")
       action <- getOption("R.methodsS3.setGenericS3.onDefaultExists", action)
       if (identical(action, "error")) {

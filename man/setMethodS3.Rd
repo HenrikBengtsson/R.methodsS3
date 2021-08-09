@@ -49,8 +49,9 @@
   \item{deprecated}{If \code{\link[base:logical]{TRUE}} this method is defined to be deprecated,
      otherwise not. Currently this has no effect expect as an indicator.}
   \item{envir}{The environment for where this method should be stored.}
-  \item{overwrite}{If \code{\link[base:logical]{TRUE}} an already existing method with the same
-     name (and of the same class) will be overwritten, otherwise not.}
+  \item{overwrite}{If \code{\link[base:logical]{TRUE}} an already existing generic function and an
+     already existing method with the same name (and of the same class)
+     will be overwritten, otherwise not.}
   \item{conflict}{If a method already exists with the same name (and of
      the same class), different actions can be taken. If \code{"error"},
      an exception will be thrown and the method will not be created.

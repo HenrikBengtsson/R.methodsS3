@@ -48,16 +48,21 @@ noexport <- export(function(x) {
   inherits <- as.logical(inherits)
   stopifnot(length(inherits) == n)
 
+  if (!exists("environmentName", mode="function")) {
+    environmentName <- function(env) attr(env, "name")
+  }
+  
   fcn <- pkg <- NULL
   for (kk in seq_along(envir)) {
     env <- envir[[kk]]
     inh <- inherits[kk]
     if (exists(name, mode="function", envir=env, inherits=inh)) {
       fcn <- get(name, mode="function", envir=env, inherits=inh)
-      pkg <- attr(env, "name")
+      pkg <- environmentName(env)
       if (is.null(pkg)) {
-        pkg <- "base"
+        pkg <- "<unknown>"
         if (identical(env, baseenv())) {
+          pkg <- "base"
         } else if (identical(env, globalenv())) {
           pkg <- "<R_GlobalEnv>"
         }
