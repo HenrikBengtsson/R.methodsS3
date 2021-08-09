@@ -3,7 +3,10 @@ Package: R.methodsS3
 
 Version: 1.8.1-9001 [2021-08-09]
 
- * ... 
+DEPRECATED & DEFUNCT:
+
+ * Very old, deprecated argument 'enforceRCC' for setGenericS3() and
+   setMethodS3() is now defunct in favor of argument 'validators'.
 
 
 Version: 1.8.1 [2020-08-24]
