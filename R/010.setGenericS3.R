@@ -115,9 +115,12 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
   # 3. Check for preexisting functions with the same name
   #     i) in the environment that we are saving to ('envir'),
   #    ii) in the currently loading environment ('loadenv'), or
-  #   iii) in the environments in the search path (search()).
+  #   iii) (optional) in the environments in the search path.
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  envirs <- c(envir, loadenv, lapply(search(), FUN=as.environment))
+  envirs <- c(envir, loadenv)
+  if (getOption("R.methodsS3:useSearchPath", TRUE)) {
+    envirs <- c(envirs, lapply(search(), FUN=as.environment))
+  }
   inherits <- rep(FALSE, times=length(envirs))
   checkImports <- getOption("R.methodsS3:checkImports:setGenericS3", FALSE)
   if (checkImports) inherits[1:2] <- TRUE
