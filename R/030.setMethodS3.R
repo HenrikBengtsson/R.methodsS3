@@ -90,7 +90,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   args <- list(...)
   if (is.element("enforceRCC", names(args))) {
-    .Defunct(msg = "Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.")
+    .Defunct(msg = "Argument 'enforceRCC' of setMethodS3() has been replaced by argument 'validators'.")
   }
 
 

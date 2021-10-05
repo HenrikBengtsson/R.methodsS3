@@ -57,7 +57,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   args <- list(...)
   if (is.element("enforceRCC", names(args))) {
-    .Deprecated(msg = "Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.")
+    .Defunct(msg = "Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.")
   }
 
 
