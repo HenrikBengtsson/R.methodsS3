@@ -3,8 +3,8 @@
 #
 # \description{
 #  @eval "packageDescription('R.methodsS3')$Description"
-#  This contents of this package was extracted from the 
-#  \pkg{R.oo} package [1].
+#  This contents of this package originates from the 
+#  \bold{R.oo} package [1].
 # }
 #
 # \section{Installation and updates}{
