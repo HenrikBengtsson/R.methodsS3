@@ -1,28 +1,3 @@
-# aroma.affymetrix
-
-<details>
-
-* Version: 3.2.0
-* GitHub: https://github.com/HenrikBengtsson/aroma.affymetrix
-* Source code: https://github.com/cran/aroma.affymetrix
-* Date/Publication: 2019-06-23 06:00:14 UTC
-* Number of recursive dependencies: 73
-
-Run `revdep_details(, "aroma.affymetrix")` for more info
-
-</details>
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  8.0Mb
-      sub-directories of 1Mb or more:
-        R             4.0Mb
-        help          2.1Mb
-        testScripts   1.1Mb
-    ```
-
 # aroma.core
 
 <details>
@@ -31,7 +6,7 @@ Run `revdep_details(, "aroma.affymetrix")` for more info
 * GitHub: https://github.com/HenrikBengtsson/aroma.core
 * Source code: https://github.com/cran/aroma.core
 * Date/Publication: 2021-01-05 05:10:12 UTC
-* Number of recursive dependencies: 47
+* Number of recursive dependencies: 48
 
 Run `revdep_details(, "aroma.core")` for more info
 
@@ -49,10 +24,10 @@ Run `revdep_details(, "aroma.core")` for more info
 
 <details>
 
-* Version: 3.22.0
+* Version: 3.26.0
 * GitHub: https://github.com/HenrikBengtsson/aroma.light
 * Source code: https://github.com/cran/aroma.light
-* Date/Publication: 2021-05-19
+* Date/Publication: 2022-04-26
 * Number of recursive dependencies: 6
 
 Run `revdep_details(, "aroma.light")` for more info
@@ -69,15 +44,85 @@ Run `revdep_details(, "aroma.light")` for more info
     structure’ in the ‘Writing R Extensions’ manual.
     ```
 
+# bioCancer
+
+<details>
+
+* Version: 1.24.01
+* GitHub: https://github.com/kmezhoud/bioCancer
+* Source code: https://github.com/cran/bioCancer
+* Date/Publication: 2022-04-27
+* Number of recursive dependencies: 220
+
+Run `revdep_details(, "bioCancer")` for more info
+
+</details>
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  8.1Mb
+      sub-directories of 1Mb or more:
+        app       3.2Mb
+        doc       2.8Mb
+        extdata   1.5Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘AlgDesign’ ‘GO.db’ ‘R.methodsS3’ ‘import’ ‘methods’ ‘org.Bt.eg.db’
+      ‘shinythemes’
+      All declared Imports should be used.
+    ```
+
+# canceR
+
+<details>
+
+* Version: 1.30.01
+* GitHub: https://github.com/kmezhoud/canceR
+* Source code: https://github.com/cran/canceR
+* Date/Publication: 2022-04-27
+* Number of recursive dependencies: 166
+
+Run `revdep_details(, "canceR")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘canceR’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: loading Rplot failed
+      Warning: no DISPLAY variable so Tk is not available
+    See ‘/c4/home/henrik/repositories/R.methodsS3/revdep/checks/canceR/new/canceR.Rcheck/00install.out’ for details.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 19.7Mb
+      sub-directories of 1Mb or more:
+        doc  18.2Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘R.methodsS3’
+      All declared Imports should be used.
+    ```
+
 # DEGraph
 
 <details>
 
-* Version: 1.44.0
+* Version: 1.48.0
 * GitHub: NA
 * Source code: https://github.com/cran/DEGraph
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 87
+* Date/Publication: 2022-04-26
+* Number of recursive dependencies: 80
 
 Run `revdep_details(, "DEGraph")` for more info
 
@@ -113,11 +158,11 @@ Run `revdep_details(, "DEGraph")` for more info
 
 <details>
 
-* Version: 1.40.0
+* Version: 1.44.0
 * GitHub: NA
 * Source code: https://github.com/cran/NCIgraph
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 59
+* Date/Publication: 2022-04-26
+* Number of recursive dependencies: 45
 
 Run `revdep_details(, "NCIgraph")` for more info
 
@@ -142,11 +187,11 @@ Run `revdep_details(, "NCIgraph")` for more info
 
 <details>
 
-* Version: 7.1.1
+* Version: 7.2.0
 * GitHub: https://github.com/r-lib/roxygen2
 * Source code: https://github.com/cran/roxygen2
-* Date/Publication: 2020-06-27 14:50:02 UTC
-* Number of recursive dependencies: 80
+* Date/Publication: 2022-05-13 07:30:02 UTC
+* Number of recursive dependencies: 63
 
 Run `revdep_details(, "roxygen2")` for more info
 
@@ -154,29 +199,9 @@ Run `revdep_details(, "roxygen2")` for more info
 
 ## In both
 
-*   checking tests ...
+*   checking Rd cross-references ... NOTE
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(roxygen2)
-      > 
-      > if (requireNamespace("xml2")) {
-      +   test_check("roxygen2", reporter = MultiReporter$new(reporters = list(JunitReporter$new(file = "test-results.xml"), CheckReporter$new())))
-      + } else {
-      +   test_check("roxygen2")
-    ...
-       2.   └─testthat::expect_equal(s1, s2) helper-test.R:12:2
-      
-      [ FAIL 1 | WARN 0 | SKIP 13 | PASS 733 ]
-      Error: Test failures
-      In addition: Warning messages:
-      1: closing unused connection 7 (/scratch/henrik/RtmpmZrBVV/file20e23e1aaa93) 
-      2: closing unused connection 6 (/scratch/henrik/RtmpmZrBVV/file20e266395332) 
-      3: closing unused connection 5 (/scratch/henrik/RtmpmZrBVV/file20e2138ea3e0) 
-      4: closing unused connection 4 (/scratch/henrik/RtmpmZrBVV/file20e279955c39) 
-      Execution halted
+    Package unavailable to check Rd xrefs: ‘devtools’
     ```
 
 # tmle.npvi
@@ -187,13 +212,38 @@ Run `revdep_details(, "roxygen2")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/tmle.npvi
 * Date/Publication: 2015-05-22 18:59:02
-* Number of recursive dependencies: 43
+* Number of recursive dependencies: 41
 
 Run `revdep_details(, "tmle.npvi")` for more info
 
 </details>
 
 ## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘tmle-npvi.Rnw’ using knitr
+    Error: processing vignette 'tmle-npvi.Rnw' failed with diagnostics:
+    Running 'texi2dvi' on 'tmle-npvi.tex' failed.
+    LaTeX errors:
+    ! LaTeX Error: File `manfnt.sty' not found.
+    
+    Type X to quit or <RETURN> to proceed,
+    or enter new name. (Default extension: sty)
+    ...
+    l.59 \usepackage
+                    [textwidth=15cm, textheight=23cm]{geometry}^^M
+    !  ==> Fatal error occurred, no output PDF file produced!
+    --- failed re-building ‘tmle-npvi.Rnw’
+    
+    SUMMARY: processing the following file failed:
+      ‘tmle-npvi.Rnw’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
 
 *   checking R code for possible problems ... NOTE
     ```
