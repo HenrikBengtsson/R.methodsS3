@@ -18,10 +18,13 @@
  Note that \code{throw()} can be defined for specific classes, which can
  then be caught (or not) using \code{\link[base:conditions]{tryCatch}}().
 
- \emph{This default function will be overridden by ditto in the \pkg{R.oo}
- package, if that is loaded.  The latter \code{\link[R.oo]{throw}} implementation
+ \emph{This default function will be overridden by ditto in the \bold{R.oo}
+ package, if that is loaded.  The latter \code{R.oo::throw()} implementation
  is fully backward compatible with this one, but the error object thrown
- is of class \code{\link[R.oo]{Exception}}.}
+ is of class \code{R.oo::Exception}.}
+
+ \emph{WARNING: This function is deprecated in favor of \code{R.oo::throw()},
+ or alternatively, just \code{stop()}.}
 }
 
 \usage{
@@ -54,4 +57,5 @@ tryCatch({
 \author{Henrik Bengtsson}
 
 \keyword{error}
+\keyword{internal}
 

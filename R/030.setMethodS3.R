@@ -34,8 +34,9 @@
 #   \item{deprecated}{If @TRUE this method is defined to be deprecated,
 #      otherwise not. Currently this has no effect expect as an indicator.}
 #   \item{envir}{The environment for where this method should be stored.}
-#   \item{overwrite}{If @TRUE an already existing method with the same
-#      name (and of the same class) will be overwritten, otherwise not.}
+#   \item{overwrite}{If @TRUE an already existing generic function and an
+#      already existing method with the same name (and of the same class)
+#      will be overwritten, otherwise not.}
 #   \item{conflict}{If a method already exists with the same name (and of
 #      the same class), different actions can be taken. If \code{"error"},
 #      an exception will be thrown and the method will not be created.
@@ -89,9 +90,7 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   args <- list(...)
   if (is.element("enforceRCC", names(args))) {
-    warning("Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.")
-    # Turn off validators?
-    if (!args$enforceRCC) validators <- NULL
+    .Defunct(msg = "Argument 'enforceRCC' of setMethodS3() has been replaced by argument 'validators'.")
   }
 
 
@@ -187,9 +186,12 @@ setMethodS3.default <- function(name, class="default", definition, private=FALSE
   # 3. Check for preexisting functions with the same name
   #     i) in the environment that we are saving to ('envir'),
   #    ii) in the currently loading environment ('loadenv'), or
-  #   iii) in the environments in the search path (search()).
+  #   iii) (optional) in the environments in the search path.
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  envirs <- c(envir, loadenv, lapply(search(), FUN=as.environment))
+  envirs <- c(envir, loadenv)
+  if (getOption("R.methodsS3:useSearchPath", TRUE)) {
+    envirs <- c(envirs, lapply(search(), FUN=as.environment))
+  }
   inherits <- rep(FALSE, times=length(envirs))
   checkImports <- getOption("R.methodsS3:checkImports:setGenericS3", FALSE)
   if (checkImports) inherits[1:2] <- TRUE

@@ -57,9 +57,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   args <- list(...)
   if (is.element("enforceRCC", names(args))) {
-    warning("Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.")
-    # Turn off validators?
-    if (args$enforceRCC == FALSE) validators <- NULL
+    .Defunct(msg = "Argument 'enforceRCC' of setGenericS3() has been replaced by argument 'validators'.")
   }
 
 
@@ -115,9 +113,12 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
   # 3. Check for preexisting functions with the same name
   #     i) in the environment that we are saving to ('envir'),
   #    ii) in the currently loading environment ('loadenv'), or
-  #   iii) in the environments in the search path (search()).
+  #   iii) (optional) in the environments in the search path.
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  envirs <- c(envir, loadenv, lapply(search(), FUN=as.environment))
+  envirs <- c(envir, loadenv)
+  if (getOption("R.methodsS3:useSearchPath", TRUE)) {
+    envirs <- c(envirs, lapply(search(), FUN=as.environment))
+  }
   inherits <- rep(FALSE, times=length(envirs))
   checkImports <- getOption("R.methodsS3:checkImports:setGenericS3", FALSE)
   if (checkImports) inherits[1:2] <- TRUE
@@ -148,7 +149,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
     defaultPkg <- fcn$pkg
 
     if (defaultExists) {
-      msg <- paste("Could not create generic function. There is already a non-generic function named ", name, "() in package ", fcnPkg, " with the same name as an existing default function ", nameDefault, "() in ", defaultPkg, ".", sep = "")
+      msg <- paste("Could not create generic function. There is already a non-generic function named ", name, "() in ", sQuote(fcnPkg), " with the same name as an existing default function ", nameDefault, "() in ", sQuote(defaultPkg), ".", sep = "")
       action <- Sys.getenv("R_R_METHODSS3_SETGENERICS3_ONDEFAULTEXISTS", "error")
       action <- getOption("R.methodsS3.setGenericS3.onDefaultExists", action)
       if (identical(action, "error")) {
