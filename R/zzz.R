@@ -2,7 +2,7 @@
 .onLoad <- function(libname, pkgname) {
   value <- getOption("R.methodsS3:useSearchPath", NULL)
   if (is.null(value)) {
-    value <- Sys.getenv("R_R_METHODSS3_USE_SEARCH_PATH", "TRUE")
+    value <- Sys.getenv("R_R_METHODSS3_USE_SEARCH_PATH", "FALSE")
     value <- isTRUE(as.logical(value))
     options("R.methodsS3:useSearchPath" = value)
   }

@@ -116,7 +116,7 @@ setGenericS3.default <- function(name, export=TRUE, envir=parent.frame(), dontWa
   #   iii) (optional) in the environments in the search path.
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   envirs <- c(envir, loadenv)
-  if (getOption("R.methodsS3:useSearchPath", TRUE)) {
+  if (getOption("R.methodsS3:useSearchPath", FALSE)) {
     envirs <- c(envirs, lapply(search(), FUN=as.environment))
   }
   inherits <- rep(FALSE, times=length(envirs))
