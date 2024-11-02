@@ -59,22 +59,13 @@ Run `revdep_details(, "aroma.light")` for more info
 * GitHub: https://github.com/kmezhoud/bioCancer
 * Source code: https://github.com/cran/bioCancer
 * Date/Publication: 2023-04-25
-* Number of recursive dependencies: 221
+* Number of recursive dependencies: 224
 
 Run `revdep_details(, "bioCancer")` for more info
 
 </details>
 
 ## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  8.1Mb
-      sub-directories of 1Mb or more:
-        app       3.2Mb
-        doc       2.8Mb
-        extdata   1.5Mb
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -128,7 +119,7 @@ Run `revdep_details(, "bioCancer")` for more info
 * GitHub: https://github.com/kmezhoud/canceR
 * Source code: https://github.com/cran/canceR
 * Date/Publication: 2023-04-25
-* Number of recursive dependencies: 168
+* Number of recursive dependencies: 169
 
 Run `revdep_details(, "canceR")` for more info
 
@@ -141,14 +132,7 @@ Run `revdep_details(, "canceR")` for more info
     Found the following significant warnings:
       Warning: loading Rplot failed
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/c4/home/henrik/repositories/R.methodsS3/revdep/checks/canceR/new/canceR.Rcheck/00install.out’ for details.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 19.6Mb
-      sub-directories of 1Mb or more:
-        doc  18.2Mb
+    See ‘/wynton/home/cbi/hb/repositories/R.methodsS3/revdep/checks/canceR/new/canceR.Rcheck/00install.out’ for details.
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -179,7 +163,7 @@ Run `revdep_details(, "canceR")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/DEGraph
 * Date/Publication: 2023-04-25
-* Number of recursive dependencies: 84
+* Number of recursive dependencies: 66
 
 Run `revdep_details(, "DEGraph")` for more info
 
@@ -211,33 +195,10 @@ Run `revdep_details(, "DEGraph")` for more info
       See the note in ?`:::` about the use of this operator.
     ```
 
-# NCIgraph
-
-<details>
-
-* Version: 1.48.0
-* GitHub: NA
-* Source code: https://github.com/cran/NCIgraph
-* Date/Publication: 2023-04-25
-* Number of recursive dependencies: 49
-
-Run `revdep_details(, "NCIgraph")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
+*   checking for non-standard things in the check directory ... NOTE
     ```
-    Package which this enhances but not available for checking: ‘DEGraph’
-    ```
-
-*   checking for hidden files and directories ... NOTE
-    ```
-    Found the following hidden files and directories:
-      .BBSoptions
-    These were most likely included in error. See section ‘Package
-    structure’ in the ‘Writing R Extensions’ manual.
+    Found the following files/directories:
+      ‘randomWAMGraph.xml’
     ```
 
 # R.devices
@@ -337,7 +298,7 @@ Run `revdep_details(, "R.rsp")` for more info
 * GitHub: https://github.com/r-lib/roxygen2
 * Source code: https://github.com/cran/roxygen2
 * Date/Publication: 2022-12-08 23:40:02 UTC
-* Number of recursive dependencies: 65
+* Number of recursive dependencies: 67
 
 Run `revdep_details(, "roxygen2")` for more info
 
@@ -348,5 +309,28 @@ Run `revdep_details(, "roxygen2")` for more info
 *   checking C++ specification ... NOTE
     ```
       Specified C++11: please drop specification unless essential
+    ```
+
+# rtf
+
+<details>
+
+* Version: 0.4-14.1
+* GitHub: https://github.com/schaffman5/rtf
+* Source code: https://github.com/cran/rtf
+* Date/Publication: 2020-03-22 09:32:44 UTC
+* Number of recursive dependencies: 33
+
+Run `revdep_details(, "rtf")` for more info
+
+</details>
+
+## In both
+
+*   checking for non-standard things in the check directory ... NOTE
+    ```
+    Found the following files/directories:
+      ‘test_addPageBreak.doc’ ‘test_addPlot.doc’ ‘test_addSessionInfo.doc’
+      ‘test_addTable.doc’
     ```
 
